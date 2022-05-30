@@ -1,0 +1,77 @@
+ #### roles internas da FFLCH ####
+- name: fflch.sambadc
+  src: https://github.com/fflch/ansible-role-sambadc.git
+  version: 1.0.2
+
+- name: fflch.deploy_laravel
+  src: https://github.com/fflch/ansible-role-deploy-laravel.git
+  version: 1.0.11
+
+- name: fflch.sap-ase
+  src: https://github.com/fflch/ansible-role-sap-ase.git
+  version: v1.0.2
+
+- name: fflch.aegir
+  src: https://github.com/fflch/ansible-role-aegir.git
+  version: 1.0.9
+
+#### roles da comunidade ####
+- src: HP41.cups
+  version: 52a655c95e959d7089c4cae93a7e33d7028b0fb2
+
+- src: hispanico.nginx_revproxy
+  version: v1.7.0
+
+- src: geerlingguy.mysql
+  version: 3.3.2
+
+- src: geerlingguy.php-versions
+  version: 5.0.0
+
+- src: geerlingguy.php
+  version: 4.6.1
+
+- src: geerlingguy.composer
+  version: 1.9.0
+
+- src: geerlingguy.firewall
+  version: 2.5.0
+
+- src: geerlingguy.apache
+  version: 3.1.0
+
+- src: geerlingguy.nodejs
+  version: 5.1.1
+
+- src: geerlingguy.ntp
+  version: 2.3.1
+
+- src: geerlingguy.pip
+  version: 2.0.0
+
+- src: robertdebock.logrotate
+  version: 2.0.0
+  
+# Falta fixar a versão e ver se estão sendo usadas:
+- src: gcoop-libre.mysqldump
+- src: Stouts.hostname
+- src: adriagalin.timezone
+- src: infOpen.locales
+- src: ontic.ntp
+- src: blackstar257.resolv
+
+######### FORKS
+# Estou mantendo um fork até resolverem essa issue:
+# https://github.com/geerlingguy/ansible-role-backup/issues/17
+- name: geerlingguy.backup
+  src: https://github.com/thiagogomesverissimo/ansible-role-backup.git
+  version: single_quote_problem_mysql
+
+- name: robertdebock.rsyslog
+  src: https://github.com/fflch/ansible-role-rsyslog.git
+  version: fflch
+
+- name: robertdebock.logrotate
+  src: https://github.com/fflch/ansible-role-logrotate.git
+  version: fflch
+
