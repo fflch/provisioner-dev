@@ -20,6 +20,7 @@ vagrant_ftp ansible_host="192.168.8.61"
 vagrant_f-secure ansible_host="192.168.8.90"
 vagrant_phpserver ansible_host="192.168.8.92"
 vagrant_aegirmigrate ansible_host="192.168.8.93"
+vagrant_hpc ansible_host="192.168.8.94"
 
 [vagrant:vars]
 ansible_user="vagrant"
