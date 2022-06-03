@@ -1,0 +1,50 @@
+---
+- name: deploy aegir
+  become: yes
+  hosts: vagrant_aegir
+
+  vars:
+    aegir_frontend_url: 'aegir.local.fflch.usp.br'
+
+    backup_directories:
+      - /var/aegir/platforms
+    backup_exclude_items:
+      - vendor
+
+  tasks:
+
+    - name: Common tasks across all FFLCH servers
+      import_tasks: ../../roles/fflch.tasks/tasks/common.yml
+
+    - name: Import php
+      import_tasks: ../../roles/fflch.tasks/tasks/php.yml  
+
+    - name: Arruma hostname
+      include_role:
+        name: Stouts.hostname
+      vars:
+        hostname_hostname: "{{ aegir_frontend_url }}"
+        hostname_hosts:
+          "{{ aegir_frontend_url }}": "{{ ansible_default_ipv4.address }}"
+
+    - name: Instalação do aegir
+      import_role:
+        name: fflch.aegir
+      vars:
+        aegir_db_host: '192.168.8.57'
+        aegir_db_user: 'aegir_root'
+        aegir_db_password: "aegir_root"
+
+        aegir_user1_password: "aegir_root"
+        aegir_install_git_platforms: true
+
+        #aegir_provision_version: "7.x-3.185" # https://git.drupalcode.org/project/provision.git
+        #aegir_platform_version:  "7.x-3.182"  # https://git.drupalcode.org/project/hostmaster.git
+
+        aegir_provision_version: "7.x-3.192" # https://git.drupalcode.org/project/provision.git
+        aegir_platform_version:  "7.x-3.190" # https://git.drupalcode.org/project/hostmaster.git
+        aegir_drush_version:     "8.4.11"     # https://github.com/drush-ops/drush/releases
+        aegir_git_platforms:
+          - name: drupal8916a
+            repo: https://github.com/fflch/drupal.git
+            version: v8.9.16a

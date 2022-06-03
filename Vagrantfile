@@ -63,7 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "aegir" do |host| 
     host.vm.hostname = "aegir"
-    host.vm.box = "generic/debian11"
+    host.vm.box = "generic/debian10"
     host.vm.network :private_network,
       :ip => "192.168.8.44",
       :libvirt__network_name => "fflch",

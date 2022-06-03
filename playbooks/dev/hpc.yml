@@ -10,7 +10,7 @@
   tasks:
 
     - name: Common tasks across all FFLCH servers
-      import_tasks: ../roles/fflch.tasks/tasks/common.yml
+      import_tasks: ../../roles/fflch.tasks/tasks/common.yml
 
     - name: Instalação do aegir
       import_role:
