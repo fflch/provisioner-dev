@@ -1,0 +1,43 @@
+---
+- name: deploy vagrant_zmadm
+  become: yes
+  hosts: vagrant_zmadm
+
+  vars:
+    backup_directories:
+      - /var/aegir/platforms
+    backup_exclude_items:
+      - vendor
+
+  vars:
+    backup_directories:
+      - /etc
+    apache2_confs: zoneminder
+
+    # mysql
+    mysql_root:
+      username: aegir_root
+      password: "SuperPassw0rd#"
+
+    zoneminder_version: '1.36'
+    zoneminder_frontend_url: 'zmadm.local.fflch.usp.br'
+    zoneminder_mysql:
+      database: zmadm
+      host: '192.168.8.57'
+      user: zmadm
+      password: 'zmadm'
+
+  handlers:
+    - include: "../../handlers/main.yml"
+
+  tasks:
+
+    - name: Common tasks across all FFLCH servers
+      import_tasks: ../../roles/fflch.tasks/tasks/common.yml
+
+    - name: Import php
+      import_tasks: ../../roles/fflch.tasks/tasks/php.yml
+
+    - name: Import zoneminder
+      import_tasks: ../../roles/fflch.tasks/tasks/zoneminder.yml
+

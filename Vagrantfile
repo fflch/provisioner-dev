@@ -191,9 +191,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "zoneminder" do |host|
-    host.vm.hostname = "zoneminder"
-    host.vm.box = "generic/debian11"
+  config.vm.define "zmadm" do |host|
+    host.vm.hostname = "zmadm"
+    host.vm.box = "generic/debian10"
     host.vm.network :private_network,
       :ip => "192.168.8.60",
       :libvirt__network_name => "fflch",
