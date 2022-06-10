@@ -8,7 +8,7 @@
       prompt: Senha do email de smtp?
 
   vars:
-    msmtp_email: 'noreply.fflch@usp.br'
+    msmtp_email: 'testes.sti.fflch@usp.br'
     aegir_frontend_url: 'aegir.local.fflch.usp.br'
 
     backup_directories:
