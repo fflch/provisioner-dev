@@ -20,4 +20,4 @@ Instalação das roles do ansible
 
     git clone https://github.com/fflch/provisioner-dev.git
     cd provisioner-dev
-    ansible-galaxy install -r requirements.yml
+    ansible-galaxy install -r requirements.yml --force
