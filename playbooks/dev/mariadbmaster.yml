@@ -3,15 +3,18 @@
   become: yes
   hosts: vagrant_mariadbmaster
 
-  vars:
+  vars_prompt:
+    - name: msmtp_password
+      prompt: Senha do email de smtp?
 
-    backup_directories:
-      - /etc/mysql
+  vars:
+    msmtp_email: 'noreplay.fflch@usp.br'
       
   tasks:
 
-    - name: Common tasks across all servers
-      import_tasks: ../../roles/fflch.tasks/tasks/common.yml
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
 
     - name: Instala Mysql e cria dbs/users
       include_role:

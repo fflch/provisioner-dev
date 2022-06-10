@@ -32,11 +32,11 @@
 
   tasks:
 
-    - name: Common tasks across all FFLCH servers
-      import_tasks: ../../roles/fflch.tasks/tasks/common.yml
-
-    - name: Import php
-      import_tasks: ../../roles/fflch.tasks/tasks/php.yml
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_php: true
 
     - name: Import zoneminder
       import_tasks: ../../roles/fflch.tasks/tasks/zoneminder.yml

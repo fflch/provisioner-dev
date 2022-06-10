@@ -8,7 +8,7 @@
       prompt: Senha do email de smtp?
 
   vars:
-    msmtp_email: 'noreplay.fflch@usp.br'
+    msmtp_email: 'noreply.fflch@usp.br'
     aegir_frontend_url: 'aegir.local.fflch.usp.br'
 
     backup_directories:
@@ -21,6 +21,8 @@
     - name: Aplica role fflch.tasks 
       include_role:
         name: fflch.tasks
+      vars:
+        tasks_php: true
 
     - name: Arruma hostname
       include_role:
@@ -28,7 +30,7 @@
       vars:
         hostname_hostname: "{{ aegir_frontend_url }}"
         hostname_hosts:
-          "{{ aegir_frontend_url }}": "{{ ansible_default_ipv4.address }}"
+          "aegir.local.fflch.usp.br": "192.168.8.44"
 
     - name: Instalação do aegir
       import_role:
@@ -36,18 +38,18 @@
       vars:
         aegir_db_host: '192.168.8.57'
         aegir_db_user: 'aegir_root'
-        aegir_db_password: "aegir_root"
+        aegir_db_password: "SuperPassw0rd"
 
         aegir_user1_password: "aegir_root"
         aegir_install_git_platforms: true
 
-        #aegir_provision_version: "7.x-3.185" # https://git.drupalcode.org/project/provision.git
-        #aegir_platform_version:  "7.x-3.182"  # https://git.drupalcode.org/project/hostmaster.git
-
-        aegir_provision_version: "7.x-3.192" # https://git.drupalcode.org/project/provision.git
-        aegir_platform_version:  "7.x-3.190" # https://git.drupalcode.org/project/hostmaster.git
+        aegir_provision_version: "7.x-3.192"  # https://git.drupalcode.org/project/provision.git
+        aegir_platform_version:  "7.x-3.190"  # https://git.drupalcode.org/project/hostmaster.git
         aegir_drush_version:     "8.4.11"     # https://github.com/drush-ops/drush/releases
         aegir_git_platforms:
           - name: drupal8916a
             repo: https://github.com/fflch/drupal.git
             version: v8.9.16a
+
+# /etc/hosts da hospedeira:
+# 192.168.8.44 aegir.local.fflch.usp.br
