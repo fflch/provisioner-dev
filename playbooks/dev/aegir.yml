@@ -51,5 +51,8 @@
             repo: https://github.com/fflch/drupal.git
             version: v8.9.16a
 
-# /etc/hosts da hospedeira:
+# Entradas da /etc/hosts da hospedeira:
 # 192.168.8.44 aegir.local.fflch.usp.br
+# 192.168.8.44 site1.local.fflch.usp.br
+# 192.168.8.44 site2.local.fflch.usp.br
+# 192.168.8.44 site3.local.fflch.usp.br
