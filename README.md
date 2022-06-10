@@ -19,5 +19,5 @@ Instalação do plugin do libvirt no ansible:
 Instalação das roles do ansible
 
     git clone https://github.com/fflch/provisioner-dev.git
-    cp provisioner-dev
+    cd provisioner-dev
     ansible-galaxy install -r requirements.yml
