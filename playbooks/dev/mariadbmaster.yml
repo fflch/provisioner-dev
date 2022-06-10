@@ -8,7 +8,7 @@
       prompt: Senha do email de smtp?
 
   vars:
-    msmtp_email: 'noreplay.fflch@usp.br'
+    msmtp_email: 'testes.sti.fflch@usp.br'
       
   tasks:
 
