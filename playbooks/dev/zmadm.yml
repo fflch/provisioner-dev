@@ -17,7 +17,7 @@
     # mysql
     mysql_root:
       username: aegir_root
-      password: "SuperPassw0rd#"
+      password: "SuperPassw0rd"
 
     zoneminder_version: '1.36'
     zoneminder_frontend_url: 'zmadm.local.fflch.usp.br'

@@ -3,7 +3,12 @@
   become: yes
   hosts: vagrant_aegir
 
+  vars_prompt:
+    - name: msmtp_password
+      prompt: Senha do email de smtp?
+
   vars:
+    msmtp_email: 'noreplay.fflch@usp.br'
     aegir_frontend_url: 'aegir.local.fflch.usp.br'
 
     backup_directories:
@@ -13,11 +18,9 @@
 
   tasks:
 
-    - name: Common tasks across all FFLCH servers
-      import_tasks: ../../roles/fflch.tasks/tasks/common.yml
-
-    - name: Import php
-      import_tasks: ../../roles/fflch.tasks/tasks/php.yml  
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
 
     - name: Arruma hostname
       include_role:

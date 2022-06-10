@@ -10,7 +10,7 @@
       
   tasks:
 
-    - name: Common tasks across all FFLCH servers
+    - name: Common tasks across all servers
       import_tasks: ../../roles/fflch.tasks/tasks/common.yml
 
     - name: Instala Mysql e cria dbs/users
@@ -18,11 +18,11 @@
         name: geerlingguy.mysql
       vars:
         mysql_root_username: root
-        mysql_root_password: "SuperPassw0rd#"
+        mysql_root_password: "SuperPassw0rd"
         mysql_bind_address: '*'
         mysql_mysqldump_max_allowed_packet: "1024M"
         mysql_users:
           - name: aegir_root
             host: "%"
-            password: "SuperPassw0rd#"
+            password: "SuperPassw0rd"
             priv: "*.*:ALL,GRANT"    
