@@ -1,0 +1,60 @@
+---
+- name: deploy
+  become: yes
+  hosts: vagrant_anotherdc1,vagrant_anotherdc2
+
+  #### global vars
+  vars:
+    # variables to smb.conf template used at sambadc role
+    template_smb_cups_server    : '192.168.8.43:631'
+    template_smb_netbios        : "{{ inventory_hostname }}"
+    sambadc_realm: "smbdomain.fflch.usp.br"
+    printersfile: "{{ lookup('file', '../../files/printers.csv') }}"
+    printers: "{{ printersfile.split('\n') }}"
+    template_printers: []
+    backup_directories:
+      - /etc/mysql
+
+  #### tasks
+  tasks:
+
+    - name: monta lista de dicionários cups_printer_list
+      set_fact: 
+        template_printers: > 
+          {{ template_printers + [{ 
+            'name': item.split(',')[0]
+          }]}}
+      with_items: 
+        - "{{ printers }}"
+
+    - name: configura /etc/hosts e /etc/hostnane
+      include_role:
+        name: Stouts.hostname
+      vars:
+        hostname_hostname: "{{ inventory_hostname }}.{{sambadc_realm}}"
+
+    - name: Common tasks across all FFLCH servers
+      import_tasks: ../tasks/common.yml
+
+    - name: Samba DC common tasks
+      import_tasks: ../tasks/sambadc.yml
+
+    - name: Configura resolv.conf para consultar DNS no firstdc e nele mesmo
+      include_role:
+        name: blackstar257.resolv
+      vars:
+        resolv_conf_nameservers:
+          - 192.168.8.48
+          - 192.168.8.49
+          - 192.168.8.50
+        resolv_conf_search_domains:
+          - "{{ sambadc_realm }}"
+
+    - name: Join samba como um Domain Controller
+      include_role:
+        name: fflch.sambadc
+      vars:
+        sambadc_type: "join"
+        sambadc_realm: "smbdomain.fflch.usp.br"
+        sambadc_admin_password: ""
+        sambadc_smb_path: "{{ playbook_dir }}/../../templates/smb.conf.j2"

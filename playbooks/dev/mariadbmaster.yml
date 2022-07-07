@@ -3,10 +3,6 @@
   become: yes
   hosts: vagrant_mariadbmaster
 
-  vars_prompt:
-    - name: msmtp_password
-      prompt: Senha do email de smtp?
-
   vars:
     msmtp_email: 'testes.sti.fflch@usp.br'
       

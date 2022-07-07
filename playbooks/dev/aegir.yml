@@ -23,6 +23,7 @@
         name: fflch.tasks
       vars:
         tasks_php: true
+        tasks_msmtp: true
 
     - name: Arruma hostname
       include_role:
@@ -50,12 +51,6 @@
           - name: drupal8916a
             repo: https://github.com/fflch/drupal.git
             version: v8.9.16a
-          - name: drupal9
-            repo: https://github.com/fflch/drupal.git
-            version: 9.x
-          - name: drupal9novo1
-            repo: https://github.com/thiagogomesverissimo/drupalnovo.git
-            version: master
 
 # Entradas da /etc/hosts da hospedeira:
 # 192.168.8.44 aegir.local.fflch.usp.br

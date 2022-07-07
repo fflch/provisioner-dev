@@ -20,8 +20,6 @@
   version: 1.0.2
 
 #### roles da comunidade ####
-- src: HP41.cups
-  version: 52a655c95e959d7089c4cae93a7e33d7028b0fb2
 
 - src: hispanico.nginx_revproxy
   version: v1.7.0
@@ -81,4 +79,8 @@
 - name: robertdebock.logrotate
   src: https://github.com/fflch/ansible-role-logrotate.git
   version: fflch
+
+- name: HP41.cups
+  src: https://github.com/fflch/ansible-cups.git
+  version: 1.0.0
 

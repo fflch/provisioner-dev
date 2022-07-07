@@ -6,6 +6,46 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ### global configs
   config.ssh.insert_key = false # important
 
+  config.vm.define "cups" do |host|
+    host.vm.hostname = "cups"
+    host.vm.box = "generic/debian9"
+    host.vm.network :private_network,
+      :ip => "192.168.8.43",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 256
+      v.cpus = 1
+    end
+  end
+
+  config.vm.define "aegir" do |host| 
+    host.vm.hostname = "aegir"
+    host.vm.box = "generic/debian10"
+    host.vm.network :private_network,
+      :ip => "192.168.8.44",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 2048
+      v.cpus = 1
+    end
+  end
+
+  config.vm.define "mariadbmaster" do |host|
+    host.vm.hostname = "mariadbmaster"
+    host.vm.box = "generic/debian10"
+    host.vm.network :private_network,
+      :ip => "192.168.8.57",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+  end
+
+  ########################## REVISAR
   ### VMs
   config.vm.define "rsyslog" do |host|
     host.vm.hostname = "log"
@@ -48,31 +88,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "cups" do |host|
-    host.vm.hostname = "cups"
-    host.vm.box = "generic/debian9"
-    host.vm.network :private_network,
-      :ip => "192.168.8.43",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 256
-      v.cpus = 1
-    end
-  end
 
-  config.vm.define "aegir" do |host| 
-    host.vm.hostname = "aegir"
-    host.vm.box = "generic/debian10"
-    host.vm.network :private_network,
-      :ip => "192.168.8.44",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 2048
-      v.cpus = 1
-    end
-  end
 
   config.vm.define "projetos" do |host| 
     host.vm.hostname = "projetos"
@@ -152,18 +168,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "mariadbmaster" do |host|
-    host.vm.hostname = "mariadbmaster"
-    host.vm.box = "generic/debian10"
-    host.vm.network :private_network,
-      :ip => "192.168.8.57",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 1024
-      v.cpus = 1
-    end
-  end
+
 
   config.vm.define "bind" do |host|
     host.vm.hostname = "bind"

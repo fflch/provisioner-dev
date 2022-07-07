@@ -1,0 +1,17 @@
+---
+- name: deploy cups
+  become: yes
+  hosts: vagrant_cups
+
+  vars:
+
+    tasks_cups_quotas_endpoint: 'http://127.0.0.1/x'
+    tasks_cups_quotas_api_token: '123'
+
+  tasks:
+
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_cups: true

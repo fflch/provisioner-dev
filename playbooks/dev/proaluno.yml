@@ -1,0 +1,48 @@
+---
+- name: deploy vm example host
+  hosts: terminal
+  become: yes
+
+  vars:
+    sambadc_realm: "proaluno.usp.br"
+    ntp_dns_servers:
+      - 192.168.7.201
+  tasks:
+
+    - import_tasks: ../partials/locale.yml
+    - import_tasks: ../partials/ntp_dns.yml
+
+    - name: proaluno role
+      include_role:
+        name: local.proaluno
+      vars:
+        proaluno_check_quota: "http://192.168.7.1:8000"
+        proaluno_install_pacotes_debian: False
+        proaluno_remove_all_printers: True
+        proaluno_cups_server: "192.168.7.202:631"
+
+        proaluno_printers:
+          - name: impressora_pdf_tea4cups
+            device: "ipp://{{proaluno_cups_server}}/printers/impressora_pdf_tea4cups"
+            model: 'raw'
+
+          - name: impressora_pdf
+            device: "ipp://{{proaluno_cups_server}}/printers/impressora_pdf"
+            model: 'raw'
+
+          - name: impressora_adm_fin
+            device: "ipp://{{proaluno_cups_server}}/printers/impressora_adm_fin"
+            model: 'K7600_processado_gstopdf17.ppd'
+
+    - name: fflch.domain-member
+      include_role:
+        name: fflch.domain-member
+      vars:
+        domain_member_realm: "{{ sambadc_realm }}"
+        domain_member_samba_server: "samba"
+        domain_member_password: "Pr0Aluno123"
+
+    - name: change root's password
+      user:
+        name: root
+        password: "{{ 'Pr0Aluno123' | password_hash('sha512') }}"
