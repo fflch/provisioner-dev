@@ -36,12 +36,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     host.vm.hostname = "mariadbmaster"
     host.vm.box = "generic/debian10"
     host.vm.network :private_network,
+      :ip => "192.168.8.10",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 4024
+      v.cpus = 1
+    end
+  end
+
+  config.vm.define "nunaliit" do |host|
+    host.vm.hostname = "nunaliit"
+    host.vm.box = "generic/ubuntu1804"
+    host.vm.network :private_network,
       :ip => "192.168.8.57",
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 1024
-      v.cpus = 1
+      v.memory = 4096
+      v.cpus = 4
     end
   end
 

@@ -1,0 +1,22 @@
+---
+- name: vagrant_nunaliit
+  become: yes
+  hosts: vagrant_nunaliit
+
+
+  tasks:
+
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
+
+    - name: Install a list of packages for nunaliit
+      apt:
+        pkg:
+        - openjdk-8-jre-headless
+        - apt-transport-https
+        - curl
+        - gnupg
+        - imagemagick
+        - ffmpeg
+        - ubuntu-restricted-extras
