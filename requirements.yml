@@ -19,6 +19,10 @@
   src: https://github.com/fflch/ansible-role-tasks.git
   version: 1.0.2
 
+- name: fflch.proaluno
+  src: https://github.com/fflch/ansible-role-proaluno.git
+  version: 1.0.2
+
 #### roles da comunidade ####
 
 - src: hispanico.nginx_revproxy
