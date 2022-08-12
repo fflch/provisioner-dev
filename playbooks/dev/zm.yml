@@ -1,0 +1,37 @@
+---
+- name: deploy vagrant_zoneminder
+  become: yes
+  hosts: vagrant_zoneminder
+
+  vars:
+    backup_directories:
+      - /etc
+
+    # mysql
+    mysql_root:
+      username: aegir_root
+      password: "SuperPassw0rd"
+
+    zoneminder_apache2_confs: zoneminder
+    zoneminder_version: '1.36'
+    zoneminder_frontend_url: 'zm.local.fflch.usp.br'
+    zoneminder_mysql:
+      database: zm
+      host: '192.168.8.10'
+      user: zm
+      password: 'zm'
+
+  tasks:
+
+    - name: Role que corrige hostname da máquina
+      include_role:
+        name: Stouts.hostname
+      vars:
+        hostname_hostname: "{{ zoneminder_frontend_url }}"
+
+    - name: Aplica role fflch.tasks
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_php: true
+        tasks_zoneminder: true
