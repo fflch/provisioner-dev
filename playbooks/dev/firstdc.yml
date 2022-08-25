@@ -29,6 +29,7 @@
         name: fflch.tasks
       vars:
         tasks_sambadc: true
+        tasks_common: true
 
     - name: configura /etc/hosts e /etc/hostnane
       include_role:
