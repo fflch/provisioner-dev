@@ -24,4 +24,11 @@
           - name: aegir_root
             host: "%"
             password: "SuperPassw0rd"
-            priv: "*.*:ALL,GRANT"    
+            priv: "*.*:ALL,GRANT"
+          - name: zm
+            host: "%"
+            password: "SuperPassw0rd"
+            priv: "*.*:ALL,GRANT"
+
+        mysql_databases:
+           - name: zm
