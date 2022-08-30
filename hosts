@@ -4,20 +4,15 @@ vagrant_cups ansible_host="192.168.8.43"
 vagrant_aegir ansible_host="192.168.8.44"
 vagrant_mariadbmaster ansible_host="192.168.8.10"
 vagrant_nunaliit ansible_host="192.168.8.57"
-
-######## REVISAR
 vagrant_rsyslog ansible_host="192.168.8.2"
 vagrant_dhcp ansible_host="192.168.8.40"
 vagrant_freeradius ansible_host="192.168.8.41"
-
-
 vagrant_projetos ansible_host="192.168.8.45"
 vagrant_firstdc ansible_host="192.168.8.48"
 vagrant_anotherdc1 ansible_host="192.168.8.49"
 vagrant_anotherdc2 ansible_host="192.168.8.50"
 vagrant_mariadbslave ansible_host="192.168.8.55"
 vagrant_replicado ansible_host="192.168.8.56"
-
 vagrant_bind ansible_host="192.168.8.58"
 vagrant_entrypointbackup ansible_host="192.168.8.59"
 vagrant_zoneminder ansible_host="192.168.8.60"
@@ -27,6 +22,7 @@ vagrant_f-secure ansible_host="192.168.8.90"
 vagrant_phpserver ansible_host="192.168.8.92"
 vagrant_aegirmigrate ansible_host="192.168.8.93"
 vagrant_hpc ansible_host="192.168.8.94"
+vagrant_python ansible_host="192.168.8.95"
 
 [vagrant:vars]
 ansible_user="vagrant"
