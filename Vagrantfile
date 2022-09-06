@@ -71,7 +71,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  ########################## REVISAR
   ### VMs
   config.vm.define "rsyslog" do |host|
     host.vm.hostname = "log"
@@ -113,8 +112,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       v.cpus = 1
     end
   end
-
-
 
   config.vm.define "projetos" do |host| 
     host.vm.hostname = "projetos"
@@ -194,8 +191,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-
-
   config.vm.define "bind" do |host|
     host.vm.hostname = "bind"
     host.vm.box = "generic/debian10"
@@ -222,8 +217,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "zmadm" do |host|
-    host.vm.hostname = "zmadm"
+  config.vm.define "zoneminder" do |host|
+    host.vm.hostname = "zoneminder"
     host.vm.box = "generic/debian10"
     host.vm.network :private_network,
       :ip => "192.168.8.60",
@@ -307,6 +302,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     host.vm.box = "generic/debian10"
     host.vm.network :private_network,
       :ip => "192.168.8.94",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 2048
+      v.cpus = 2
+    end
+  end
+
+  config.vm.define "python" do |host| 
+    host.vm.hostname = "python"
+    host.vm.box = "generic/debian10"
+    host.vm.network :private_network,
+      :ip => "192.168.8.95",
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|

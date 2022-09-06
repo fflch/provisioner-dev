@@ -1,7 +1,7 @@
  #### roles internas da FFLCH ####
 - name: fflch.sambadc
   src: https://github.com/fflch/ansible-role-sambadc.git
-  version: 1.0.2
+  version: 1.0.3
 
 - name: fflch.deploy_laravel
   src: https://github.com/fflch/ansible-role-deploy-laravel.git
@@ -17,7 +17,7 @@
 
 - name: fflch.tasks
   src: https://github.com/fflch/ansible-role-tasks.git
-  version: 1.0.2
+  version: 1.0.6
 
 - name: fflch.proaluno
   src: https://github.com/fflch/ansible-role-proaluno.git
@@ -60,6 +60,9 @@
 
 - src: andrewrothstein.anaconda
   version: v4.0.19
+
+- src: gforcada.compile-python
+  version: 3.0.0
   
 # Falta fixar a versão e ver se estão sendo usadas:
 - src: gcoop-libre.mysqldump

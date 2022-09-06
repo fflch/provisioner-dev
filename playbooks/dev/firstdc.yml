@@ -7,26 +7,29 @@
   vars:
     backup_directories:
       - /etc
-    # variables to smb.conf template used at sambadc role
-    template_smb_cups_server    : '192.168.8.43:631'
-    template_smb_netbios        : "{{ inventory_hostname }}"
-    sambadc_realm: "smbdomain.fflch.usp.br"
     printersfile: "{{ lookup('file', '../../files/printers.csv') }}"
     printers: "{{ printersfile.split('\n') }}"
-    template_smb_dns_forwarder: 8.8.8.8
-    template_printers: []
+    tasks_samba_printers: []
+    sambadc_realm: "smbdomain.local.br"
 
   #### tasks
   tasks:
 
-    - name: monta lista de dicionários cups_printer_list
+    - name: monta lista de dicionários tasks_samba_printers
       set_fact: 
-        template_printers: > 
-          {{ template_printers + [{ 
+        tasks_samba_printers: > 
+          {{ tasks_samba_printers + [{ 
             'name': item.split(',')[0]
           }]}}
       with_items: 
         - "{{ printers }}"
+
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_sambadc: true
+        tasks_common: true
 
     - name: configura /etc/hosts e /etc/hostnane
       include_role:
@@ -34,21 +37,17 @@
       vars:
         hostname_hostname: "{{ inventory_hostname }}.{{sambadc_realm}}"
 
-    - name: Common tasks across all FFLCH servers
-      import_tasks: ../tasks/common.yml
-
-    - name: Samba DC common tasks
-      import_tasks: ../tasks/sambadc.yml
-
     - name: Configura samba como um Domain Controller
       include_role:
         name: fflch.sambadc
       vars:
         sambadc_type: "new"
-        sambadc_realm: "smbdomain.fflch.usp.br"
-        sambadc_admin_password: "{{ lookup('passwordstore', 'sti/servidores/smbdomain/Administrator/password') }}"
-        sambadc_smb_path: "{{ playbook_dir }}/../../templates/smb.conf.j2"
- 
+        sambadc_admin_password: "SuperSenh@1"
+        sambadc_cups_server    : '192.168.8.43:631'
+        sambadc_netbios        : "{{ inventory_hostname }}"
+        sambadc_dns_forwarder: 8.8.8.8
+        sambadc_printers: []
+
     - name: Configura resolv.conf para consultar DNSs no próprio samba
       include_role:
         name: blackstar257.resolv
