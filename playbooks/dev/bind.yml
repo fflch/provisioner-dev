@@ -1,0 +1,38 @@
+---
+- name: deploy bind DNS
+  become: yes
+  hosts: vagrant_bind
+
+  vars:
+    backup_directories:
+      - /etc/bind
+    tasks_common: true
+
+    #bind vars
+    tasks_bind_job_server: dev # dev or prod
+    tasks_bind_domain: com.br
+    tasks_bind_subdomain: example
+    tasks_bind_ns_name: ns1
+    tasks_bind_ns_ip: 192.168.8.58
+    tasks_bind_ns_ip_reverse: 8.168.192
+    tasks_bind_address_dns_slave:
+      - {address: '192.168.0.1'}
+      - {address: '2001:db8:cafe:1111:faca::1'}
+      - {address: '192.168.200.5'}
+      - {address: '2001:db8:cafe:faca::5'}
+      - {address: '192.168.150.3'}
+      - {address: '2001:db8:cafe:2222::20'}
+    tasks_bind_name_server:
+      - {ns: a.example.com}
+      - {ns: b.example.com}
+      - {ns: c.example.com}
+      - {ns: d.example.com}
+      - {ns: e.example.com}
+
+  tasks:
+
+    - name: Aplica role fflch.tasks
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_bind: true

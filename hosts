@@ -3,6 +3,7 @@
 vagrant_cups ansible_host="192.168.8.43"
 vagrant_aegir ansible_host="192.168.8.44"
 vagrant_mariadbmaster ansible_host="192.168.8.10"
+vagrant_pythonweb ansible_host="192.168.8.11"
 vagrant_nunaliit ansible_host="192.168.8.57"
 vagrant_rsyslog ansible_host="192.168.8.2"
 vagrant_dhcp ansible_host="192.168.8.40"

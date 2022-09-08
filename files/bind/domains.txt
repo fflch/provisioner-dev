@@ -1,0 +1,4 @@
+meusite                IN A 192.168.8.58
+www.meusite            IN A 192.168.8.58
+segundosite            IN A 192.168.8.58
+www.segundosite        IN A 192.168.8.58

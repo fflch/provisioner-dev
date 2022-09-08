@@ -58,6 +58,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define "pythonweb" do |host|
+    host.vm.hostname = "pythonweb"
+    host.vm.box = "generic/debian10"
+    host.vm.network :private_network,
+      :ip => "192.168.8.11",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+  end
+
+  ### VMs
   config.vm.define "rsyslog" do |host|
     host.vm.hostname = "log"
     host.vm.box = "generic/debian10"
