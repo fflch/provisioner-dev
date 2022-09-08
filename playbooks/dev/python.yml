@@ -1,0 +1,13 @@
+---
+- name: deploy python
+  become: yes
+  hosts: vagrant_python
+
+  tasks:
+
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_django: true
+        tasks_django_user_password: SuperSenha123
