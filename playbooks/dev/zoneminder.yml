@@ -12,10 +12,10 @@
       username: aegir_root
       password: "SuperPassw0rd"
 
-    zoneminder_apache2_confs: zoneminder
-    zoneminder_version: '1.36'
-    zoneminder_frontend_url: 'zm.local.fflch.usp.br'
-    zoneminder_mysql:
+    tasks_zoneminder_apache2_confs: zoneminder
+    tasks_zoneminder_version: '1.36'
+    tasks_zoneminder_frontend_url: 'zm.local.fflch.usp.br'
+    tasks_zoneminder_mysql:
       database: zm
       host: '192.168.8.10'
       user: zm
@@ -27,7 +27,7 @@
       include_role:
         name: Stouts.hostname
       vars:
-        hostname_hostname: "{{ zoneminder_frontend_url }}"
+        hostname_hostname: "{{ tasks_zoneminder_frontend_url }}"
 
     - name: Aplica role fflch.tasks
       include_role:
