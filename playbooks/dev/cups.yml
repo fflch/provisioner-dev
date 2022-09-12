@@ -5,8 +5,13 @@
 
   vars:
 
-    tasks_cups_quotas_endpoint: 'http://127.0.0.1/x'
+    tasks_cups_quotas_endpoint: 'http://127.0.0.1:8000/api'
     tasks_cups_quotas_api_token: '123'
+    tasks_cups_use_php_backend: False
+
+    tasks_cups_template_cups_listen: 192.168.8.43:631
+    tasks_cups_template_cups_admin_networks: 
+      - '192.168.8.0/24'
 
   tasks:
 
