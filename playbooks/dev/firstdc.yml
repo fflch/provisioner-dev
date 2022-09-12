@@ -7,22 +7,10 @@
   vars:
     backup_directories:
       - /etc
-    printersfile: "{{ lookup('file', '../../files/printers.csv') }}"
-    printers: "{{ printersfile.split('\n') }}"
-    tasks_samba_printers: []
     sambadc_realm: "smbdomain.local.br"
 
   #### tasks
   tasks:
-
-    - name: monta lista de dicionários tasks_samba_printers
-      set_fact: 
-        tasks_samba_printers: > 
-          {{ tasks_samba_printers + [{ 
-            'name': item.split(',')[0]
-          }]}}
-      with_items: 
-        - "{{ printers }}"
 
     - name: Aplica role fflch.tasks 
       include_role:
@@ -46,7 +34,6 @@
         sambadc_cups_server    : '192.168.8.43:631'
         sambadc_netbios        : "{{ inventory_hostname }}"
         sambadc_dns_forwarder: 8.8.8.8
-        sambadc_printers: []
 
     - name: Configura resolv.conf para consultar DNSs no próprio samba
       include_role:
