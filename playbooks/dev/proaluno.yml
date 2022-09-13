@@ -1,48 +1,44 @@
 ---
-- name: deploy vm example host
-  hosts: terminal
+- name: prolauno playbook
+  hosts: vagrantproaluno
   become: yes
 
-  vars:
-    sambadc_realm: "proaluno.usp.br"
-    ntp_dns_servers:
-      - 192.168.7.201
   tasks:
 
-    - import_tasks: ../partials/locale.yml
-    - import_tasks: ../partials/ntp_dns.yml
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
 
     - name: proaluno role
       include_role:
-        name: local.proaluno
+        name: fflch.proaluno
       vars:
-        proaluno_check_quota: "http://192.168.7.1:8000"
         proaluno_install_pacotes_debian: False
+        proaluno_deploy_printers: True
+        proaluno_install_mate: True
         proaluno_remove_all_printers: True
-        proaluno_cups_server: "192.168.7.202:631"
-
+        proaluno_update_keys: True
+        proaluno_cups_server: "ipp://192.168.8.43:631/printers"
+        proaluno_sala: "proaluno_dev_"
+        proaluno_ntp_servers:
+          - 192.168.8.48
         proaluno_printers:
-          - name: impressora_pdf_tea4cups
-            device: "ipp://{{proaluno_cups_server}}/printers/impressora_pdf_tea4cups"
-            model: 'raw'
-
-          - name: impressora_pdf
-            device: "ipp://{{proaluno_cups_server}}/printers/impressora_pdf"
-            model: 'raw'
-
-          - name: impressora_adm_fin
-            device: "ipp://{{proaluno_cups_server}}/printers/impressora_adm_fin"
+          - name: impressora
+            device: "{{ proaluno_cups_server }}/proaluno_gh_ppd"
             model: 'K7600_processado_gstopdf17.ppd'
+
+    - name: Configura resolv.conf para consultar DNSs do firstdc dev
+      include_role:
+        name: blackstar257.resolv
+      vars:
+        resolv_conf_nameservers:
+          - 192.168.8.48
+        resolv_conf_search_domains:
+          - "smbdomain.local.br"
 
     - name: fflch.domain-member
       include_role:
         name: fflch.domain-member
       vars:
-        domain_member_realm: "{{ sambadc_realm }}"
-        domain_member_samba_server: "samba"
-        domain_member_password: "Pr0Aluno123"
-
-    - name: change root's password
-      user:
-        name: root
-        password: "{{ 'Pr0Aluno123' | password_hash('sha512') }}"
+        domain_member_realm: "smbdomain.local.br"
+        domain_member_password: "SuperSenh@1"

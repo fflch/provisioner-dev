@@ -5,7 +5,7 @@
 
   vars:
 
-    tasks_cups_quotas_endpoint: 'http://127.0.0.1:8000/api'
+    tasks_cups_quotas_endpoint: 'http://127.0.0.1:8000'
     tasks_cups_quotas_api_token: '123'
     tasks_cups_use_php_backend: False
 
