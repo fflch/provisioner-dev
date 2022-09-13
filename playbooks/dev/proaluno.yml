@@ -5,6 +5,19 @@
 
   tasks:
 
+#################### resolve o problema do grub no box generic/debian10
+    - name: Delete content & directory
+      file:
+        state: absent
+        path: /boot/grub/menu.lst
+
+    - name: Install a list of packages
+      apt:
+        force: yes
+        pkg:
+        - grub-legacy
+####################
+
     - name: Aplica role fflch.tasks 
       include_role:
         name: fflch.tasks
@@ -24,7 +37,7 @@
           - 192.168.8.48
         proaluno_printers:
           - name: impressora
-            device: "{{ proaluno_cups_server }}/proaluno_gh_ppd"
+            device: "{{ proaluno_cups_server }}/financeiro_ppd"
             model: 'K7600_processado_gstopdf17.ppd'
 
     - name: Configura resolv.conf para consultar DNSs do firstdc dev

@@ -326,8 +326,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "proaluno" do |host| 
     host.vm.hostname = "proaluno"
     host.vm.box = "generic/debian10"
+    #host.vm.box_version = "3.0.36"
     host.vm.network :private_network,
       :ip => "192.168.8.47",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 4096
+      v.cpus = 1
+    end
+  end
+
+  config.vm.define "windowsdm" do |host| 
+    host.vm.hostname = "windowsdm"
+    host.vm.box = "peru/windows-10-enterprise-x64-eval"
+    host.vm.network :private_network,
+      :ip => "192.168.8.52",
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
