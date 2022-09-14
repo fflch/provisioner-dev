@@ -39,6 +39,8 @@
           - name: impressora
             device: "{{ proaluno_cups_server }}/financeiro_ppd"
             model: 'K7600_processado_gstopdf17.ppd'
+          - name: pdfprinter
+            device: "{{ proaluno_cups_server }}/pdfprinter"
 
     - name: Configura resolv.conf para consultar DNSs do firstdc dev
       include_role:
