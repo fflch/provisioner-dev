@@ -1,7 +1,7 @@
 ---
 - name: deploy
   become: yes
-  hosts: vagrant_firstdc
+  hosts: firstdc
 
   #### global vars
   vars:

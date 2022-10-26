@@ -128,7 +128,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "firstdc" do |host|
     host.vm.hostname = "firstdc"
-    host.vm.box = "generic/ubuntu1604"
+    #host.vm.box = "generic/ubuntu1604"
+    host.vm.box = "generic/debian11"
     host.vm.network :private_network,
       :ip => "192.168.8.48",
       :libvirt__network_name => "fflch",
