@@ -1,7 +1,7 @@
 ---
 - name: vagrant_nunaliit
   become: yes
-  hosts: vagrant_nunaliit
+  hosts: vagrantnunaliit
 
 
   tasks:

@@ -1,7 +1,7 @@
 ---
 - name: mariadbmaster
   become: yes
-  hosts: vagrant_mariadbmaster
+  hosts: vagrantmariadbmaster
 
   vars:
     msmtp_email: 'testes.sti.fflch@usp.br'

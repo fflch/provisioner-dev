@@ -1,7 +1,7 @@
 ---
 - name: deploy vagrant_zoneminder
   become: yes
-  hosts: vagrant_zoneminder
+  hosts: vagrantzoneminder
 
   vars:
     backup_directories:

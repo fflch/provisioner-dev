@@ -1,7 +1,7 @@
 ---
 - name: deploy
   become: yes
-  hosts: vagrant_f-secure
+  hosts: vagrantfsecure
 
   vars:
     #hostname_hostname: "{{ inventory_hostname }}.fflch.usp.br"

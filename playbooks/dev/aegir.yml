@@ -1,7 +1,7 @@
 ---
 - name: deploy aegir
   become: yes
-  hosts: vagrant_aegir
+  hosts: vagrantaegir
 
   vars_prompt:
     - name: msmtp_password

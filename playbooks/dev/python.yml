@@ -1,7 +1,7 @@
 ---
-- name: deploy python
+- name: deploy vagrantpythonweb
   become: yes
-  hosts: vagrant_python
+  hosts: vagrantpythonweb
 
   tasks:
 

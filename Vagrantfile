@@ -128,8 +128,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "firstdc" do |host|
     host.vm.hostname = "firstdc"
-    #host.vm.box = "generic/ubuntu1604"
-    host.vm.box = "generic/debian11"
+    host.vm.box = "generic/ubuntu1804"
     host.vm.network :private_network,
       :ip => "192.168.8.48",
       :libvirt__network_name => "fflch",
@@ -162,6 +161,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
       v.memory = 384
+      v.cpus = 1
+    end
+  end
+
+  config.vm.define "sambadcdebian11" do |host|
+    host.vm.hostname = "sambadcdebian11"
+    host.vm.box = "generic/debian11"
+    host.vm.network :private_network,
+      :ip => "192.168.8.51",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 1024
       v.cpus = 1
     end
   end
@@ -303,19 +315,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     host.vm.box = "generic/debian10"
     host.vm.network :private_network,
       :ip => "192.168.8.94",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 2048
-      v.cpus = 2
-    end
-  end
-
-  config.vm.define "python" do |host| 
-    host.vm.hostname = "python"
-    host.vm.box = "generic/debian10"
-    host.vm.network :private_network,
-      :ip => "192.168.8.95",
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|

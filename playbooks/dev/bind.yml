@@ -1,7 +1,7 @@
 ---
 - name: deploy bind DNS
   become: yes
-  hosts: vagrant_bind
+  hosts: vagrantbind
 
   vars:
     backup_directories:

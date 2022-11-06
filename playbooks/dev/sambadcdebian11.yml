@@ -1,10 +1,12 @@
 ---
 - name: deploy
   become: yes
-  hosts: vagrantanotherdc1,vagrantanotherdc2
+  hosts: vagrantsambadcdebian11
 
   #### global vars
   vars:
+    backup_directories:
+      - /etc
     sambadc_realm: "smbdomain.local.br"
 
   #### tasks
@@ -17,12 +19,6 @@
         tasks_sambadc: true
         tasks_common: true
 
-    - name: configura /etc/hosts e /etc/hostnane
-      include_role:
-        name: Stouts.hostname
-      vars:
-        hostname_hostname: "{{ inventory_hostname }}.{{sambadc_realm}}"
-
     - name: Configura resolv.conf para consultar DNS no firstdc
       include_role:
         name: blackstar257.resolv
@@ -32,12 +28,29 @@
         resolv_conf_search_domains:
           - "{{ sambadc_realm }}"
 
+    - name: configura /etc/hosts e /etc/hostnane
+      include_role:
+        name: Stouts.hostname
+      vars:
+        hostname_hostname: "{{ inventory_hostname }}.{{sambadc_realm}}"
+
     - name: Configura samba como um Domain Controller
       include_role:
         name: fflch.sambadc
       vars:
+        sambadc_use_backports: True
         sambadc_type: "join"
         sambadc_admin_password: "SuperSenh@1"
         sambadc_cups_server    : '192.168.8.43:631'
         sambadc_netbios        : "{{ inventory_hostname }}"
         sambadc_dns_forwarder: 8.8.8.8
+
+    - name: Configura resolv.conf para consultar DNS ne mesmo
+      include_role:
+        name: blackstar257.resolv
+      vars:
+        resolv_conf_nameservers:
+          - 192.168.8.48
+          - 192.168.8.51
+        resolv_conf_search_domains:
+          - "{{ sambadc_realm }}"
