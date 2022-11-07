@@ -61,7 +61,7 @@
   version: 2.3.1
 
 - src: geerlingguy.pip
-  version: 2.0.0
+  version: 2.2.0
 
 - src: robertdebock.logrotate
   version: 2.0.0

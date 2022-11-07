@@ -8,7 +8,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "cups" do |host|
     host.vm.hostname = "cups"
-    host.vm.box = "generic/debian9"
+    #host.vm.box = "generic/debian9"
+    host.vm.box = "generic/debian11"
     host.vm.network :private_network,
       :ip => "192.168.8.43",
       :libvirt__network_name => "fflch",

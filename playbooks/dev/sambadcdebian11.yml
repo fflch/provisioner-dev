@@ -43,9 +43,9 @@
         sambadc_admin_password: "SuperSenh@1"
         sambadc_cups_server    : '192.168.8.43:631'
         sambadc_netbios        : "{{ inventory_hostname }}"
-        sambadc_dns_forwarder: 8.8.8.8
+        sambadc_forwarder      : 8.8.8.8
 
-    - name: Configura resolv.conf para consultar DNS ne mesmo
+    - name: Configura resolv.conf para consultar DNS nele mesmo
       include_role:
         name: blackstar257.resolv
       vars:
