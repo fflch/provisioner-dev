@@ -1,7 +1,8 @@
 ---
 - name: deploy
   become: yes
-  hosts: vagrantanotherdc1,vagrantanotherdc2
+#  hosts: vagrantanotherdc1,vagrantanotherdc2
+  hosts: vagrantfirstdc
 
   #### global vars
   vars:
@@ -28,7 +29,7 @@
         name: blackstar257.resolv
       vars:
         resolv_conf_nameservers:
-          - 192.168.8.48
+          - 192.168.8.51
         resolv_conf_search_domains:
           - "{{ sambadc_realm }}"
 
@@ -36,8 +37,19 @@
       include_role:
         name: fflch.sambadc
       vars:
+        sambadc_use_backports: True
         sambadc_type: "join"
         sambadc_admin_password: "SuperSenh@1"
         sambadc_cups_server    : '192.168.8.43:631'
         sambadc_netbios        : "{{ inventory_hostname }}"
         sambadc_dns_forwarder: 8.8.8.8
+
+    - name: Configura resolv.conf para consultar DNS nele mesmo
+      include_role:
+        name: blackstar257.resolv
+      vars:
+        resolv_conf_nameservers:
+          - 192.168.8.48
+          - 192.168.8.51
+        resolv_conf_search_domains:
+          - "{{ sambadc_realm }}"
