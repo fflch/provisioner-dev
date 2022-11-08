@@ -352,4 +352,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define "printers" do |host| 
+    host.vm.hostname = "printers"
+    host.vm.box = "generic/debian11"
+    host.vm.network :private_network,
+      :ip => "192.168.8.53",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 2048
+      v.cpus = 1
+    end
+  end
+
 end

@@ -27,6 +27,7 @@ vagrantanotherdc1 ansible_host="192.168.8.49"
 vagrantanotherdc2 ansible_host="192.168.8.50"
 
 vagrantsambadcdebian11 ansible_host="192.168.8.51"
+vagrantprinters ansible_host="192.168.8.53"
 
 [vagrant:vars]
 ansible_user="vagrant"

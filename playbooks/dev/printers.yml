@@ -1,0 +1,28 @@
+---
+- name: printers playbook
+  hosts: vagrantprinters
+  become: yes
+
+  tasks:
+
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
+
+    - name: Configura resolv.conf para consultar DNSs do DC
+      include_role:
+        name: blackstar257.resolv
+      vars:
+        resolv_conf_nameservers:
+          - 192.168.8.48
+        resolv_conf_search_domains:
+          - "smbdomain.local.br"
+
+    - name: fflch.domain-member
+      include_role:
+        name: fflch.domain-member
+      vars:
+        domain_member_cups_server: 192.168.8.43:631
+        domain_member_realm: "smbdomain.local.br"
+        domain_member_password: "SuperSenh@1"
+        domain_member_smb_file: "smb.printers.conf.j2"
