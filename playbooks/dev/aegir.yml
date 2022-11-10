@@ -37,7 +37,7 @@
       import_role:
         name: fflch.aegir
       vars:
-        aegir_db_host: '192.168.8.57'
+        aegir_db_host: '192.168.8.10'
         aegir_db_user: 'aegir_root'
         aegir_db_password: "SuperPassw0rd"
 
