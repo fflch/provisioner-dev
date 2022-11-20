@@ -11,8 +11,6 @@
     - name: Aplica role fflch.tasks
       include_role:
         name: fflch.tasks
-      vars:
-        tasks_bind: true
 
     - name: Clone django project repository
       git:
