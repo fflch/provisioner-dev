@@ -1,0 +1,39 @@
+- name: deploy rshiny
+  become: yes
+  hosts: rshiny
+
+  vars:
+    backup_directories:
+      - /etc/bind
+
+  tasks:
+
+    - name: Aplica role fflch.tasks
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_bind: true
+
+    - name: Clone django project repository
+      git:
+        repo: "https://github.com/brunomaroneze/dicio_biologia.git"
+        dest: "/root/dicio_biologia"
+        version: master
+        force: yes
+        update: yes
+
+    - name: Aplica role rshiny
+      include_role:
+        name: oefenweb.shiny_server
+      vars:
+        shiny_server_conf_directives:
+          - |
+            run_as shiny;
+            server {
+              listen 3838;
+              location / {
+                site_dir /root/dicio_biologia;
+                log_dir /var/log/shiny-server;
+                directory_index on;
+              }
+            }
