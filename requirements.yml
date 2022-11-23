@@ -74,7 +74,10 @@
 
 - src: cmprescott.chrome
   version: 0.2.4
-  
+
+- src: oefenweb.shiny_server
+  version: 'v1.1.31'
+
 # Falta fixar a versão e ver se estão sendo usadas:
 - src: gcoop-libre.mysqldump
 - src: Stouts.hostname

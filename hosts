@@ -1,5 +1,6 @@
 ######################################################################
 [vagrant]
+rshiny ansible_host="192.168.8.3"
 vagrantcups ansible_host="192.168.8.43"
 vagrantaegir ansible_host="192.168.8.44"
 vagrantmariadbmaster ansible_host="192.168.8.10"

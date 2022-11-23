@@ -1,5 +1,5 @@
 VAGRANTFILE_API_VERSION = "2"
-ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
+#ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
@@ -8,7 +8,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "cups" do |host|
     host.vm.hostname = "cups"
-    #host.vm.box = "generic/debian9"
     host.vm.box = "generic/debian11"
     host.vm.network :private_network,
       :ip => "192.168.8.43",
@@ -361,6 +360,51 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
       v.memory = 2048
+      v.cpus = 1
+    end
+  end
+
+  #### Máquinas com virtualbox
+
+  config.vm.define "windows11" do |host| 
+    host.vm.box = "StefanScherer/windows_11"
+    host.vm.network :private_network, ip: "192.168.77.41"
+    
+    host.vm.provider :virtualbox do |v|
+      v.name = "windows11"
+      v.memory = 9000
+      v.cpus = 4
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--groups", "/fflch"]
+    end
+  end
+
+  config.vm.define "windows10" do |host| 
+    host.vm.box = "gusztavvargadr/windows-10"
+    host.vm.network :private_network, ip: "192.168.77.41"
+    
+    host.vm.provider :virtualbox do |v|
+      v.name = "windows10"
+      v.memory = 2000
+      v.cpus = 4
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--groups", "/fflch"]
+    end
+  end
+
+  config.vm.define "rshiny" do |host|
+    host.vm.hostname = "rshiny"
+    host.vm.box = "generic/debian10"
+    host.vm.network :private_network,
+      :ip => "192.168.8.3",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 256
       v.cpus = 1
     end
   end
