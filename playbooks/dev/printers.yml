@@ -26,3 +26,4 @@
         domain_member_realm: "smbdomain.local.br"
         domain_member_password: "SuperSenh@1"
         domain_member_smb_file: "smb.printers.conf.j2"
+        domain_member_krb5_file: "krb5.printers.conf.j2"
