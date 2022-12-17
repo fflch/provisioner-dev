@@ -48,9 +48,17 @@
         aegir_platform_version:  "7.x-3.190"  # https://git.drupalcode.org/project/hostmaster.git
         aegir_drush_version:     "8.4.11"     # https://github.com/drush-ops/drush/releases
         aegir_git_platforms:
-          - name: drupal8916a
+#          - name: drupal8916a
+#            repo: https://github.com/fflch/drupal.git
+#            version: v8.9.16a
+
+#          - name: drupal8920g
+#            repo: https://github.com/fflch/drupal.git
+#            version: v8.9.20g
+
+          - name: drupal9.4.2
             repo: https://github.com/fflch/drupal.git
-            version: v8.9.16a
+            version: 9.x
 
 # Entradas da /etc/hosts da hospedeira:
 # 192.168.8.44 aegir.local.fflch.usp.br

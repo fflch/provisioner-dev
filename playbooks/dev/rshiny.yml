@@ -12,6 +12,17 @@
       include_role:
         name: fflch.tasks
 
+    - name: Install a list of R packages for projects
+      apt:
+        pkg:
+        - r-base
+        - r-cran-shinythemes
+        - r-cran-tidyverse
+        - r-cran-shiny
+        - r-cran-dt
+        - r-cran-markdown
+        - r-cran-stringr
+
     - name: Clone django project repository
       git:
         repo: "https://github.com/brunomaroneze/dicio_biologia.git"

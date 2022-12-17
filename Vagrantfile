@@ -338,19 +338,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "windowsdm" do |host| 
-    host.vm.hostname = "windowsdm"
-    host.vm.box = "peru/windows-10-enterprise-x64-eval"
-    host.vm.network :private_network,
-      :ip => "192.168.8.52",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 4096
-      v.cpus = 2
-    end
-  end
-
   config.vm.define "printers" do |host| 
     host.vm.hostname = "printers"
     host.vm.box = "generic/debian11"
@@ -364,41 +351,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  #### Máquinas com virtualbox
-
-  config.vm.define "windows11" do |host| 
-    host.vm.box = "StefanScherer/windows_11"
-    host.vm.network :private_network, ip: "192.168.77.41"
-    
-    host.vm.provider :virtualbox do |v|
-      v.name = "windows11"
-      v.memory = 9000
-      v.cpus = 4
-      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--ioapic", "on"]
-      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-      v.customize ["modifyvm", :id, "--groups", "/fflch"]
-    end
-  end
-
-  config.vm.define "windows10" do |host| 
-    host.vm.box = "gusztavvargadr/windows-10"
-    host.vm.network :private_network, ip: "192.168.77.41"
-    
-    host.vm.provider :virtualbox do |v|
-      v.name = "windows10"
-      v.memory = 2000
-      v.cpus = 4
-      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--ioapic", "on"]
-      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-      v.customize ["modifyvm", :id, "--groups", "/fflch"]
-    end
-  end
-
   config.vm.define "rshiny" do |host|
     host.vm.hostname = "rshiny"
-    host.vm.box = "generic/debian10"
+    host.vm.box = "generic/debian11"
     host.vm.network :private_network,
       :ip => "192.168.8.3",
       :libvirt__network_name => "fflch",
