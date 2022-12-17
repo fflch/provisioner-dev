@@ -26,7 +26,7 @@
     - name: Clone django project repository
       git:
         repo: "https://github.com/brunomaroneze/dicio_biologia.git"
-        dest: "/root/dicio_biologia"
+        dest: "/dicio_biologia"
         version: master
         force: yes
         update: yes
@@ -41,8 +41,17 @@
             server {
               listen 3838;
               location / {
-                site_dir /root/dicio_biologia;
+                site_dir /dicio_biologia;
                 log_dir /var/log/shiny-server;
                 directory_index on;
               }
             }
+
+    - name: Recursively change ownership
+      file:
+        path: "/dicio_biologia"
+        owner: "shiny"
+        group: "shiny"
+
+# Acessar na web: http://192.168.8.3:3838/
+#
