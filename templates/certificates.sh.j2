@@ -1,0 +1,47 @@
+#!/bin/bash
+
+url='http://aegird8.fflch.usp.br/sites/aegird8.fflch.usp.br/files/fflch_domains.txt'
+body=''
+
+certbot certificates > /tmp/certificates.txt 2>&1
+
+if [[ -f "/tmp/certificates.txt" ]]; then
+  file="/tmp/certificates.txt"
+  invalid=$(grep -n INVALID $file | cut -f1 -d:)
+  if [[ ! -z $invalid ]]; then
+    body="$body <h3>Domínio com certificado inválido</h3><ul>"
+    for line in $invalid
+    do
+      body="$body<li>$(sed -n $(($line - 2))p $file | cut '-d ' '-f5')</li>"
+    done
+    body="$body</ul>"
+  fi
+fi
+
+if [[ $(curl -s -I $url | head -n 1 | cut '-d ' '-f2') -eq "200" ]] ; then
+  sites=$(curl -s $url | sed 's/[.][[:space:]].*$// ; /^www/d ; /^$/d')
+  off=''
+  for site in $sites
+  do
+    ln=$(grep -n -m1 "$site" $file | cut -f1 -d:)
+    if [[ -z "$ln" ]] ; then
+      off="$off<li>$site</li>"
+    fi
+  done
+fi
+
+if [[ ! -z $off ]]; then
+  body="$body <h3>Domínio sem certificado</h3><ul>$off</ul>"
+fi
+
+if [[ ! -z $body ]]; then
+  d=$(date +%d/%m/%Y)
+  assunto="Relatório de problemas com Certificados HTTPS - ${d}"
+  body="<div>Prezados(as) analistas, por favor verificar os seguintes problemas:</div><br>${body}"
+  mail="From: fffchsti@usp.br\nMime-Version: 1.0\nContent-Type: text/html\nSubject: ${assunto}\n\n${body}"
+  echo -e ${mail} | msmtp servidor1@usp.br
+  echo -e ${mail} | msmtp servidor2@usp.br
+  echo -e ${mail} | msmtp servidor3@usp.br
+  echo -e ${mail} | msmtp servidor4@usp.br
+  echo -e ${mail} | msmtp servidor5@usp.br
+fi
