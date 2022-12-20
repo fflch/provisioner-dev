@@ -29,6 +29,11 @@
             host: "%"
             password: "SuperPassw0rd"
             priv: "*.*:ALL,GRANT"
+          - name: freeradius
+            host: "%"
+            password: "SuperPassw0rd"
+            priv: "*.*:ALL,GRANT"
 
         mysql_databases:
            - name: zm
+           - name: freeradius
