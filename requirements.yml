@@ -17,7 +17,7 @@
 
 - name: fflch.tasks
   src: https://github.com/fflch/ansible-role-tasks.git
-  version: 1.0.18
+  version: 1.0.19
 
 - name: fflch.proaluno
   src: https://github.com/fflch/ansible-role-proaluno.git
