@@ -12,7 +12,7 @@
         django_name: "macc"
         django_dest: "/var/www/macc"
         django_repo: "https://github.com/fflch/macc.git"
-        django_version: "1.0.1"
+        django_version: "1.0.2"
         django_port: "8002"
         django_envfile: '.env.sample'
         django_pythonversion: '3.10'
