@@ -3,10 +3,12 @@
 rshiny ansible_host="192.168.8.3"
 postgresql ansible_host="192.168.8.4"
 
+django ansible_host="192.168.8.11"
+
+# falta arrumar
 vagrantcups ansible_host="192.168.8.43"
 vagrantaegir ansible_host="192.168.8.44"
 vagrantmariadbmaster ansible_host="192.168.8.10"
-vagrantdjango ansible_host="192.168.8.11"
 vagrantnunaliit ansible_host="192.168.8.57"
 vagrantrsyslog ansible_host="192.168.8.2"
 vagrantdhcp ansible_host="192.168.8.40"
