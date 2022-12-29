@@ -1,0 +1,38 @@
+---
+- name: vagrantfreeradius
+  become: yes
+  hosts: vagrantfreeradius
+
+  vars:
+    backup_directories:
+      - /etc
+    freeradius_secret: SuperPass0rd
+    freeradius_version: "3.0"
+    freeradius_mysql:
+      database: freeradius
+      host: 192.168.8.10
+      user: freeradius
+      password: SuperPassw0rd
+
+  tasks:
+
+    - name: Aplica role fflch.tasks
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_freeradius: true
+
+    - name: robertdebock.rsyslog
+      include_role:
+        name: robertdebock.rsyslog
+      vars:
+        rsyslog_receiver: no
+        rsyslog_remote: 192.168.8.2
+        rsyslog_config_file_format: advanced
+
+##############
+# Dicas para testar
+# insert into radcheck (username,attribute,op,value) values("maria", "Cleartext-Password", ":=", "m123");
+# radtest maria m123 localhost 0 mysecret
+# tail -f /var/log/freeradius/radius.log
+

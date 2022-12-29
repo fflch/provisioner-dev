@@ -31,6 +31,11 @@
             password: "SuperPassw0rd"
             priv: "zm.*:ALL"
             
+          - name: freeradius
+            host: "%"
+            password: "freeradius"
+            priv: "freeradius.*:ALL"
+
           - name: analytics
             host: "%"
             password: "analytics"
@@ -38,4 +43,5 @@
 
         mysql_databases:
            - name: zm
+           - name: freeradius
            - name: analytics
