@@ -56,3 +56,6 @@
 # Testando conexão do hospedeiro:
 # sudo apt install postgresql-client
 # PGPASSWORD='macc' psql -h 192.168.8.4 -U macc -d macc
+
+# PGPASSWORD='admin' psql -h 192.168.8.4 -U admin -d template1
+# \l
