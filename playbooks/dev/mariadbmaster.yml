@@ -25,10 +25,17 @@
             host: "%"
             password: "SuperPassw0rd"
             priv: "*.*:ALL,GRANT"
+
           - name: zm
             host: "%"
             password: "SuperPassw0rd"
-            priv: "*.*:ALL,GRANT"
+            priv: "zm.*:ALL"
+            
+          - name: analytics
+            host: "%"
+            password: "analytics"
+            priv: "analytics.*:ALL"
 
         mysql_databases:
            - name: zm
+           - name: analytics

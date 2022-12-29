@@ -1,0 +1,41 @@
+---
+- name: deploy vagrantdjango
+  become: yes
+  hosts: vagrantdjango
+
+  tasks:
+
+    - name: analytics.fflch.usp.br
+      include_role:
+        name: fflch.django
+      vars:
+        django_name: "analytics"
+        django_dest: "/var/www/analytics"
+        django_repo: "https://github.com/fflch/analytics.git"
+        django_version: "1.0.0"
+        django_port: "8001"
+        django_envfile: '.env-example'
+        django_pythonversion: '3.9'
+        django_env:   
+          - name: DEBUG
+            value: False
+          - name: SECRET_KEY
+            value: "123dZdRASw"
+          - name: DBUSER
+            value: analytics
+          - name: DBNAME
+            value: analytics
+          - name: DBHOST
+            value: 192.168.8.10
+          - name: DBPASSWORD
+            value: "analytics"
+
+    - name: add cron task scheduling - analytics
+      cron:
+        job: "cd /var/www/analytics && /var/www/analytics/venv/bin/python3.9 populadb.py >> /dev/null 2>&1"
+        name: "task scheduling analytics"
+        minute: "0"
+        hour: "0"
+        day: "*"
+        month: "*"
+        weekday: "*"

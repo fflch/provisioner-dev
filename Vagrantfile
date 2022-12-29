@@ -58,8 +58,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "pythonweb" do |host|
-    host.vm.hostname = "pythonweb"
+  config.vm.define "django" do |host|
+    host.vm.hostname = "django"
     host.vm.box = "generic/debian10"
     host.vm.network :private_network,
       :ip => "192.168.8.11",
