@@ -179,19 +179,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "mariadbslave" do |host|
-    host.vm.hostname = "mariadbslave"
-    host.vm.box = "generic/debian10"
-    host.vm.network :private_network,
-      :ip => "192.168.8.55",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 512
-      v.cpus = 1
-    end
-  end
-
   config.vm.define "replicado" do |host|
     host.vm.hostname = "replicado"
     host.vm.box = "generic/debian10"
@@ -356,6 +343,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     host.vm.box = "generic/debian11"
     host.vm.network :private_network,
       :ip => "192.168.8.3",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 256
+      v.cpus = 1
+    end
+  end
+
+  config.vm.define "postgresql" do |host|
+    host.vm.hostname = "postgresql"
+    host.vm.box = "generic/debian11"
+    host.vm.network :private_network,
+      :ip => "192.168.8.4",
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|

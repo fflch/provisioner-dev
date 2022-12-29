@@ -1,6 +1,8 @@
 ######################################################################
 [vagrant]
 rshiny ansible_host="192.168.8.3"
+postgresql ansible_host="192.168.8.4"
+
 vagrantcups ansible_host="192.168.8.43"
 vagrantaegir ansible_host="192.168.8.44"
 vagrantmariadbmaster ansible_host="192.168.8.10"
@@ -10,7 +12,6 @@ vagrantrsyslog ansible_host="192.168.8.2"
 vagrantdhcp ansible_host="192.168.8.40"
 vagrantfreeradius ansible_host="192.168.8.41"
 vagrantprojetos ansible_host="192.168.8.45"
-vagrantmariadbslave ansible_host="192.168.8.55"
 vagrantreplicado ansible_host="192.168.8.56"
 vagrantbind ansible_host="192.168.8.58"
 vagrantentrypointbackup ansible_host="192.168.8.59"
