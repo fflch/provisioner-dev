@@ -33,5 +33,4 @@
         sap_ase_log: '/replicado/log'      
         sap_ase_host: 'replicado.local.fflch.usp.br'
         sap_ase_ip: '192.168.8.56'
-        #sap_ase_password: "{{ lookup('passwordstore', 'sti/servidores/replicado/sybase_password') }}"
         sap_ase_password: "mypassword"
