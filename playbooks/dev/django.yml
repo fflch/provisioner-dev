@@ -1,8 +1,23 @@
 ---
-- name: deploy vagrantdjango
+- name: deploy django
   become: yes
   hosts: django
 
+  vars:
+    backup_remote_connection: root@192.168.8.59
+    backup_remote_connection_ssh_options: '-p 22'
+    backup_mysql: false
+    backup_path: /root/backups
+    backup_identifier: "{{ inventory_hostname }}"
+    backup_remote_base_path: "/backupsfflch" 
+    backup_user: root
+    backup_directories:
+      - /etc
+
+    rsyslog_remote: 192.168.8.2
+    rsyslog_receiver: no
+    rsyslog_config_file_format: advanced
+    
   tasks:
 
     - name: Aplica role fflch.tasks 

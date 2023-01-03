@@ -1,0 +1,25 @@
+---
+- name: ftpserver
+  become: yes
+  hosts: ftp
+
+  tasks:
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_ftp: true
+
+# No navegador: ftp://ftpuser@192.168.8.61 ou ftp://192.168.8.61
+# se copiar os arquivo para o servidor, lembrar de deixar 755 nos arquivos. Por ftp ja vai certo
+
+# Usando um cliente para enviar ou pegar arquivos nesse server
+# apt install ftp
+# ftp -p 192.168.8.61 -> colocar ftpuser e senha
+# ftp> lcd /home/ftpuser/
+
+# Baixando um arquivo
+# ftp> get maria.txt
+
+# Enviando um arquivo
+# ftp> put /home/thiago/arquivolocal.txt /home/ftpuser/arquivo-renomeado.txt
