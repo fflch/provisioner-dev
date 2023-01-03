@@ -23,7 +23,7 @@
         - r-cran-markdown
         - r-cran-stringr
 
-    - name: Clone django project repository
+    - name: Clone project repository
       git:
         repo: "https://github.com/brunomaroneze/dicio_biologia.git"
         dest: "/dicio_biologia"
@@ -54,4 +54,3 @@
         group: "shiny"
 
 # Acessar na web: http://192.168.8.3:3838/
-#

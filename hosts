@@ -5,6 +5,10 @@ postgresql ansible_host="192.168.8.4"
 
 django ansible_host="192.168.8.11"
 
+firstdc ansible_host="192.168.8.48"
+anotherdc1 ansible_host="192.168.8.49"
+anotherdc2 ansible_host="192.168.8.50"
+
 # falta arrumar
 vagrantcups ansible_host="192.168.8.43"
 vagrantaegir ansible_host="192.168.8.44"
@@ -26,9 +30,7 @@ vagrantaegirmigrate ansible_host="192.168.8.93"
 vagranthpc ansible_host="192.168.8.94"
 vagrantproaluno ansible_host="192.168.8.47"
 
-vagrantfirstdc ansible_host="192.168.8.48"
-vagrantanotherdc1 ansible_host="192.168.8.49"
-vagrantanotherdc2 ansible_host="192.168.8.50"
+
 
 vagrantsambadcdebian11 ansible_host="192.168.8.51"
 vagrantprinters ansible_host="192.168.8.53"

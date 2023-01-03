@@ -52,6 +52,11 @@
              lc_collate: 'pt_BR.UTF-8'
              lc_ctype: 'pt_BR.UTF-8'
 
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: ome.postgresql_backup
+      vars:
+        postgresql_backup_dir: /backupspostgresql
 
 # Testando conexão do hospedeiro:
 # sudo apt install postgresql-client

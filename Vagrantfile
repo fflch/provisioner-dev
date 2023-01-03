@@ -127,8 +127,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "firstdc" do |host|
+
     host.vm.hostname = "firstdc"
-    #host.vm.box = "generic/ubuntu1804"
     host.vm.box = "generic/debian11"
     host.vm.network :private_network,
       :ip => "192.168.8.48",
@@ -142,7 +142,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "anotherdc1" do |host|
     host.vm.hostname = "anotherdc1"
-    host.vm.box = "generic/ubuntu1804"
+    host.vm.box = "generic/debian11"
     host.vm.network :private_network,
       :ip => "192.168.8.49",
       :libvirt__network_name => "fflch",
@@ -154,27 +154,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "anotherdc2" do |host|
-    host.vm.hostname = "anotherdc1"
-    host.vm.box = "generic/ubuntu1804"
+    host.vm.hostname = "anotherdc2"
+    host.vm.box = "generic/debian11"
     host.vm.network :private_network,
       :ip => "192.168.8.50",
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
       v.memory = 384
-      v.cpus = 1
-    end
-  end
-
-  config.vm.define "sambadcdebian11" do |host|
-    host.vm.hostname = "sambadcdebian11"
-    host.vm.box = "generic/debian11"
-    host.vm.network :private_network,
-      :ip => "192.168.8.51",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 1024
       v.cpus = 1
     end
   end

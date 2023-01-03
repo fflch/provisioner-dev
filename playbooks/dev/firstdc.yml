@@ -1,12 +1,10 @@
 ---
 - name: deploy
   become: yes
-  hosts: vagrantfirstdc
+  hosts: firstdc
 
   #### global vars
   vars:
-    backup_directories:
-      - /etc
     sambadc_realm: "smbdomain.local.br"
 
   #### tasks

@@ -1,8 +1,7 @@
 ---
-- name: deploy
+- name: deploy anothers DCs
   become: yes
-#  hosts: vagrantanotherdc1,vagrantanotherdc2
-  hosts: vagrantfirstdc
+  hosts: anotherdc1, anotherdc2
 
   #### global vars
   vars:
