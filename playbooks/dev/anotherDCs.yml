@@ -14,7 +14,6 @@
       include_role:
         name: fflch.tasks
       vars:
-        tasks_sambadc: true
         tasks_common: true
 
     - name: configura /etc/hosts e /etc/hostnane
@@ -28,7 +27,7 @@
         name: blackstar257.resolv
       vars:
         resolv_conf_nameservers:
-          - 192.168.8.51
+          - 192.168.8.48
         resolv_conf_search_domains:
           - "{{ sambadc_realm }}"
 
@@ -48,7 +47,7 @@
         name: blackstar257.resolv
       vars:
         resolv_conf_nameservers:
-          - 192.168.8.48
-          - 192.168.8.51
+          - 192.168.8.49
+          - 192.168.8.50
         resolv_conf_search_domains:
           - "{{ sambadc_realm }}"
