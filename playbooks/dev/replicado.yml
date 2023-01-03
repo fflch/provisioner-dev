@@ -1,7 +1,7 @@
 ---
 - name: deploy
   become: yes
-  hosts: vagrantreplicado
+  hosts: replicado
 
   vars:
     backup_directories:

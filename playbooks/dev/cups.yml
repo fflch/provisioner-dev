@@ -1,7 +1,7 @@
 ---
 - name: deploy cups
   become: yes
-  hosts: vagrantcups
+  hosts: cups
 
   vars:
 

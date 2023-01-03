@@ -1,10 +1,9 @@
 ---
 - name: deploy
   become: yes
-  hosts: vagrantfsecure
+  hosts: fsecure
 
   vars:
-    #hostname_hostname: "{{ inventory_hostname }}.fflch.usp.br"
     hostname_hostname: "f-secure.local.fflch.usp.br"
     backup_directories:
       - /etc

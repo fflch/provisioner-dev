@@ -1,17 +1,7 @@
 ---
 - name: vagrant_rsyslog
   become: yes
-  hosts: vagrantrsyslog
-
-  vars:
-    backup_directories:
-      - /etc
-    rsyslog_ip_laravel: 192.168.8.92
-    rsyslog_emails:
-      - {email: 'servidor1@usp.br'}
-      - {email: 'servidor2@usp.br'}
-      - {email: 'servidor3@usp.br'}
-      - {email: 'servidor4@usp.br'}
+  hosts: rsyslog
 
   tasks:
 

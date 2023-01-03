@@ -1,6 +1,6 @@
 ---
 - name: printers playbook
-  hosts: vagrantprinters
+  hosts: printers
   become: yes
 
   tasks:

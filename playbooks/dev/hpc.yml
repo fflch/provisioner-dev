@@ -1,7 +1,7 @@
 ---
 - name: hpc
   become: yes
-  hosts: vagranthpc
+  hosts: hpc
 
   vars:
     backup_directories:

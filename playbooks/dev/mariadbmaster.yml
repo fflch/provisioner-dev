@@ -1,11 +1,8 @@
 ---
 - name: mariadbmaster
   become: yes
-  hosts: vagrantmariadbmaster
-
-  vars:
-    msmtp_email: 'testes.sti.fflch@usp.br'
-      
+  hosts: mariadbmaster
+     
   tasks:
 
     - name: Aplica role fflch.tasks 

@@ -1,10 +1,7 @@
 ---
 - name: vagrant_entrypointbackup
   become: yes
-  hosts: vagrantentrypointbackup
-
-  vars:
-    entrypointbackup_public_key: "{{ lookup('file', '../../files/sshpublickey.txt') }}"
+  hosts: entrypointbackup
 
   tasks:
 

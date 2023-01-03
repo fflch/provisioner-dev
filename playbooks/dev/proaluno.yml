@@ -1,6 +1,6 @@
 ---
 - name: prolauno playbook
-  hosts: vagrantproaluno
+  hosts: proaluno
   become: yes
 
   tasks:

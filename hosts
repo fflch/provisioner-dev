@@ -1,39 +1,38 @@
 ######################################################################
 [vagrant]
+rsyslog ansible_host="192.168.8.2"
 rshiny ansible_host="192.168.8.3"
 postgresql ansible_host="192.168.8.4"
 
+mariadbmaster ansible_host="192.168.8.10"
 django ansible_host="192.168.8.11"
 
+dhcp ansible_host="192.168.8.40"
+freeradius ansible_host="192.168.8.41"
+
+cups ansible_host="192.168.8.43"
+aegir ansible_host="192.168.8.44"
+projetos ansible_host="192.168.8.45"
+
+proaluno ansible_host="192.168.8.47"
 firstdc ansible_host="192.168.8.48"
 anotherdc1 ansible_host="192.168.8.49"
 anotherdc2 ansible_host="192.168.8.50"
 
-# falta arrumar
-vagrantcups ansible_host="192.168.8.43"
-vagrantaegir ansible_host="192.168.8.44"
-vagrantmariadbmaster ansible_host="192.168.8.10"
-vagrantnunaliit ansible_host="192.168.8.57"
-vagrantrsyslog ansible_host="192.168.8.2"
-vagrantdhcp ansible_host="192.168.8.40"
-vagrantfreeradius ansible_host="192.168.8.41"
-vagrantprojetos ansible_host="192.168.8.45"
-vagrantreplicado ansible_host="192.168.8.56"
-vagrantbind ansible_host="192.168.8.58"
-vagrantentrypointbackup ansible_host="192.168.8.59"
-vagrantzoneminder ansible_host="192.168.8.60"
-vagrantnginxrevproxy ansible_host="192.168.8.62"
-vagrantftp ansible_host="192.168.8.61"
-vagrantfsecure ansible_host="192.168.8.90"
-vagrantphpserver ansible_host="192.168.8.92"
-vagrantaegirmigrate ansible_host="192.168.8.93"
-vagranthpc ansible_host="192.168.8.94"
-vagrantproaluno ansible_host="192.168.8.47"
+printers ansible_host="192.168.8.53"
 
+replicado ansible_host="192.168.8.56"
+nunaliit ansible_host="192.168.8.57"
+bind ansible_host="192.168.8.58"
+entrypointbackup ansible_host="192.168.8.59"
+zoneminder ansible_host="192.168.8.60"
+ftp ansible_host="192.168.8.61"
+nginxrevproxy ansible_host="192.168.8.62"
 
-
-vagrantsambadcdebian11 ansible_host="192.168.8.51"
-vagrantprinters ansible_host="192.168.8.53"
+fsecure ansible_host="192.168.8.90"
+phpserver ansible_host="192.168.8.92"
+aegirmigrate ansible_host="192.168.8.93"
+hpc ansible_host="192.168.8.94"
 
 [vagrant:vars]
 ansible_user="vagrant"

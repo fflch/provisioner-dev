@@ -2,10 +2,7 @@
 - name: postgresql
   become: yes
   hosts: postgresql
-
-  vars:
-    msmtp_email: 'testes.sti.fflch@usp.br'
-      
+     
   tasks:
 
     - name: Aplica role fflch.tasks 

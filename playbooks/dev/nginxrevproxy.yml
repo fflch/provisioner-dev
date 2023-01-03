@@ -1,7 +1,7 @@
 ---
 - name: deploy vagrant_nginxrevproxy
   become: yes
-  hosts: vagrantnginxrevproxy
+  hosts: nginxrevproxy
 
   vars:
     backup_directories:
