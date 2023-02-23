@@ -26,4 +26,10 @@
         domain_member_realm: "smbdomain.local.br"
         domain_member_password: "SuperSenh@1"
         domain_member_smb_file: "smb.printers.conf.j2"
-        domain_member_krb5_file: "krb5.printers.conf.j2"
+        domain_member_krb5_file: "krb5.conf.j2"                
+        domain_member_use_backports_printers: True                     
+        domain_member_configure_sssd: False                                  
+        domain_member_configure_winbindd: True                                   
+        domain_member_configure_sssd: False                                      
+        domain_member_printers_drivers: True                                   
+        domain_member_SePrintOperatorPrivilege: True     
