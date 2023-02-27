@@ -29,11 +29,11 @@
 
 - name: fflch.domain-member
   src: https://github.com/fflch/ansible-role-domain-member.git
-  version: 1.0.2
+  version: 1.0.4
 
 - name: fflch.printer-server
   src: https://github.com/fflch/ansible-role-printer-server.git
-  version: 1.0.0
+  version: 1.0.1
 
 - name: fflch.f-secure
   src: https://github.com/fflch/ansible-role-f-secure.git
