@@ -38,7 +38,13 @@
             password: "analytics"
             priv: "analytics.*:ALL"
 
+          - name: copaco
+            host: "%"
+            password: "copaco"
+            priv: "copaco.*:ALL"
+
         mysql_databases:
            - name: zm
            - name: freeradius
            - name: analytics
+           - name: copaco
