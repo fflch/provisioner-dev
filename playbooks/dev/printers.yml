@@ -18,12 +18,12 @@
         resolv_conf_search_domains:
           - "smbdomain.local.br"
 
-    - name: fflch.domain-member
+    - name: fflch.printer-server
       include_role:
-        name: fflch.domain-member
+        name: fflch.printer-server
       vars:
-        domain_member_cups_server: 192.168.8.43:631
-        domain_member_realm: "smbdomain.local.br"
-        domain_member_password: "SuperSenh@1"
-        domain_member_smb_file: "smb.printers.conf.j2"
-        domain_member_krb5_file: "krb5.printers.conf.j2"
+        printer_server_cups_server: 192.168.8.43:631
+        printer_server_realm: "smbdomain.local.br"
+        printer_server_password: "SuperSenh@1"
+        printer_server_use_backports: True
+
