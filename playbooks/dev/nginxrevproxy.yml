@@ -10,9 +10,6 @@
     nginx_ssl_env: False
     nginx_revproxy_remove_webroot_sites: false
     nginx_revproxy_de_activate_sites: false
-    nginx_aegir_sites: false
-    nginx_domains_from_csv: true
-    nginx_domains_temp_from_csv: true
 
   tasks:
 
