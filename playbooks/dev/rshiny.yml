@@ -23,11 +23,36 @@
         - r-cran-markdown
         - r-cran-stringr
 
+    - name: Install a list of R packages for projects
+      apt:
+        pkg:
+        - r-base
+        - r-cran-shinythemes
+        - r-cran-tidyverse
+        - r-cran-shiny
+        - r-cran-dt
+        - r-cran-markdown
+        - r-cran-stringr
+
+    - name: adding a few R packages
+      command: /usr/bin/Rscript --slave --no-save --no-restore-history -e "if (! ('{{item}}' %in% installed.packages()[,'Package'])) install.packages(pkgs='{{item}}', repos=c('https://vps.fmvz.usp.br/CRAN/'))"
+      with_items:
+      - slickR
+
+### daqui para baixo é possível separar cada sistema, como foi feito no django, laravel etc
+    - name: Creates directory for projects
+      file:
+        path: /var/www
+        state: directory
+        owner: root
+        group: root
+        recurse: yes
+
     - name: Clone project repository
       git:
-        repo: "https://github.com/brunomaroneze/dicio_biologia.git"
-        dest: "/dicio_biologia"
-        version: master
+        repo: "https://github.com/fflch/dicbio.git"
+        dest: "/var/www/dicbio"
+        version: main
         force: yes
         update: yes
 
@@ -41,15 +66,15 @@
             server {
               listen 3838;
               location / {
-                site_dir /dicio_biologia;
-                log_dir /var/log/shiny-server;
+                site_dir /var/www/dicbio;
+                log_dir /var/log/shiny-server-dicbio;
                 directory_index on;
               }
             }
 
     - name: Recursively change ownership
       file:
-        path: "/dicio_biologia"
+        path: "/var/www/dicbio"
         owner: "shiny"
         group: "shiny"
 
