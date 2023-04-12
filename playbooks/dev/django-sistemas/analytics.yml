@@ -12,11 +12,11 @@
         django_name: "analytics"
         django_dest: "/var/www/analytics"
         django_repo: "https://github.com/fflch/analytics.git"
-        django_version: "1.0.0"
+        django_version: "1.0.7"
         django_port: "8001"
         django_envfile: '.env-example'
         django_pythonversion: '3.10'
-        django_env:   
+        django_env:
           - name: DEBUG
             value: False
           - name: SECRET_KEY
@@ -29,6 +29,29 @@
             value: 192.168.8.10
           - name: DBPASSWORD
             value: "analytics"
+
+          - name: ETL_DBNAME
+            value: dbname
+          - name: ETL_DBUSER
+            value: dbuser
+          - name: ETL_DBPASSWORD
+            value: "dbpassword"
+          - name: ETL_DBHOST
+            value: 192.168.8.10
+          - name: ETL_DBPORT
+            value: 3306
+
+          - name: OAUTH_CLIENT_ID
+            value: "client_id"
+          - name: OAUTH_CLIENT_SECRET_KEY
+            value: "secret_key"
+          - name: OAUTH_CALLBACK_ID
+            value: "callback_id"
+
+          - name: ALLOWED_UNIDADES
+            value: 8
+          - name: ALLOWED_HOSTS
+            value: "*"
 
     - name: add cron task scheduling - analytics
       cron:
