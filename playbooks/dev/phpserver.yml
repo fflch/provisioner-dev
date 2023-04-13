@@ -1,0 +1,12 @@
+---
+- name: phpserver deploy
+  become: yes
+  hosts: phpserver
+
+  tasks:
+
+    - name: Aplica role fflch.tasks
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_php: true
