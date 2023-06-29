@@ -1,0 +1,20 @@
+---
+- name: phpserver nuvem dev
+  become: yes
+  hosts: phpserver
+  vars:
+    backup_directories:
+      - /var/www
+    backup_exclude_items:
+      - vendor
+      - node_modules
+
+#### Preparação da máquina  
+  tasks:
+    - name: Aplica role fflch.tasks
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_php: true
+        #tasks_id_rsa: "{{ lookup('passwordstore', 'sti/tokens/ssh/fflch/private returnall=true') }}"
+        #tasks_id_rsa: "{{ lookup('passwordstore', 'sti/tokens/ssh/fflch/private returnall=true') }}"

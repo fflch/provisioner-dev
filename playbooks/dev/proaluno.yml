@@ -22,26 +22,26 @@
       include_role:
         name: fflch.tasks
 
-    - name: proaluno role
-      include_role:
-        name: fflch.proaluno
-      vars:
-        proaluno_install_pacotes_debian: False
-        proaluno_deploy_printers: True
-        proaluno_install_mate: True
-        proaluno_remove_all_printers: True
-        proaluno_update_keys: True
-        proaluno_cups_server: "ipp://192.168.8.43:631/printers"
-        proaluno_sala: "proaluno_dev_"
-        proaluno_ntp_servers:
-          - 192.168.8.48
-        proaluno_printers:
-          - name: impressora
-            device: "{{ proaluno_cups_server }}/financeiro_ppd"
-            model: 'K7600_processado_gstopdf17.ppd'
-          - name: pdfprinter
-            device: "{{ proaluno_cups_server }}/pdfprinter"
-            model: 'K7600_processado_gstopdf17.ppd'
+#    - name: proaluno role
+#      include_role:
+#        name: fflch.proaluno
+#      vars:
+#        proaluno_install_pacotes_debian: False
+#        proaluno_deploy_printers: True
+#        proaluno_install_mate: False
+#        proaluno_remove_all_printers: True
+#        proaluno_update_keys: True
+#        proaluno_cups_server: "ipp://192.168.8.43:631/printers"
+#        proaluno_sala: "proaluno_dev_"
+#        proaluno_ntp_servers:
+#          - 192.168.8.48
+#        proaluno_printers:
+#          - name: impressora
+#            device: "{{ proaluno_cups_server }}/financeiro_ppd"
+#            model: 'K7600_processado_gstopdf17.ppd'
+#          - name: pdfprinter
+#            device: "{{ proaluno_cups_server }}/pdfprinter"
+#            model: 'K7600_processado_gstopdf17.ppd'
 
     - name: Configura resolv.conf para consultar DNSs do firstdc dev
       include_role:

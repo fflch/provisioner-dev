@@ -1,0 +1,63 @@
+---
+- name: phpserver nuvem dev
+  
+  become: yes
+  hosts: phpserver
+
+  vars:
+    deploy_laravel_env:
+      - name: APP_NAME
+        value: 'Copaco FFLCH'
+      - name: APP_URL
+        value: 'https://copaco.local.fflch.usp.br'
+      - name: DB_USERNAME
+        value: 'copaco'
+      - name: DB_PASSWORD
+        #value: "{{ lookup('passwordstore', 'sti/servidores/mysql/copaco') }}"
+        value: "copaco"
+      - name: DB_DATABASE
+        value: 'copaco'
+      - name: DB_HOST
+        value: 'mariadbmaster'
+      - name: SENHAUNICA_CALLBACK_ID
+        value: "169"
+      - name: SUPERADMINS_USERNAMES
+        #value: "5385361,2517070,3426504,2479057,3426511,1463002,2989060"
+        value: "2517070"
+      - name: FREERADIUS_HABILITAR
+        #value: 'True'
+        value: 'False'
+      - name: FREERADIUS_HOST
+        value: 'mariadbmaster'
+      - name: FREERADIUS_PASSWD
+        #value: "{{ lookup('passwordstore', 'sti/servidores/mysql/freeradius') }}"
+        value: "SuperPassw0rd"
+      - name: FREERADIUS_MACADDR_SEPARATOR
+        value: ''
+      - name: CONSUMER_DEPLOY_KEY
+        #value: "{{ lookup('passwordstore', 'sti/sistemas/copaco.fflch.usp.br/deploy_key') }}"
+        value: "copaco"
+      - name: SENHAUNICA_UNIDADES
+        value: "FFLCH"
+      - name: SOMENTE_SENHAUNICA
+        #value: "true"
+        value: "False"
+      - name: ALLOW_LOGIN_ALL
+        value: 1
+
+  tasks:
+    #- name: laravel vars
+    #  include_vars: ../../../vars/laravel.yml
+
+    #- name: merge lists deploy_laravel_env
+    #  set_fact:
+    #    deploy_laravel_env: "{{ deploy_laravel_env + laravel }}"
+
+    - name: copaco.local.fflch.usp.br
+      include_role:
+        name: fflch.deploy_laravel
+      vars:
+        deploy_laravel_build_assets: no
+        deploy_laravel_domain: "copaco.local.fflch.usp.br"
+        deploy_laravel_repo: "https://github.com/uspdev/copaco.git"
+        deploy_laravel_repo_version: "master"
