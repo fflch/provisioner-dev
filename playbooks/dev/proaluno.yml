@@ -6,16 +6,16 @@
   tasks:
 
 #################### resolve o problema do grub no box generic/debian10
-    - name: Delete content & directory
-      file:
-        state: absent
-        path: /boot/grub/menu.lst
-
-    - name: Install a list of packages
-      apt:
-        force: yes
-        pkg:
-        - grub-legacy
+#    - name: Delete content & directory
+#      file:
+#        state: absent
+#        path: /boot/grub/menu.lst
+#
+#    - name: Install a list of packages
+#      apt:
+#        force: yes
+#        pkg:
+#        - grub-legacy
 ####################
 
     - name: Aplica role fflch.tasks 
