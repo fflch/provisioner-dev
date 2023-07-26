@@ -2,7 +2,7 @@ VAGRANTFILE_API_VERSION = "2"
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  
+
   ### global configs
   config.ssh.insert_key = false # important
 
@@ -158,7 +158,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.44
-  config.vm.define "aegir" do |host| 
+  config.vm.define "aegir" do |host|
     host.vm.hostname = "aegir"
     host.vm.box = "generic/debian10"
     host.vm.network :private_network,
@@ -172,7 +172,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.45
-  config.vm.define "projetos" do |host| 
+  config.vm.define "projetos" do |host|
     host.vm.hostname = "projetos"
     host.vm.box = "generic/debian11"
     host.vm.network :private_network,
@@ -188,7 +188,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.46 livre
 
   # 192.168.8.47
-  config.vm.define "proaluno" do |host| 
+  config.vm.define "proaluno" do |host|
     host.vm.hostname = "proaluno"
     host.vm.box = "generic/debian11"
     host.vm.network :private_network,
@@ -247,7 +247,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.52 livre
 
   # 192.168.8.53
-  config.vm.define "printers" do |host| 
+  config.vm.define "printers" do |host|
     host.vm.hostname = "printers"
     host.vm.box = "generic/debian11"
     host.vm.network :private_network,
@@ -294,7 +294,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.58
   config.vm.define "bind" do |host|
     host.vm.hostname = "bind"
-    host.vm.box = "generic/debian10"
+    host.vm.box = "debian/bookworm64"
     host.vm.network :private_network,
       :ip => "192.168.8.58",
       :libvirt__network_name => "fflch",
@@ -390,7 +390,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.87 livre
   # 192.168.8.88 livre
   # 192.168.8.89 livre
-  
+
   # 192.168.8.90
   config.vm.define "f-secure" do |host|
     host.vm.hostname = "f-secure"
@@ -406,7 +406,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.91 livre
-  
+
   # 192.168.8.92
   config.vm.define "phpserver" do |host|
     host.vm.hostname = "phpserver"
@@ -422,7 +422,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.93
-  config.vm.define "aegirmigrate" do |host| 
+  config.vm.define "aegirmigrate" do |host|
     host.vm.hostname = "aegirmigrate"
     host.vm.box = "generic/debian11"
     host.vm.network :private_network,
@@ -436,7 +436,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.94
-  config.vm.define "hpc" do |host| 
+  config.vm.define "hpc" do |host|
     host.vm.hostname = "hpc"
     host.vm.box = "generic/debian10"
     host.vm.network :private_network,
