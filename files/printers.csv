@@ -1,7 +1,5 @@
-adm_samsung_pb_m4080fx_editora,10.80.0.15
-adm_samsung_cor_x7500lx_ccint,10.80.0.10
-adm_samsung_pb_k7500lx_fin,10.80.0.7
-adm_samsung_cor_c4062fx_dir,10.80.0.13
-let_hp_cor_e87660_posdlm,10.80.0.16
-let_hp_cor_e87660_graddlm,10.80.0.17
-let_hp_pb_e52645_celp,10.80.0.46
+adm_hp_cor_e57540_pos,10.80.0.11
+adm_hp_pb_e82660_fin,10.80.0.7
+adm_hp_pb_e52645_apoio,10.80.0.12
+adm_hp_cor_e87660_ssg,10.80.0.10
+adm_hp_pb_e82660_ccint,10.80.0.44
