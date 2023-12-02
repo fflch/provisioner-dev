@@ -5,7 +5,7 @@
 
   vars:
 
-    tasks_cups_root_password: "12345678"
+    tasks_cups_root_password: '$6$eUm4FGHqjBRwBN/x$fu42kkMMB6zR3hHt00bbr1KwuMSjA1XspFGrrVJ38LRYSh/8j7m14/UfDUYHrsLD9.eIGRaNVk50ZGKBECWKe.'
     tasks_cups_template_cups_listen: 192.168.8.43:631
     tasks_cups_template_cups_admin_networks: 
       - '192.168.8.0/24'
