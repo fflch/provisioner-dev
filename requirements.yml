@@ -1,7 +1,7 @@
  #### roles internas da FFLCH ####
 - name: fflch.sambadc
   src: https://github.com/fflch/ansible-role-sambadc.git
-  version: 1.0.6
+  version: 1.0.7
 
 - name: fflch.deploy_laravel
   src: https://github.com/fflch/ansible-role-deploy-laravel.git
@@ -21,11 +21,11 @@
 
 - name: fflch.tasks
   src: https://github.com/fflch/ansible-role-tasks.git
-  version: 1.0.22
+  version: 1.0.29
 
 - name: fflch.proaluno
   src: https://github.com/fflch/ansible-role-proaluno.git
-  version: 1.0.4
+  version: 1.0.8
 
 - name: fflch.domain-member
   src: https://github.com/fflch/ansible-role-domain-member.git
