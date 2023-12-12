@@ -1,2 +1,6 @@
-adm_hp_pb_e82660_fin,10.80.0.7
-adm_hp_cor_e87660_ccint,10.80.0.10
+adm_hp_cor_e57540_pos,10.80.0.11,e57540
+adm_hp_pb_e82660_fin,10.80.0.7,e82660
+adm_hp_pb_e52645_apoio,10.80.0.12,e52645
+adm_hp_cor_e87660_ssg,10.80.0.10,e87660
+adm_hp_pb_e82660_ccint,10.80.0.44,e82660
+
