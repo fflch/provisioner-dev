@@ -1,7 +1,7 @@
  #### roles internas da FFLCH ####
 - name: fflch.sambadc
   src: https://github.com/fflch/ansible-role-sambadc.git
-  version: 1.0.8
+  version: 1.0.9
 
 - name: fflch.deploy_laravel
   src: https://github.com/fflch/ansible-role-deploy-laravel.git
@@ -33,7 +33,7 @@
 
 - name: fflch.printer-server
   src: https://github.com/fflch/ansible-role-printer-server.git
-  version: 1.0.1
+  version: 1.0.2
 
 - name: fflch.f-secure
   src: https://github.com/fflch/ansible-role-f-secure.git
