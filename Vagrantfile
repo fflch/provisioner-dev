@@ -185,7 +185,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # 192.168.8.46 livre
+  # 192.168.8.46
+    config.vm.define "boa" do |host|
+    host.vm.hostname = "boa"
+    host.vm.box = "generic/debian11"
+    host.vm.network :private_network,
+      :ip => "192.168.8.46",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 4024
+      v.cpus = 1
+    end
+  end
 
   # 192.168.8.47
   config.vm.define "proaluno" do |host|
