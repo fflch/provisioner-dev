@@ -410,7 +410,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.92
   config.vm.define "phpserver" do |host|
     host.vm.hostname = "phpserver"
-    host.vm.box = "generic/debian10"
+    host.vm.box = "generic/debian11"
     host.vm.network :private_network,
       :ip => "192.168.8.92",
       :libvirt__network_name => "fflch",
