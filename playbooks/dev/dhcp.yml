@@ -1,0 +1,20 @@
+---
+- name: deploy dhcp
+  hosts: dhcp
+  become: yes
+
+  vars:
+    backup_directories:
+      - /etc
+    tasks_dhcp_consumer: false
+    tasks_dhcp_deploy_key: "key_to_deploy"
+    tasks_dhcp_copaco: "http://copaco.local.usp.br/api/dhcpd.conf"
+    tasks_dhcp_interfaces: eth1
+
+  tasks:
+
+    - name: Aplica role fflch.tasks
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_dhcp: true
