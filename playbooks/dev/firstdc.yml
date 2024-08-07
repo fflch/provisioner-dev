@@ -32,7 +32,7 @@
         sambadc_netbios        : "{{ inventory_hostname }}"
         sambadc_dns_forwarder: 8.8.8.8
         # Essa opção só deve ser ligada na primeira instalação
-        sambadc_use_backports: true
+        sambadc_use_backports: false
 
     - name: Configura resolv.conf para consultar DNSs no próprio samba
       include_role:

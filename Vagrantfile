@@ -202,7 +202,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.47
   config.vm.define "proaluno" do |host|
     host.vm.hostname = "proaluno"
-    host.vm.box = "generic/debian11"
+    host.vm.box = "generic/debian12"
     host.vm.network :private_network,
       :ip => "192.168.8.47",
       :libvirt__network_name => "fflch",

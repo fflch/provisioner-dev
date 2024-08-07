@@ -1,7 +1,7 @@
 ---
 - name: deploy
   become: yes
-  hosts: vagrantsambadcdebian11
+  hosts: FALTACRIAR
 
   #### global vars
   vars:
