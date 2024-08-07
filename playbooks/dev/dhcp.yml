@@ -10,6 +10,7 @@
     tasks_dhcp_deploy_key: "key_to_deploy"
     tasks_dhcp_copaco: "http://copaco.local.usp.br/api/dhcpd.conf"
     tasks_dhcp_interfaces: eth1
+    tasks_dhcp6_name_servers: 2001:0DB8:CAFE:DAD0::DEAD
 
   tasks:
 

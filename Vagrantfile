@@ -114,14 +114,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.40
   config.vm.define "dhcp" do |host|
     host.vm.hostname = "dhcp"
-    host.vm.box = "generic/ubuntu1604"
+    host.vm.box = "debian/bookworm64"
     host.vm.network :private_network,
       :ip => "192.168.8.40",
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
-
+    host.vm.provision "shell",
+      run: "always",
+      inline: "ip -6 addr add 2001:0db8:cafe:40::10 dev eth1"
     host.vm.provider :libvirt do |v|
-      v.memory = 256
+      v.memory = 1024
       v.cpus = 1
 
     end
