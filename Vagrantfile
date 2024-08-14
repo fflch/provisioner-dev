@@ -112,6 +112,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.39 livre
 
   # 192.168.8.40
+  # Foi usado debian/bookworm64 e não generic/debian12 porque no generic/debian12 
+  # ipv6 não está habilitado por padrão
   config.vm.define "dhcp" do |host|
     host.vm.hostname = "dhcp"
     host.vm.box = "debian/bookworm64"
