@@ -408,15 +408,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.89 livre
 
   # 192.168.8.90
-  config.vm.define "f-secure" do |host|
-    host.vm.hostname = "f-secure"
-    host.vm.box = "generic/debian10"
+  config.vm.define "fsecure" do |host|
+    host.vm.hostname = "fsecure"
+    host.vm.box = "debian/bookworm64"
     host.vm.network :private_network,
       :ip => "192.168.8.90",
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 384
+      v.memory = 1024
       v.cpus = 1
     end
   end
@@ -432,7 +432,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 512
+      v.memory = 1024
       v.cpus = 1
     end
   end

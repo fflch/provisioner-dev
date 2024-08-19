@@ -1,0 +1,13 @@
+---
+- name: deploy fsecure
+  become: yes
+  hosts: fsecure
+
+  tasks:
+    #- name: Aplica role fflch.tasks
+    #  include_role:
+    #    name: fflch.tasks
+
+    - name: Aplica role fflch.fsecure
+      include_role:
+        name: fflch.fsecure
