@@ -1,7 +1,7 @@
 ---
-- name: phpserver nuvem dev
+- name: php8server 
   become: yes
-  hosts: phpserver
+  hosts: php8server
   vars:
     backup_directories:
       - /var/www
@@ -16,5 +16,5 @@
         name: fflch.tasks
       vars:
         tasks_php: true
-        #tasks_id_rsa: "{{ lookup('passwordstore', 'sti/tokens/ssh/fflch/private returnall=true') }}"
-        #tasks_id_rsa: "{{ lookup('passwordstore', 'sti/tokens/ssh/fflch/private returnall=true') }}"
+        tasks_php_version: '8.3'
+        tasks_id_rsa: "{{ lookup('passwordstore', 'sti/tokens/ssh/fflch/private returnall=true') }}"

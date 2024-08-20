@@ -30,7 +30,7 @@ ftp ansible_host="192.168.8.61"
 nginxrevproxy ansible_host="192.168.8.62"
 
 fsecure ansible_host="192.168.8.90"
-phpserver ansible_host="192.168.8.92"
+php8server ansible_host="192.168.8.92"
 aegirmigrate ansible_host="192.168.8.93"
 hpc ansible_host="192.168.8.94"
 
