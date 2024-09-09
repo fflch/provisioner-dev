@@ -190,16 +190,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.46
-    config.vm.define "boa" do |host|
+  config.vm.define "boa" do |host|
     host.vm.hostname = "boa"
-    host.vm.box = "generic/debian11"
+    host.vm.box = "debian/bookworm64"
     host.vm.network :private_network,
       :ip => "192.168.8.46",
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 4024
-      v.cpus = 1
+      v.memory = 4096
+      v.cpus = 2
     end
   end
 
@@ -260,6 +260,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.51 livre
+  config.vm.define "boa-devuan" do |host|
+    host.vm.hostname = "boadevuan"
+    host.vm.box = "generic/devuan5"
+    host.vm.network :private_network,
+      :ip => "192.168.8.51",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 4096
+      v.cpus = 2
+    end
+  end
+
   # 192.168.8.52 livre
 
   # 192.168.8.53
