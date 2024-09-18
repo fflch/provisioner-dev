@@ -260,19 +260,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.51 livre
-  config.vm.define "boa-devuan" do |host|
-    host.vm.hostname = "boadevuan"
-    host.vm.box = "generic/devuan5"
-    host.vm.network :private_network,
-      :ip => "192.168.8.51",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 4096
-      v.cpus = 2
-    end
-  end
-
   # 192.168.8.52 livre
 
   # 192.168.8.53
