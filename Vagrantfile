@@ -192,7 +192,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.46
   config.vm.define "boa" do |host|
     host.vm.hostname = "boa"
-    host.vm.box = "debian/bookworm64"
+    host.vm.box = "generic-x64/devuan5"
     host.vm.network :private_network,
       :ip => "192.168.8.46",
       :libvirt__network_name => "fflch",
