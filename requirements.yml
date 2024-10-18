@@ -86,9 +86,6 @@
 - src: cmprescott.chrome
   version: 0.2.4
 
-- src: oefenweb.shiny_server
-  version: 'v1.1.31'
-
 - src: ome.postgresql_backup
   version: '0.2.1'
 
@@ -119,3 +116,6 @@
   src: https://github.com/fflch/ansible-cups.git
   version: 1.0.0
 
+- src: oefenweb.shiny_server
+  src: https://github.com/ricardfo/ansible-shiny-server.git
+  version: 'master'

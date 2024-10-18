@@ -22,22 +22,20 @@
         - r-cran-dt
         - r-cran-markdown
         - r-cran-stringr
-
-    - name: Install a list of R packages for projects
-      apt:
-        pkg:
-        - r-base
-        - r-cran-shinythemes
-        - r-cran-tidyverse
-        - r-cran-shiny
+        - r-cran-pillar
+        - r-cran-rcurl
         - r-cran-dt
-        - r-cran-markdown
-        - r-cran-stringr
+        - libpoppler-cpp-dev
+        - libcurl4-openssl-dev
+        - libxml2-dev
+        - libssl-dev
 
     - name: adding a few R packages
       command: /usr/bin/Rscript --slave --no-save --no-restore-history -e "if (! ('{{item}}' %in% installed.packages()[,'Package'])) install.packages(pkgs='{{item}}', repos=c('https://vps.fmvz.usp.br/CRAN/'))"
       with_items:
       - slickR
+      - readtext
+      - fst
 
 ### daqui para baixo é possível separar cada sistema, como foi feito no django, laravel etc
     - name: Creates directory for projects
@@ -56,10 +54,19 @@
         force: yes
         update: yes
 
+    - name: Clone project repository verbalcollocations
+      git:
+        repo: "https://github.com/fflch/verbalcollocations.git"
+        dest: "/var/www/verbalcollocations"
+        version: main
+        force: yes
+        update: yes
+
     - name: Aplica role rshiny
       include_role:
         name: oefenweb.shiny_server
       vars:
+        shiny_server_use_apt: true
         shiny_server_conf_directives:
           - |
             run_as shiny;
@@ -71,11 +78,24 @@
                 directory_index on;
               }
             }
+            server {
+              listen 3850;
+              location / {
+                site_dir /var/www/verbalcollocations;
+                log_dir /var/log/shiny-server-verbalcollocations;
+                directory_index on;
+              }
+            }
 
     - name: Recursively change ownership
       file:
-        path: "/var/www/dicbio"
+        path: "/var/www/{{ item }}"
         owner: "shiny"
         group: "shiny"
+        recurse: true
+      loop:
+        - dicbio
+        - verbalcollocations
+
 
 # Acessar na web: http://192.168.8.3:3838/
