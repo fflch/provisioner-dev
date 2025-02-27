@@ -1,0 +1,35 @@
+---
+- name: deploy map
+  become: yes
+  hosts: django
+
+  tasks:
+
+    - name: map.fflch.usp.br
+      include_role:
+        name: fflch.django
+      vars:
+        django_name: "map"
+        django_dest: "/var/www/map"
+        django_repo: "https://github.com/fflch/map.git"
+        django_version: "main"
+        django_port: "8003"
+        django_envfile: '.env.sample'
+        django_pythonversion: '3.10'
+        django_collectstatic: false
+        django_wsgi: map
+        django_env:
+          - name: DEBUG
+            value: False
+          - name: SECRET_KEY
+            value: "123dZdRASw"
+          - name: MYSQL_USER
+            value: map
+          - name: MYSQL_NAME
+            value: map
+          - name: MYSQL_HOST
+            value: 192.168.8.10
+          - name: MYSQL_PASSWORD
+            value: "map"
+          - name: CONVITE
+            value: conviteMAP1
