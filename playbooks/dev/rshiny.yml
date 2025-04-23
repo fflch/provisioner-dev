@@ -36,6 +36,7 @@
       - slickR
       - readtext
       - fst
+      - sqldf
 
 ### daqui para baixo é possível separar cada sistema, como foi feito no django, laravel etc
     - name: Creates directory for projects

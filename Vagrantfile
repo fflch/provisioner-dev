@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 512
+      v.memory = 1024
       v.cpus = 1
     end
   end
@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 256
+      v.memory = 1024
       v.cpus = 1
     end
   end
@@ -43,7 +43,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 256
+      v.memory = 1024
       v.cpus = 1
     end
   end
@@ -140,7 +140,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 512
+      v.memory = 1024
       v.cpus = 1
     end
   end
@@ -240,7 +240,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 384
+      v.memory = 1024
       v.cpus = 1
     end
   end
@@ -254,7 +254,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 384
+      v.memory = 1024
       v.cpus = 1
     end
   end
@@ -344,7 +344,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 512
+      v.memory = 1024
       v.cpus = 1
     end
     host.vm.network "forwarded_port", guest: 80, host: 46080
@@ -360,7 +360,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 512
+      v.memory = 1024
       v.cpus = 1
     end
   end
@@ -374,7 +374,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 512
+      v.memory = 1024
       v.cpus = 1
     end
   end

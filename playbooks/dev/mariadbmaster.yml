@@ -2,10 +2,10 @@
 - name: mariadbmaster
   become: yes
   hosts: mariadbmaster
-     
+
   tasks:
 
-    - name: Aplica role fflch.tasks 
+    - name: Aplica role fflch.tasks
       include_role:
         name: fflch.tasks
 
@@ -23,11 +23,6 @@
             password: "SuperPassw0rd"
             priv: "*.*:ALL,GRANT"
 
-          - name: zm
-            host: "%"
-            password: "SuperPassw0rd"
-            priv: "zm.*:ALL"
-            
           - name: freeradius
             host: "%"
             password: "freeradius"
@@ -43,8 +38,19 @@
             password: "copaco"
             priv: "copaco.*:ALL"
 
+          - name: dados
+            host: "%"
+            password: "dados"
+            priv: "dados.*:ALL"
+
+          - name: map
+            host: "%"
+            password: "map"
+            priv: "map.*:ALL"
+
         mysql_databases:
-           - name: zm
            - name: freeradius
            - name: analytics
            - name: copaco
+           - name: dados
+           - name: map

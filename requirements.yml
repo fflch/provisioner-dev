@@ -5,7 +5,7 @@
 
 - name: fflch.deploy_laravel
   src: https://github.com/fflch/ansible-role-deploy-laravel.git
-  version: 1.0.12
+  version: 1.0.14
 
 - name: fflch.django
   src: https://github.com/fflch/ansible-role-django.git

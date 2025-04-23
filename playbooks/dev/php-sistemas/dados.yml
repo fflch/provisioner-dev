@@ -1,0 +1,43 @@
+---
+- name: Sistema dados
+  become: yes
+  hosts: php8server
+
+  vars:
+    deploy_laravel_env:
+      - name: APP_NAME
+        value: 'Portal de Dados'
+      - name: DB_USERNAME
+        value: 'dados'
+      - name: DB_PASSWORD
+        value: "dados"
+      - name: DB_DATABASE
+        value: 'dados'
+      - name: DB_HOST
+        value: '192.168.8.10'
+      - name: APP_URL
+        value: "http://dados.fflch.usp.br"
+      - name: SENHAUNICA_CALLBACK_ID
+        value: "164"
+      - name: ADMINS
+        value: "3426504"
+      - name: SENHAUNICA_ADMINS
+        value: "3426504"
+
+  tasks:
+
+    #- name: laravel vars
+    #  include_vars: ../../../vars/laravel.yml
+
+    #- name: merge lists deploy_laravel_env
+    #  set_fact:
+    #    deploy_laravel_env: "{{ deploy_laravel_env + laravel }}"
+
+    - name: deploy dados.fflch.usp.br
+      include_role:
+        name: fflch.deploy_laravel
+      vars:
+        deploy_laravel_build_assets: no
+        deploy_laravel_domain: "dados.fflch.usp.br"
+        deploy_laravel_repo: "https://github.com/fflch/dados.git"
+        deploy_laravel_repo_version: "master"
