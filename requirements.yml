@@ -37,7 +37,7 @@
 
 - name: fflch.fsecure
   src: https://github.com/fflch/ansible-role-fsecure.git
-  version: 1.0.3
+  version: 1.0.4
 
 #### roles da comunidade ####
 
