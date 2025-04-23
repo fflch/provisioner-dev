@@ -11,7 +11,7 @@ dhcp ansible_host="192.168.8.40"
 freeradius ansible_host="192.168.8.41"
 
 cups ansible_host="192.168.8.43"
-aegir ansible_host="192.168.8.44"
+drupal ansible_host="192.168.8.44"
 projetos ansible_host="192.168.8.45"
 
 proaluno ansible_host="192.168.8.47"
@@ -31,7 +31,6 @@ nginxrevproxy ansible_host="192.168.8.62"
 
 fsecure ansible_host="192.168.8.90"
 php8server ansible_host="192.168.8.92"
-aegirmigrate ansible_host="192.168.8.93"
 hpc ansible_host="192.168.8.94"
 
 [vagrant:vars]

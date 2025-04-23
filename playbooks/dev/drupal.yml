@@ -1,0 +1,19 @@
+---
+- name: deploy Drupal
+  become: yes
+  hosts: drupal
+  tasks:
+
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
+      vars:
+        #tasks_php: true
+        tasks_drupal: true
+        tasks_php_version: '7.4'
+
+# Entradas da /etc/hosts da hospedeira:
+# 192.168.8.44 site1.local.fflch.usp.br
+# 192.168.8.44 site2.local.fflch.usp.br
+# 192.168.8.44 site3.local.fflch.usp.br
+# 192.168.8.44 site4.local.fflch.usp.br
