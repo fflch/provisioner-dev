@@ -8,49 +8,15 @@
     - name: Aplica role fflch.tasks
       include_role:
         name: fflch.tasks
-
-    - name: Instala Mysql e cria dbs/users
-      include_role:
-        name: geerlingguy.mysql
       vars:
-        mysql_root_username: root
-        mysql_root_password: "SuperPassw0rd"
-        mysql_bind_address: '*'
-        mysql_mysqldump_max_allowed_packet: "1024M"
-        mysql_users:
-          - name: aegir_root
-            host: "%"
-            password: "SuperPassw0rd"
-            priv: "*.*:ALL,GRANT"
+        tasks_databases: true
 
-          - name: freeradius
-            host: "%"
-            password: "freeradius"
-            priv: "freeradius.*:ALL"
-
-          - name: analytics
-            host: "%"
-            password: "analytics"
-            priv: "analytics.*:ALL"
-
-          - name: copaco
-            host: "%"
-            password: "copaco"
-            priv: "copaco.*:ALL"
-
-          - name: dados
-            host: "%"
-            password: "dados"
-            priv: "dados.*:ALL"
-
-          - name: map
-            host: "%"
-            password: "map"
-            priv: "map.*:ALL"
-
-        mysql_databases:
-           - name: freeradius
-           - name: analytics
-           - name: copaco
-           - name: dados
-           - name: map
+     - name: Instala Mysql e cria dbs/users
+       include_role:
+         name: geerlingguy.mysql
+       vars:
+         mysql_root_username: root
+         mysql_root_password: "SuperPassw0rd"
+         mysql_bind_address: '*'
+         mysql_mysqldump_max_allowed_packet: "1024M"
+    
