@@ -11,12 +11,12 @@
       vars:
         tasks_databases: true
 
-     - name: Instala Mysql e cria dbs/users
-       include_role:
-         name: geerlingguy.mysql
-       vars:
-         mysql_root_username: root
-         mysql_root_password: "SuperPassw0rd"
-         mysql_bind_address: '*'
-         mysql_mysqldump_max_allowed_packet: "1024M"
+    - name: Instala Mysql e cria dbs/users
+      include_role:
+        name: geerlingguy.mysql
+      vars:
+        mysql_root_username: root
+        mysql_root_password: "SuperPassw0rd"
+        mysql_bind_address: '*'
+        mysql_mysqldump_max_allowed_packet: "1024M"
     
