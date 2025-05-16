@@ -8,7 +8,7 @@
       include_role:
         name: fflch.tasks
       vars:
-        tasks_php: true
+#        tasks_php: true
         tasks_drupal: true
         tasks_php_version: '7.4'
 
