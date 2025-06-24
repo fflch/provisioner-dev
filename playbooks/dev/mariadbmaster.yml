@@ -48,9 +48,15 @@
             password: "map"
             priv: "map.*:ALL"
 
+          - name: dicbio
+            host: "%"
+            password: "dicbio"
+            priv: "dicbio.*:ALL"
+
         mysql_databases:
            - name: freeradius
            - name: analytics
            - name: copaco
            - name: dados
            - name: map
+           - name: dicbio
