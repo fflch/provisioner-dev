@@ -8,6 +8,8 @@
     - name: Aplica role fflch.tasks
       include_role:
         name: fflch.tasks
+      vars:
+        tasks_databases: true
 
     - name: Instala Mysql e cria dbs/users
       include_role:

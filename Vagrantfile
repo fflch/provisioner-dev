@@ -162,9 +162,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.44
-  config.vm.define "aegir" do |host|
-    host.vm.hostname = "aegir"
-    host.vm.box = "generic/debian10"
+  config.vm.define "drupal" do |host|
+    host.vm.hostname = "drupal"
+    host.vm.box = "generic/debian12"
     host.vm.network :private_network,
       :ip => "192.168.8.44",
       :libvirt__network_name => "fflch",
@@ -438,18 +438,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.93
-  config.vm.define "aegirmigrate" do |host|
-    host.vm.hostname = "aegirmigrate"
-    host.vm.box = "generic/debian11"
-    host.vm.network :private_network,
-      :ip => "192.168.8.93",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 1024
-      v.cpus = 1
-    end
-  end
 
   # 192.168.8.94
   config.vm.define "hpc" do |host|

@@ -1,0 +1,70 @@
+---
+- name: Migra Sites Drupal
+  become: yes
+  hosts: drupal
+  vars:
+    drupal_sites_file: '../../files/sites_a_migrar.csv'
+    drupal_dest: '/var/www/drupal' 
+    drupal_database: '192.168.8.10'
+  tasks:
+
+    - name: Lê o arquivo CSV com os endereços dos sites
+      set_fact:
+        sites_file: "{{ lookup('file', drupal_sites_file) }}"
+
+    - name: Gera lista com os endereços dos sites a partir do arquivo CSV
+      set_fact:
+        sites: "{{ sites_file.split('\n') }}"
+
+    # - name: Verifica se o diretório existe para cada site
+    #   stat:
+    #     path: "{{ drupal_dest }}/web/sites/{{ item }}"
+    #   loop: "{{ sites }}"
+    #   register: sites_status  
+
+    - name: Copia os arquivos de trabalho
+      shell: "scp -r -P 4321 acesarfs@10.64.0.40:/home/acesarfs/projetos/pb_drupal /home/vagrant/"
+
+    - name: Extrai arquivos FILES compactados
+      shell: "tar -xvzf /home/vagrant/pb_drupal/{{ item.split('.')[0] }}_files.tar.gz"
+      args:
+          chdir: "/home/vagrant/pb_drupal/"
+      loop: "{{ sites }}"
+      #loop: "{{ sites_status.results }}"
+
+    - name: Extrai arquivos PRIVATE compactados
+      shell: "tar -xvzf /home/vagrant/pb_drupal/{{ item.split('.')[0] }}_private.tar.gz"
+      args:
+          chdir: "/home/vagrant/pb_drupal/"
+      loop: "{{ sites }}"
+      #loop: "{{ sites_status.results }}"
+
+    - name: Executa o dump no banco de dados do site
+      shell: "mariadb -u{{ item.split('.')[0] }} -p{{ lookup('passwordstore', 'sti/servidores/mysql/'+item.split('.')[0]) }} -h{{ drupal_database }} {{ item.split('.')[0] }} < /home/vagrant/pb_drupal/{{ item.split('.')[0] }}_dump.sql"
+      loop: "{{ sites }}"
+
+    - name: Copia a pasta FILES
+      shell: "cp -ar /home/vagrant/pb_drupal/var/aegir/platforms/drupal8916a/web/sites/{{ item.split('.')[0] }}.fflch.usp.br/files/ {{ drupal_dest }}/web/sites/{{ item }}/"
+      loop: "{{ sites }}"
+      #loop: "{{ sites_status.results }}"      
+
+    - name: Copia a pasta PRIVATE
+      shell: "cp -ar /home/vagrant/pb_drupal/var/aegir/platforms/drupal8916a/web/sites/{{ item.split('.')[0] }}.fflch.usp.br/private/ {{ drupal_dest }}/web/sites/{{ item }}/"
+      loop: "{{ sites }}"
+      #loop: "{{ sites_status.results }}"  
+
+    - name: Atualiza os bancos de dados dos sites
+      command: >-
+        {{ drupal_dest }}/vendor/bin/drush updb {{ item }} -y
+      args:
+          chdir: "{{ drupal_dest }}/web/sites/{{ item }}"
+      loop: "{{ sites }}"
+      #loop: "{{ sites_status.results }}"  
+
+    - name: Atualiza as entidades dos sites
+      command: >-
+        {{ drupal_dest }}/vendor/bin/drush entup {{ item }} -y
+      args:
+          chdir: "{{ drupal_dest }}/web/sites/{{ item }}"
+      loop: "{{ sites }}"
+      #loop: "{{ sites_status.results }}" 
