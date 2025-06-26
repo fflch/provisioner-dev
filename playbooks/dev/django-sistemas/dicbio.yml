@@ -10,7 +10,7 @@
     django_port: "8004"
     django_envfile: '.env.sample'
     django_pythonversion: '3.10'
-    django_collectstatic: false
+    django_collectstatic: True
     django_wsgi: dicbio
     django_env:
       - name: DEBUG
