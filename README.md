@@ -1,17 +1,11 @@
-## Preparação do ambiente (testado com debian 10/11)
+## Preparação do ambiente
 
-Instale na sua distro: ansible, vagrant
-
-    sudo apt install curl build-essential
-    sudo apt-get install software-properties-common
-    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-    sudo apt-get update && sudo apt-get install vagrant
+Instale na sua distro: vagrant
 
 Instalação e configuração do libvirt para criar virtualização:
 
     $ sudo apt install virt-manager libvirt-dev ansible
-    $ sudo addgroup SEU-USER libvirt
+    $ sudo adduser SEU-USER libvirt
 
 Instalação do plugin do libvirt no ansible:
 
