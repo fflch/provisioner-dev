@@ -112,6 +112,6 @@
   src: https://github.com/fflch/ansible-cups.git
   version: 1.0.0
 
-- src: oefenweb.shiny_server
+- name: oefenweb.shiny_server
   src: https://github.com/ricardfo/ansible-shiny-server.git
   version: 'master'
