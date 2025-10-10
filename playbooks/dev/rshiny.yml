@@ -72,14 +72,6 @@
           - |
             run_as shiny;
             server {
-              listen 3838;
-              location / {
-                site_dir /var/www/dicbio;
-                log_dir /var/log/shiny-server-dicbio;
-                directory_index on;
-              }
-            }
-            server {
               listen 3850;
               location / {
                 site_dir /var/www/verbalcollocations;
@@ -95,8 +87,7 @@
         group: "shiny"
         recurse: true
       loop:
-        - dicbio
         - verbalcollocations
 
 
-# Acessar na web: http://192.168.8.3:3838/
+# Acessar na web: http://192.168.8.3:3850/

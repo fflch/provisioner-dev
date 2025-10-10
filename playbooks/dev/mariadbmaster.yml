@@ -30,11 +30,6 @@
             password: "freeradius"
             priv: "freeradius.*:ALL"
 
-          - name: analytics
-            host: "%"
-            password: "analytics"
-            priv: "analytics.*:ALL"
-
           - name: copaco
             host: "%"
             password: "copaco"
@@ -57,7 +52,6 @@
 
         mysql_databases:
            - name: freeradius
-           - name: analytics
            - name: copaco
            - name: dados
            - name: map
