@@ -3,6 +3,7 @@
 rsyslog ansible_host="192.168.8.2"
 rshiny ansible_host="192.168.8.3"
 postgresql ansible_host="192.168.8.4"
+ocsinventoryserver ansible_host="192.168.8.5"
 
 mariadbmaster ansible_host="192.168.8.10"
 django ansible_host="192.168.8.11"
@@ -12,7 +13,6 @@ freeradius ansible_host="192.168.8.41"
 
 cups ansible_host="192.168.8.43"
 drupal ansible_host="192.168.8.44"
-projetos ansible_host="192.168.8.45"
 
 proaluno ansible_host="192.168.8.47"
 firstdc ansible_host="192.168.8.48"

@@ -48,22 +48,36 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # 192.168.8.5 livre
+  # 192.168.8.5
+  config.vm.define "ocsinventoryserver" do |host|
+    host.vm.hostname = "ocsinventoryserver"
+    host.vm.box = "generic/debian12"
+    host.vm.network :private_network,
+      :ip => "192.168.8.5",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+  end
+
   # 192.168.8.6 livre
   # 192.168.8.7 livre
   # 192.168.8.8 livre
   # 192.168.8.9 livre
 
   # 192.168.8.10
+  # Na produção está debian 10, mas aqui coloquei debian 12 porque a VM não roda apt update, dado que o debian 10 não tem mais suporte
   config.vm.define "mariadbmaster" do |host|
     host.vm.hostname = "mariadbmaster"
-    host.vm.box = "generic/debian10"
+    host.vm.box = "generic/debian12"
     host.vm.network :private_network,
       :ip => "192.168.8.10",
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 4024
+      v.memory = 1024
       v.cpus = 1
     end
   end
@@ -175,19 +189,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # 192.168.8.45
-  config.vm.define "projetos" do |host|
-    host.vm.hostname = "projetos"
-    host.vm.box = "generic/debian11"
-    host.vm.network :private_network,
-      :ip => "192.168.8.45",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 4024
-      v.cpus = 1
-    end
-  end
+  # 192.168.8.45 livre
 
   # 192.168.8.46
   config.vm.define "boa" do |host|
@@ -212,7 +214,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 4096
+      v.memory = 2048
       v.cpus = 2
     end
   end
@@ -288,7 +290,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 4096
+      v.memory = 2048
       v.cpus = 1
     end
   end
@@ -302,7 +304,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
-      v.memory = 4096
+      v.memory = 2048
       v.cpus = 4
     end
   end

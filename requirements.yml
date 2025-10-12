@@ -1,117 +1,121 @@
- #### roles internas da FFLCH ####
-- name: fflch.sambadc
-  src: https://github.com/fflch/ansible-role-sambadc.git
-  version: 1.0.9
+collections:
+  - name: community.mysql
 
-- name: fflch.deploy_laravel
-  src: https://github.com/fflch/ansible-role-deploy-laravel.git
-  version: 1.0.14
+roles:
+#### roles internas da FFLCH ####
+  - name: fflch.sambadc
+    src: https://github.com/fflch/ansible-role-sambadc.git
+    version: 1.0.9
 
-- name: fflch.django
-  src: https://github.com/fflch/ansible-role-django.git
-  version: 1.0.4
+  - name: fflch.deploy_laravel
+    src: https://github.com/fflch/ansible-role-deploy-laravel.git
+    version: 1.0.14
 
-- name: fflch.sap-ase
-  src: https://github.com/fflch/ansible-role-sap-ase.git
-  version: v1.0.2
+  - name: fflch.django
+    src: https://github.com/fflch/ansible-role-django.git
+    version: 1.0.4
 
-- name: fflch.tasks
-  src: https://github.com/fflch/ansible-role-tasks.git
-  version: 1.0.42
+  - name: fflch.sap-ase
+    src: https://github.com/fflch/ansible-role-sap-ase.git
+    version: v1.0.2
 
-- name: fflch.proaluno
-  src: https://github.com/fflch/ansible-role-proaluno.git
-  version: 1.0.8
+  - name: fflch.tasks
+    src: https://github.com/fflch/ansible-role-tasks.git
+    version: 1.0.42
 
-- name: fflch.domain-member
-  src: https://github.com/fflch/ansible-role-domain-member.git
-  version: 1.0.4
+  - name: fflch.proaluno
+    src: https://github.com/fflch/ansible-role-proaluno.git
+    version: 1.0.8
 
-- name: fflch.printer-server
-  src: https://github.com/fflch/ansible-role-printer-server.git
-  version: 1.0.2
+  - name: fflch.domain-member
+    src: https://github.com/fflch/ansible-role-domain-member.git
+    version: 1.0.4
 
-- name: fflch.fsecure
-  src: https://github.com/fflch/ansible-role-fsecure.git
-  version: 1.0.4
+  - name: fflch.printer-server
+    src: https://github.com/fflch/ansible-role-printer-server.git
+    version: 1.0.2
 
-#### roles da comunidade ####
+  - name: fflch.fsecure
+    src: https://github.com/fflch/ansible-role-fsecure.git
+    version: 1.0.4
 
-- src: hispanico.nginx_revproxy
-  version: v1.7.0
+  #### roles da comunidade ####
 
-- src: geerlingguy.mysql
-  version: 3.3.2
+  - src: hispanico.nginx_revproxy
+    version: v1.7.0
 
-- src: geerlingguy.postgresql
-  version: 3.4.2
+  - src: geerlingguy.mysql
+    version: 5.1.0
 
-- src: geerlingguy.php-versions
-  version: 5.0.0
+  - src: geerlingguy.postgresql
+    version: 3.4.2
 
-- src: geerlingguy.php
-  version: 4.6.1
+  - src: geerlingguy.php-versions
+    version: 5.0.0
 
-- src: geerlingguy.composer
-  version: 1.9.0
+  - src: geerlingguy.php
+    version: 4.6.1
 
-- src: geerlingguy.firewall
-  version: 2.5.0
+  - src: geerlingguy.composer
+    version: 1.9.0
 
-- src: geerlingguy.apache
-  version: 3.1.0
+  - src: geerlingguy.firewall
+    version: 2.5.0
 
-- src: geerlingguy.nodejs
-  version: 5.1.1
+  - src: geerlingguy.apache
+    version: 3.1.0
 
-- src: geerlingguy.ntp
-  version: 2.3.1
+  - src: geerlingguy.nodejs
+    version: 5.1.1
 
-- src: geerlingguy.pip
-  version: 2.2.0
+  - src: geerlingguy.ntp
+    version: 2.3.1
 
-- src: robertdebock.logrotate
-  version: 2.0.0
+  - src: geerlingguy.pip
+    version: 2.2.0
 
-- src: andrewrothstein.anaconda
-  version: v4.0.19
+  - src: robertdebock.logrotate
+    version: 2.0.0
 
-- src: gforcada.compile-python
-  version: 3.0.0
+  - src: andrewrothstein.anaconda
+    version: v4.0.19
 
-- src: cmprescott.chrome
-  version: 0.2.4
+  - src: gforcada.compile-python
+    version: 3.0.0
 
-- src: ome.postgresql_backup
-  version: '0.2.1'
+  - src: cmprescott.chrome
+    version: 0.2.4
 
-# Falta fixar a versão e ver se estão sendo usadas:
-- src: gcoop-libre.mysqldump
-- src: Stouts.hostname
-- src: adriagalin.timezone
-- src: infOpen.locales
-- src: ontic.ntp
-- src: blackstar257.resolv
+  - src: ome.postgresql_backup
+    version: '0.2.1'
 
-######### FORKS
-# Estou mantendo um fork até resolverem essa issue:
-# https://github.com/geerlingguy/ansible-role-backup/issues/17
-- name: geerlingguy.backup
-  src: https://github.com/thiagogomesverissimo/ansible-role-backup.git
-  version: single_quote_problem_mysql
+  # Falta fixar a versão e ver se estão sendo usadas:
+  - src: gcoop-libre.mysqldump
+  - src: Stouts.hostname
+  - src: adriagalin.timezone
+  - src: infOpen.locales
+  - src: ontic.ntp
+  - src: blackstar257.resolv
 
-- name: robertdebock.rsyslog
-  src: https://github.com/fflch/ansible-role-rsyslog.git
-  version: fflch
+  ######### FORKS
+  # Estou mantendo um fork até resolverem essa issue:
+  # https://github.com/geerlingguy/ansible-role-backup/issues/17
+  - name: geerlingguy.backup
+    src: https://github.com/thiagogomesverissimo/ansible-role-backup.git
+    version: single_quote_problem_mysql
 
-- name: robertdebock.logrotate
-  src: https://github.com/fflch/ansible-role-logrotate.git
-  version: fflch
+  - name: robertdebock.rsyslog
+    src: https://github.com/fflch/ansible-role-rsyslog.git
+    version: fflch
 
-- name: HP41.cups
-  src: https://github.com/fflch/ansible-cups.git
-  version: 1.0.0
+  - name: robertdebock.logrotate
+    src: https://github.com/fflch/ansible-role-logrotate.git
+    version: fflch
 
-- name: oefenweb.shiny_server
-  src: https://github.com/ricardfo/ansible-shiny-server.git
-  version: 'master'
+  - name: HP41.cups
+    src: https://github.com/fflch/ansible-cups.git
+    version: 1.0.0
+
+  - name: oefenweb.shiny_server
+    src: https://github.com/ricardfo/ansible-shiny-server.git
+    version: 'master'

@@ -15,6 +15,10 @@
       include_role:
         name: geerlingguy.mysql
       vars:
+        mysql_packages:
+          - mariadb-client
+          - mariadb-server
+        mysql_daemon: mariadb
         mysql_root_username: root
         mysql_root_password: "SuperPassw0rd"
         mysql_bind_address: '*'
@@ -50,9 +54,15 @@
             password: "dicbio"
             priv: "dicbio.*:ALL"
 
+          - name: ocsinventoryserver
+            host: "%"
+            password: "ocsinventoryserver"
+            priv: "ocsinventoryserver.*:ALL"
+
         mysql_databases:
            - name: freeradius
            - name: copaco
            - name: dados
            - name: map
            - name: dicbio
+           - name: ocsinventoryserver
