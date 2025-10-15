@@ -1,62 +1,143 @@
-# For Mônica
+---
+- name: Instalar OCS Inventory Server
+  hosts: ocsinventoryserver
+  become: yes
+  vars:
+    ocs_version: "2.12.3"
+    ocs_download_url: "https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/{{ ocs_version }}/OCSNG_UNIX_SERVER-{{ ocs_version }}.tar.gz"
+    ocs_temp_dir: "/tmp"
+    ocs_extracted_dir: "{{ ocs_temp_dir }}/OCSNG_UNIX_SERVER-{{ ocs_version }}"
+    db_host: "192.168.8.10"
+    db_port: "3306"
+    db_name: "ocsinventoryserver"
+    db_user: "ocsinventoryserver"
+    db_password: "ocsinventoryserver"
 
-https://wiki.ocsinventory-ng.org/03.Basic-documentation/Setting-up-a-OCS-Inventory-Server/
+  tasks:
 
-https://daniel.scota.com.br/2018/ocs-inventory-instalacao-e-configuracao/
+    - name: Instalar pacotes necessários
+      ansible.builtin.apt:
+        name:
+          - apache2
+          - mariadb-client
+          - libxml-simple-perl
+          - libdbi-perl
+          - libdbd-mysql-perl
+          - libapache-dbi-perl
+          - libnet-ip-perl
+          - libsoap-lite-perl
+          - libarchive-zip-perl
+          - make
+          - build-essential
+          - php
+          - php-mbstring
+          - php-soap
+          - php-mysql
+          - php-curl
+          - php-xml
+          - php-zip
+          - php-gd
+          - libswitch-perl
+          - libio-compress-perl
+          - libapache2-mod-perl2-dev
+          - php-ldap
+        state: present
+        update_cache: yes
 
-ansible-playbook playbooks/dev/mariadbmaster.yml
+    - name: Instalar cpanminus
+      ansible.builtin.apt:
+        name: cpanminus
+        state: present
+
+    - name: Instalar módulos Perl via cpanm
+      community.general.cpanm:
+        name: "{{ item }}"
+      loop:
+        - XML::Entities
+        - Compress::Zlib
+        - Apache2::SOAP
+        - Mojolicious
+        - Plack::Handler
+
+    - name: Baixar OCS Inventory
+      ansible.builtin.get_url:
+        url: "{{ ocs_download_url }}"
+        dest: "{{ ocs_temp_dir }}/ocs.tar.gz"
+
+    - name: Extrair OCS Inventory
+      ansible.builtin.unarchive:
+        src: "{{ ocs_temp_dir }}/ocs.tar.gz"
+        dest: "{{ ocs_temp_dir }}"
+        remote_src: yes
+
+    - name: Remover arquivo temporário
+      ansible.builtin.file:
+        path: "{{ ocs_temp_dir }}/ocs.tar.gz"
+        state: absent
+
+    - name: Criar setup.answers com defaults
+      ansible.builtin.copy:
+        dest: "{{ ocs_extracted_dir }}/setup.answers"
+        content: |
+          DB_SERVER_HOST="{{ db_host }}"
+          DB_SERVER_PORT="{{ db_port }}"
+          DB_SERVER_USER="{{ db_user }}"
+          DB_SERVER_PWD="{{ db_password }}"
+          DB_NAME="{{ db_name }}"
+          APACHE_BIN=
+          APACHE_CONFIG_FILE=
+          APACHE_CONFIG_DIRECTORY=
+          APACHE_USER=
+          APACHE_GROUP=
+          APACHE_ROOT_DOCUMENT=
+          APACHE_MOD_PERL_VERSION=
+          OCS_COM_SRV_LOG=/var/log/ocsinventory-server
+          OCS_COM_SRV_PLUGINS_CONFIG_DIR=/etc/ocsinventory-server/plugins
+          OCS_COM_SRV_PLUGINS_PERL_DIR=/etc/ocsinventory-server/perl
+          PERL_BIN=$(which perl)
+          MAKE=$(which make)
+          LOGROTATE_CONF_DIR=/etc/logrotate.d
+          SETUP_LOG={{ ocs_extracted_dir }}/ocs_server_setup.log
+        mode: '0600'
+
+    # - name: Copiar arquivo de respostas com defaults
+    #   ansible.builtin.copy:
+    #     src: files/setup.answers   
+    #     dest: "{{ ocs_extracted_dir }}/setup.answers"
+    #     mode: '0600'
 
 
-vagrant ssh ocsinventoryserver
-apt update
+    - name: Executar setup automático do OCS Inventory com respostas
+      ansible.builtin.shell:
+        cmd: ./setup.sh --answers setup.answers
+        chdir: "{{ ocs_extracted_dir }}"
+      async: 1800
+      poll: 10
+      register: ocs_setup_result
 
-apt install apache2 mariadb-client libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libnet-ip-perl libsoap-lite-perl libarchive-zip-perl make build-essential php-pclzip make build-essential libdbd-mysql-perl libnet-ip-perl libxml-simple-perl php php-mbstring php-soap php-mysql php-curl php-xml php-zip php-gd libswitch-perl
+    - name: Ativar configuração ocsinventory-reports
+      ansible.builtin.command:
+        cmd: a2enconf ocsinventory-reports
+        creates: /etc/apache2/conf-enabled/ocsinventory-reports.conf
+      notify: Restart Apache
 
-apt-get install libxml-simple-perl
-apt-get install libio-compress-perl
-apt-get install libdbi-perl
-apt-get install libdbd-mysql-perl
-apt-get install libapache-dbi-perl
-apt-get install libnet-ip-perl
-apt-get install libsoap-lite-perl
-apt-get install libarchive-zip-perl
-apt-get install libapache2-mod-perl2-dev
+    - name: Ativar configuração z-ocsinventory-server
+      ansible.builtin.command:
+        cmd: a2enconf z-ocsinventory-server
+        creates: /etc/apache2/conf-enabled/z-ocsinventory-server.conf
+      notify: Restart Apache
 
-apt-get install libxml-simple-perl libio-compress-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libnet-ip-perl libsoap-lite-perl libarchive-zip-perl libapache2-mod-perl2-dev
+    - name: Ajustar permissões do diretório OCS Inventory Reports
+      ansible.builtin.file:
+        path: /var/lib/ocsinventory-reports/
+        owner: www-data
+        group: www-data
+        recurse: yes
+        state: directory
+        mode: '0755'
 
-apt-get install libphp-pclzip
-apt-get install php-gd 
-apt-get install php-curl php-xml php-soap php-mysql php-zip
-apt-get install php-mbstring
-apt-get install php-net-ldap
-
-
-cpan -i XML::Entities
-cpan -i Compress::Zlib
-cpan -i Apache::SOAP
-cpan -i Apache2::SOAP
-cpan -i XML::Entities Compress::Zlib Apache2::SOAP
-
-
-cpan install XML::Entities
-cpan Mojolicious
-cpan Plack::Handler
-
-
-Importante: it is possible to provide a setup.answers file with default configuration.
-
-https://github.com/OCSInventory-NG/OCSInventory-ocsreports/tags
-
-https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/2.12.3/OCSNG_UNIX_SERVER-2.12.3.tar.gz
-
-cd OCSInventory-Server
-sh setup.sh
-
-
-/etc/init.d/apache2 restart ou systemctl restart apache2
-a2enconf ocsinventory-reports
-a2enconf z-ocsinventory-server
-chown -R www-data:www-data /var/lib/ocsinventory-reports/
-/etc/init.d/apache2 restart ou systemctl restart apache2
-
-http://192.168.8.5/ocsreports
+  handlers:
+    - name: Restart Apache
+      ansible.builtin.service:
+        name: apache2
+        state: reloaded
