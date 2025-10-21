@@ -69,7 +69,7 @@ roles:
     version: 5.1.1
 
   - src: geerlingguy.ntp
-    version: 2.3.1
+    version: 3.0.0
 
   - src: geerlingguy.pip
     version: 2.2.0

@@ -1,7 +1,7 @@
 ---
-- name: mariadbmaster
+- name: mariadbserver
   become: yes
-  hosts: mariadbmaster
+  hosts: mariadbserver
 
   tasks:
 
