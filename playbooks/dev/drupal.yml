@@ -11,6 +11,8 @@
         tasks_php: true
         tasks_drupal: true
         tasks_php_version: '7.4'
+        tasks_drupal_repo_version: 'v9.1.0c'
+        tasks_drupal_database: '192.168.8.10'
 
 # Entradas no /etc/hosts da hospedeira:
 # 192.168.8.44 [sites que estiverem no arquivo sites.csv]

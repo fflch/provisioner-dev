@@ -5,7 +5,7 @@ rshiny ansible_host="192.168.8.3"
 postgresql ansible_host="192.168.8.4"
 ocsinventoryserver ansible_host="192.168.8.5"
 
-mariadbmaster ansible_host="192.168.8.10"
+mariadbserver ansible_host="192.168.8.10"
 django ansible_host="192.168.8.11"
 
 dhcp ansible_host="192.168.8.40"
