@@ -179,7 +179,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.44
   config.vm.define "drupal" do |host|
     host.vm.hostname = "drupal"
-    host.vm.box = "generic/debian12"
+    host.vm.box = "cloud-image/debian-13"
     host.vm.network :private_network,
       :ip => "192.168.8.44",
       :libvirt__network_name => "fflch",

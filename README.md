@@ -1,3 +1,16 @@
+## Garantindo a mesma versão de Ansible para equipe
+
+    python3 -m venv venv
+    source venv/bin/activate
+    ./venv/bin/pip3 install -r requirements.txt
+
+Assim vamos rodar o ansible sempre:
+
+    ./venv/bin/ansible-galaxy install -r requirements.yml --force
+    ./venv/bin/ansible-playbook playbooks/dev/drupal.yml
+
+
+
 ## Preparação do ambiente
 
 Instale na sua distro: vagrant
