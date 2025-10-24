@@ -44,8 +44,13 @@ roles:
   - src: hispanico.nginx_revproxy
     version: v1.7.0
 
-  - src: geerlingguy.mysql
-    version: 5.1.0
+#  - src: geerlingguy.mysql
+#    version: 5.1.0
+# Temporariamente colocando um fork que resolve o problema do debian 13
+# Acompanhar essa solução: https://github.com/geerlingguy/ansible-role-mysql/pull/568
+  - name: geerlingguy.mysql
+    src: https://github.com/Dherlou/ansible-role-mysql.git
+    version: mariadb_repo_compatibility
 
   - src: geerlingguy.postgresql
     version: 3.4.2

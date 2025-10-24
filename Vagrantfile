@@ -72,7 +72,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # mudando para  cloud-image/debian-13 pois a Generic não tem suporte para debian 13 ainda
   config.vm.define "mariadbserver" do |host|
     host.vm.hostname = "mariadbserver"
-    host.vm.box = "generic/debian12"
+    host.vm.box = "cloud-image/debian-13"
     host.vm.network :private_network,
       :ip => "192.168.8.10",
       :libvirt__network_name => "fflch",
