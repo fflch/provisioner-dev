@@ -51,7 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.5
   config.vm.define "ocsinventoryserver" do |host|
     host.vm.hostname = "ocsinventoryserver"
-    host.vm.box = "generic/debian12"
+    host.vm.box = "cloud-image/debian-13"
     host.vm.network :private_network,
       :ip => "192.168.8.5",
       :libvirt__network_name => "fflch",
