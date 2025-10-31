@@ -2,38 +2,42 @@ collections:
   - name: community.mysql
 
 roles:
-#### roles internas da FFLCH ####
+  #### roles internas da FFLCH ####
   - name: fflch.sambadc
     src: https://github.com/fflch/ansible-role-sambadc.git
-    version: 1.0.9
+    version: 1.0.5
 
   - name: fflch.deploy_laravel
     src: https://github.com/fflch/ansible-role-deploy-laravel.git
     version: 1.0.14
 
-  - name: fflch.django
-    src: https://github.com/fflch/ansible-role-django.git
-    version: 1.0.4
-
   - name: fflch.sap-ase
     src: https://github.com/fflch/ansible-role-sap-ase.git
     version: v1.0.2
 
+  - name: fflch.aegir
+    src: https://github.com/fflch/ansible-role-aegir.git
+    version: 1.0.10
+
   - name: fflch.tasks
     src: https://github.com/fflch/ansible-role-tasks.git
-    version: 1.0.42
+    version: 1.0.52
+
+  - name: fflch.django
+    src: https://github.com/fflch/ansible-role-django.git
+    version: 1.0.4
 
   - name: fflch.proaluno
     src: https://github.com/fflch/ansible-role-proaluno.git
-    version: 1.0.8
+    version: 1.0.3
 
   - name: fflch.domain-member
     src: https://github.com/fflch/ansible-role-domain-member.git
-    version: 1.0.4
+    version: 1.0.2
 
   - name: fflch.printer-server
     src: https://github.com/fflch/ansible-role-printer-server.git
-    version: 1.0.2
+    version: 1.0.1
 
   - name: fflch.fsecure
     src: https://github.com/fflch/ansible-role-fsecure.git
@@ -44,10 +48,6 @@ roles:
   - src: hispanico.nginx_revproxy
     version: v1.7.0
 
-#  - src: geerlingguy.mysql
-#    version: 5.1.0
-# Temporariamente colocando um fork que resolve o problema do debian 13
-# Acompanhar essa solução: https://github.com/geerlingguy/ansible-role-mysql/pull/568
   - name: geerlingguy.mysql
     src: https://github.com/Dherlou/ansible-role-mysql.git
     version: mariadb_repo_compatibility
@@ -72,7 +72,7 @@ roles:
     version: 4.0.0
 
   - src: geerlingguy.nodejs
-    version: 5.1.1
+    version: 7.0.0
 
   - src: geerlingguy.ntp
     version: 3.0.0
@@ -86,14 +86,18 @@ roles:
   - src: andrewrothstein.anaconda
     version: v4.0.19
 
-  - src: gforcada.compile-python
-    version: 3.0.0
+  - name: gforcada.compile-python
+    src: https://github.com/gforcada/ansible-compile-python.git
+    version: 6.4.0
 
   - src: cmprescott.chrome
     version: 0.2.4
 
   - src: ome.postgresql_backup
     version: '0.2.1'
+
+  - src: geerlingguy.backup
+    version: 2.0.0
 
   # Falta fixar a versão e ver se estão sendo usadas:
   - src: gcoop-libre.mysqldump
@@ -104,12 +108,6 @@ roles:
   - src: blackstar257.resolv
 
   ######### FORKS
-  # Estou mantendo um fork até resolverem essa issue:
-  # https://github.com/geerlingguy/ansible-role-backup/issues/17
-  - name: geerlingguy.backup
-    src: https://github.com/thiagogomesverissimo/ansible-role-backup.git
-    version: single_quote_problem_mysql
-
   - name: robertdebock.rsyslog
     src: https://github.com/fflch/ansible-role-rsyslog.git
     version: fflch
@@ -124,4 +122,4 @@ roles:
 
   - name: oefenweb.shiny_server
     src: https://github.com/ricardfo/ansible-shiny-server.git
-    version: 'master'
+    version: master

@@ -30,6 +30,6 @@
           - name: MYSQL_HOST
             value: 192.168.8.10
           - name: MYSQL_PASSWORD
-            value: "map"
+            value: "{{ lookup('passwordstore', 'sti/servidores/mysql/map') }}"
           - name: CONVITE
             value: conviteMAP1
