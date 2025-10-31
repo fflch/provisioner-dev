@@ -24,7 +24,8 @@
       - name: MYSQL_HOST
         value: 192.168.8.10
       - name: MYSQL_PASSWORD
-        value: "dicbio"
+        value: "{{ lookup('passwordstore', 'sti/servidores/mysql/dicbio') }}"
+        # value: "dicbio"
       - name: ALLOWED_HOSTS
         value: "*"
       - name: DJANGO_ENV
