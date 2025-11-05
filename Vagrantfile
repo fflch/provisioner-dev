@@ -70,8 +70,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.10
   # Na produção está debian 10, mas aqui coloquei debian 13 porque a VM não roda apt update, dado que o debian 10 não tem mais suporte
   # mudando para  cloud-image/debian-13 pois a Generic não tem suporte para debian 13 ainda
-  config.vm.define "mariadbserver" do |host|
-    host.vm.hostname = "mariadbserver"
+  config.vm.define "d13-mariadbserver" do |host|
+    host.vm.hostname = "d13-mariadbserver"
     host.vm.box = "cloud-image/debian-13"
     host.vm.network :private_network,
       :ip => "192.168.8.10",
@@ -177,8 +177,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.44
-  config.vm.define "drupal" do |host|
-    host.vm.hostname = "drupal"
+  config.vm.define "d13-drupal" do |host|
+    host.vm.hostname = "d13-drupal"
     host.vm.box = "cloud-image/debian-13"
     host.vm.network :private_network,
       :ip => "192.168.8.44",

@@ -1,7 +1,7 @@
 ---
-- name: deploy Drupal
+- name: d13-drupal
   become: yes
-  hosts: drupal
+  hosts: d13-drupal
   tasks:
 
     - name: Aplica role fflch.tasks 
@@ -9,9 +9,10 @@
         name: fflch.tasks
       vars:
         tasks_php: true
+        tasks_id_rsa: "{{ lookup('passwordstore', 'sti/tokens/ssh/fflch/private returnall=true') }}"
         tasks_drupal: true
         tasks_php_version: '7.4'
-        tasks_drupal_repo_version: 'v9.1.0e'
+        tasks_drupal_repo_version: 'v9.1.0h'
         tasks_drupal_database: '192.168.8.10'
 
 # Entradas no /etc/hosts da hospedeira:

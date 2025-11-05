@@ -3,6 +3,7 @@
     python3 -m venv venv
     source venv/bin/activate
     ./venv/bin/pip3 install -r requirements.txt
+    ./venv/bin/ansible --version
 
 Assim vamos rodar o ansible sempre:
 

@@ -1,7 +1,7 @@
 ---
-- name: mariadbserver
+- name: d13-mariadbserver
   become: yes
-  hosts: mariadbserver
+  hosts: d13-mariadbserver
 
   tasks:
 
