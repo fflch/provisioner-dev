@@ -1,7 +1,7 @@
 ---
 - name: deploy map
   become: yes
-  hosts: django
+  hosts: d13-django
 
   tasks:
 

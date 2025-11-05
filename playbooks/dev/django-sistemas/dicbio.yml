@@ -1,7 +1,7 @@
 ---
 - name: deploy dicbio
   become: yes
-  hosts: django
+  hosts: d13-django
   vars:
     django_name: "dicbio"
     django_dest: "/var/www/dicbio"

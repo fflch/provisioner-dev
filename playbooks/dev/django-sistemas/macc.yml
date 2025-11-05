@@ -1,7 +1,7 @@
 ---
-- name: deploy django
+- name: deploy macc
   become: yes
-  hosts: django
+  hosts: d13-django
 
   tasks:
 
@@ -17,7 +17,7 @@
         django_envfile: '.env.sample'
         django_pythonversion: '3.10'
         django_wsgi: macc
-        django_env:   
+        django_env:
           - name: SECRET_KEY
             value: "123dZdRASw"
           - name: POSTGRES_USER
