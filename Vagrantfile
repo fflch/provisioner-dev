@@ -408,7 +408,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.86 livre
   # 192.168.8.87 livre
   # 192.168.8.88 livre
-  # 192.168.8.89 livre
+
+  # 192.168.8.89
+  # https://portal.cloud.hashicorp.com/vagrant/discover/jborean93/WindowsServer2012R2
+  # username: vagrant, password: vagrant, connector: winrm
+  # liberar fw e conectar via RDP
+  config.vm.define "windowsensp" do |host|
+    host.vm.hostname = "windowsensp"
+    host.vm.box = "jborean93/WindowsServer2012R2"
+    host.vm.network :private_network,
+      :ip => "192.168.8.89",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 4096
+      v.cpus = 2
+    end
+  end
 
   # 192.168.8.90
   config.vm.define "fsecure" do |host|
