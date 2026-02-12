@@ -6,7 +6,7 @@ postgresql ansible_host="192.168.8.4"
 ocsinventoryserver ansible_host="192.168.8.5"
 
 d13-mariadbserver ansible_host="192.168.8.10"
-django ansible_host="192.168.8.11"
+d13-django ansible_host="192.168.8.11"
 
 dhcp ansible_host="192.168.8.40"
 freeradius ansible_host="192.168.8.41"

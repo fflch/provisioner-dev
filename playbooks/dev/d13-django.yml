@@ -1,0 +1,12 @@
+---
+- name: d13-django
+  become: yes
+  hosts: d13-django
+
+  tasks:
+
+    - name: Aplica role fflch.tasks
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_django: true
