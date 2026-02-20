@@ -81,7 +81,10 @@ roles:
     version: 2.2.0
 
   - src: robertdebock.logrotate
-    version: 2.0.0
+    version: 2.11.2
+
+  - src: robertdebock.rsyslog
+    version: 5.0.0
 
   - src: andrewrothstein.anaconda
     version: v4.0.19
@@ -108,14 +111,6 @@ roles:
   - src: blackstar257.resolv
 
   ######### FORKS
-  - name: robertdebock.rsyslog
-    src: https://github.com/fflch/ansible-role-rsyslog.git
-    version: fflch
-
-  - name: robertdebock.logrotate
-    src: https://github.com/fflch/ansible-role-logrotate.git
-    version: fflch
-
   - name: HP41.cups
     src: https://github.com/fflch/ansible-cups.git
     version: 1.0.0
