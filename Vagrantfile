@@ -97,8 +97,45 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # 192.168.8.12 livre
-  # 192.168.8.13 livre
+  # 192.168.8.12 minio
+  config.vm.define "d13-minio" do |host|
+    host.vm.hostname = "d13-minio"
+    host.vm.box = "cloud-image/debian-13"
+    host.vm.network :private_network,
+      :ip => "192.168.8.12",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 1024
+      v.cpus = 1
+
+      # Disco extra 1 (2GB)
+      v.storage :file,
+        size: '2G',
+        type: 'qcow2',
+        bus: 'virtio'
+
+      # Disco extra 2 (4GB)
+      v.storage :file,
+        size: '4G',
+        type: 'qcow2',
+        bus: 'virtio'
+    end
+  end
+
+  # 192.168.8.13 mongodb
+  config.vm.define "d13-mongodb" do |host|
+    host.vm.hostname = "d13-mongodb"
+    host.vm.box = "cloud-image/debian-13"
+    host.vm.network :private_network,
+      :ip => "192.168.8.13",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 2048
+      v.cpus = 2
+    end
+  end
   # 192.168.8.14 livre
   # 192.168.8.15 livre
   # 192.168.8.16 livre

@@ -1,0 +1,12 @@
+---
+- name: ocsinventoryserver
+  become: yes
+  hosts: ocsinventoryserver
+
+  tasks:
+
+    - name: Aplica role fflch.tasks 
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_ocsinventoryserver: true
