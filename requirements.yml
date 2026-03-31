@@ -49,8 +49,7 @@ roles:
     version: v1.7.0
 
   - name: geerlingguy.mysql
-    src: https://github.com/Dherlou/ansible-role-mysql.git
-    version: mariadb_repo_compatibility
+    version: 6.3.1
 
   - src: geerlingguy.postgresql
     version: 3.4.2
