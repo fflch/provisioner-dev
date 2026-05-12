@@ -555,9 +555,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # 192.168.8.100 miniobackup
-  config.vm.define "d13-miniobackup" do |host|
-    host.vm.hostname = "d13-miniobackup"
+  # 192.168.8.100 minio
+  config.vm.define "d13-minio" do |host|
+    host.vm.hostname = "d13-minio"
     host.vm.box = "cloud-image/debian-13"
     host.vm.network :private_network,
       :ip => "192.168.8.100",
@@ -581,90 +581,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # 192.168.8.101 minio1
-  config.vm.define "d13-minio1" do |host|
-    host.vm.hostname = "d13-minio1"
+  # 192.168.8.101 minioreplica
+  config.vm.define "d13-minioreplica" do |host|
+    host.vm.hostname = "d13-minioreplica"
     host.vm.box = "cloud-image/debian-13"
     host.vm.network :private_network,
       :ip => "192.168.8.101",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 1024
-      v.cpus = 1
-
-      # Disco extra 1 (2GB)
-      v.storage :file,
-        size: '1G',
-        type: 'qcow2',
-        bus: 'virtio'
-
-      # Disco extra 2 (4GB)
-      v.storage :file,
-        size: '1G',
-        type: 'qcow2',
-        bus: 'virtio'
-    end
-  end
-
-  # 192.168.8.102 minio2
-  config.vm.define "d13-minio2" do |host|
-    host.vm.hostname = "d13-minio2"
-    host.vm.box = "cloud-image/debian-13"
-    host.vm.network :private_network,
-      :ip => "192.168.8.102",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 1024
-      v.cpus = 1
-
-      # Disco extra 1 (2GB)
-      v.storage :file,
-        size: '1G',
-        type: 'qcow2',
-        bus: 'virtio'
-
-      # Disco extra 2 (4GB)
-      v.storage :file,
-        size: '1G',
-        type: 'qcow2',
-        bus: 'virtio'
-    end
-  end
-
-  # 192.168.8.103 minio3
-  config.vm.define "d13-minio3" do |host|
-    host.vm.hostname = "d13-minio3"
-    host.vm.box = "cloud-image/debian-13"
-    host.vm.network :private_network,
-      :ip => "192.168.8.103",
-      :libvirt__network_name => "fflch",
-      :libvirt__forward_mode => "nat"
-    host.vm.provider :libvirt do |v|
-      v.memory = 1024
-      v.cpus = 1
-
-      # Disco extra 1 (2GB)
-      v.storage :file,
-        size: '1G',
-        type: 'qcow2',
-        bus: 'virtio'
-
-      # Disco extra 2 (4GB)
-      v.storage :file,
-        size: '1G',
-        type: 'qcow2',
-        bus: 'virtio'
-    end
-  end
-
-  # 192.168.8.104 minio4
-  config.vm.define "d13-minio4" do |host|
-    host.vm.hostname = "d13-minio4"
-    host.vm.box = "cloud-image/debian-13"
-    host.vm.network :private_network,
-      :ip => "192.168.8.104",
       :libvirt__network_name => "fflch",
       :libvirt__forward_mode => "nat"
     host.vm.provider :libvirt do |v|
