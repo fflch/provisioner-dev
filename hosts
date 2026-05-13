@@ -33,7 +33,6 @@ fsecure ansible_host="192.168.8.90"
 php8server ansible_host="192.168.8.92"
 hpc ansible_host="192.168.8.94"
 
-
 d13-swarm-manager1 ansible_host="192.168.8.95"
 d13-swarm-manager2 ansible_host="192.168.8.96"
 d13-swarm-manager3 ansible_host="192.168.8.97"

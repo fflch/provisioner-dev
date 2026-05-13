@@ -555,9 +555,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # 192.168.8.100 minio
-  config.vm.define "d13-minio" do |host|
-    host.vm.hostname = "d13-minio"
+  # 192.168.8.100 miniofflch
+  config.vm.define "d13-miniofflch" do |host|
+    host.vm.hostname = "d13-miniofflch"
     host.vm.box = "cloud-image/debian-13"
     host.vm.network :private_network,
       :ip => "192.168.8.100",
@@ -581,9 +581,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # 192.168.8.101 minioreplica
-  config.vm.define "d13-minioreplica" do |host|
-    host.vm.hostname = "d13-minioreplica"
+  # 192.168.8.101 miniofflchreplica
+  config.vm.define "d13-miniofflchreplica" do |host|
+    host.vm.hostname = "d13-miniofflchreplica"
     host.vm.box = "cloud-image/debian-13"
     host.vm.network :private_network,
       :ip => "192.168.8.101",

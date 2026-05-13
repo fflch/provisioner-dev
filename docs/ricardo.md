@@ -9,11 +9,11 @@ vagrant ssh d13-miniofflchreplica
 
 Configurar discos:
 
-fdisk /dev/vdb
-fdisk /dev/vdc
-
 apt update
 apt install xfsprogs -y
+
+fdisk /dev/vdb: n, p -> w
+fdisk /dev/vdc
 
 mkfs.xfs /dev/vdb1
 mkfs.xfs /dev/vdc1
@@ -23,26 +23,24 @@ mkdir -p /data2
 
 blkid
 
-/dev/vdb1 UUID="AAA"
-/dev/vdc1 UUID="BBB"
+/dev/vdb1 UUID="1e471b63-938d-4172-964e-19fd01bb0e0b"
+/dev/vdc1 UUID="382275d8-cae6-432f-8ea8-1c94e95ecedb"
 
 /etc/fstab
 
-UUID=AAA /data1 xfs defaults,noatime 0 2
-UUID=BBB /data2 xfs defaults,noatime 0 2
+UUID="1e471b63-938d-4172-964e-19fd01bb0e0b" /data1 xfs defaults,noatime 0 2
+UUID="382275d8-cae6-432f-8ea8-1c94e95ecedb" /data2 xfs defaults,noatime 0 2
 
-
+systemctl daemon-reload
 mount -a
+
+useradd -r minio -s /sbin/nologin
 
 mkdir -p /data1/minio
 mkdir -p /data2/minio
 
 chown -R minio:minio /data1/minio
 chown -R minio:minio /data2/minio
-
-
-useradd -r minio -s /sbin/nologin
-chown -R minio:minio /opt/minio
 
 
 ### Instalação nos 3
@@ -94,8 +92,6 @@ No miniofflch:
 mc alias set miniofflch http://192.168.8.100:9000  admin SenhaMuitoForte
 mc alias set miniofflchreplica http://192.168.8.101:9000  admin SenhaMuitoForte
 
-mc admin info miniofflch
-mc admin info miniofflchreplica
 
 mc admin replicate add miniofflch miniofflchreplica
 
@@ -104,7 +100,7 @@ Criar Bucket:
 mc mb miniofflch/chamado.fflch.usp.br
 mc version enable miniofflch/chamado.fflch.usp.br
 
-playbook deve ser capaz de:
+#### playbook deve ser capaz de:
 
 - Adicionar novos discos - basta preparar os disco e alterar  /etc/systemd/system/minio.service e systemctl daemon-reload systemctl restart minio
 - Nã implementar remoção de discos
