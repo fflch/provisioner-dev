@@ -1,0 +1,80 @@
+---
+- name: senha
+  become: yes
+  hosts: php8server
+
+  vars:
+    deploy_laravel_env:
+      - name: APP_NAME
+        value: 'Sistema de Senhas FFLCH'
+      - name: APP_URL
+        value: 'http://senha.fflch.usp.br'
+      # variáveis banco de dados mysql
+      - name: DB_USERNAME
+        value: 'master'
+      - name: DB_PASSWORD
+        value: "master"
+      - name: DB_DATABASE
+        value: 'senha'
+      - name: DB_HOST
+        value: '192.168.8.7'
+      # variáveis senha única
+      - name: SENHAUNICA_CALLBACK_ID
+        value: "164"
+      - name: SENHAUNICA_ADMINS
+        value: "3426504"
+      - name: LDAP_HOSTS
+        value: '192.168.8.48'
+      - name: LDAP_PORT
+        value: '636'
+      - name: LDAP_BASE_DN
+        value: 'DC=smbdomain,DC=local,DC=usp,DC=br'
+      - name: LDAP_USERNAME
+        value: 'CN=Administrator,CN=Users,DC=smbdomain,DC=local,DC=br'
+      - name: LDAP_PASSWORD
+        value: "SuperSenh@1"
+      - name: LOCAL_ADMIN_GROUP_LDAP
+        value: "FFLCHLOCALADMIN"
+      - name: NOT_REMOVE_GROUPS
+        value: "FFLCHLOCALADMIN,SCINFOR-08"
+      - name: SOLICITA_CONTA_ADMIN
+        value: '1'
+      - name: SYNC_GROUPS_WITH_REPLICADO
+        value: 'yes'
+      - name: REMOVE_ALL_GROUPS
+        value: 0
+      - name: TIPO_NOMES_GRUPOS
+        value: 'siglas'
+      - name: USAR_ATRIBUTOS_LINUX
+        value: '1'
+      - name: PREFIXO_LINUX
+        value: 'a'
+      - name: GID_LINUX
+        value: '6000'
+      - name: LDAP_DOMAIN
+        value: 'smbdomain.local.usp.br'
+      - name: MOSTRAR_FOTO
+        value: 1
+
+  tasks:
+
+    - name: laravel vars
+      include_vars: ../vars/laravel.yml
+
+    - name: merge lists deploy_laravel_env
+      set_fact:
+        deploy_laravel_env: "{{ deploy_laravel_env + laravel }}"
+
+    - name: senha.fflch.usp.br
+      include_role:
+        name: fflch.deploy_laravel
+      vars:
+        deploy_laravel_build_assets: no
+        deploy_laravel_domain: "senha.fflch.usp.br"
+        deploy_laravel_repo: "https://github.com/uspdev/web-ldap-admin.git"
+        deploy_laravel_repo_version: "master"
+
+# Grupo temporário para admin
+# samba-tool group listmembers 'Domain Admins'
+# samba-tool group add FFLCHLOCALADMIN
+# samba-tool group addmembers 'Domain Admins' FFLCHLOCALADMIN
