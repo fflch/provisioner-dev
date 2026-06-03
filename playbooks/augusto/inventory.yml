@@ -1,0 +1,16 @@
+all:
+  hosts:
+    d13-swarm-manager1:
+      ansible_host: 192.168.8.95
+
+    d13-swarm-manager1:
+      ansible_host: 192.168.8.96
+
+    d13-swarm-manager3:
+      ansible_host: 192.168.8.97
+
+    d13-swarm-worker1:
+      ansible_host: 192.168.8.98
+
+    d13-swarm-worker2:
+      ansible_host: 192.168.8.99
