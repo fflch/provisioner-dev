@@ -1,0 +1,88 @@
+---
+- name: minio
+  become: yes
+  hosts: d13-miniofflchreplica
+
+  vars:
+    tasks_managed_disks:
+      - device: /dev/vdb
+        partition_number: 1
+        partition_label: gpt
+        filesystem_type: xfs
+        mount_path: /data
+        mount_opts: defaults,noatime
+        mount_dump: 0
+        mount_passno: 2
+
+      - device: /dev/vdc
+        partition_number: 1
+        partition_label: gpt
+        filesystem_type: xfs
+        mount_path: /data1
+        mount_opts: defaults,noatime
+        mount_dump: 0
+        mount_passno: 2
+
+  tasks:
+    - name: instala pacotes
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      loop:
+        - parted
+        - xfsprogs
+
+    - name: Cria partição
+      community.general.parted:
+        device: "{{ item.device }}"
+        number: "{{ item.partition_number }}"
+        label: "{{ item.partition_label }}"
+        state: present
+      loop: "{{ tasks_managed_disks }}"
+      when:
+        - tasks_managed_disks is defined
+
+
+    - name: Ler informação do discos
+      community.general.parted:
+        device: "{{ item.device }}"
+        unit: MiB
+      loop:
+        "{{ tasks_managed_disks }}"
+      register: disks_info
+      when:
+        - tasks_managed_disks is defined
+
+    - name: Formata a partição
+      community.general.filesystem:
+        fstype: "{{ item.filesystem_type }}"
+        dev: "{{ item.device ~ item.partition_number }}"
+      loop:
+        "{{ tasks_managed_disks }}"
+      when:
+        - tasks_managed_disks is defined
+
+    - name: Obtem UUID do discos
+      ansible.builtin.command: blkid -s UUID -o value "{{ item.device ~ item.partition_number }}"
+      register: discos_uuid
+      loop:
+        "{{ tasks_managed_disks }}"
+      changed_when: false
+      when:
+        - tasks_managed_disks is defined
+
+    - name: Monta o sistema de arquivos de forma permanente usando UUID
+      no_log: true
+      ansible.posix.mount:
+        path: "{{ item[0].mount_path }}"
+        src: "UUID={{ item[1].stdout }}"
+        fstype: "{{ item[0].filesystem_type | default('xfs') }}"
+        opts: "{{ item[0].mount_opts | default('defaults') }}"
+        dump: "{{ item[0].mount_dump | default(omit) }}"
+        passno: "{{ item[0].mount_passno | default(omit) }}"
+        state: mounted
+      loop: "{{ tasks_managed_disks | zip(discos_uuid.results) | list }}"
+      when:
+        - tasks_managed_disks is defined
+        - discos_uuid.results

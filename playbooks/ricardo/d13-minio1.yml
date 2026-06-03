@@ -1,0 +1,116 @@
+---
+- name: minio
+  become: yes
+  hosts: d13-miniofflch
+
+  vars:
+    target_disks: ["/dev/vdb", "/dev/vdc"]
+    # filesystem: ["/dev/vdb1", "/dev/vdc1"]
+
+  tasks:
+    - name: instala pacotes
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      loop:
+        - parted
+        - xfsprogs
+
+    - name: Cria partição
+      community.general.parted:
+        device: "{{ item }}"
+        number: 1
+        state: present
+        label: gpt
+      loop:
+        "{{ target_disks }}"
+
+#
+    - name: Ler informação do discos
+      community.general.parted:
+        device: "{{ item }}"
+        unit: MiB
+      loop:
+        "{{ target_disks }}"
+      register: discos_info
+
+    # - name: Exibe informação dos discos
+    #   ansible.builtin.debug:
+    #     msg: "{{ discos_info }}"
+    #
+    # - name: registra cada partição dos discos
+    #   ansible.builtin.set_fact:
+    #     "part_{{ item.item | regex_replace('^/dev/', '') }}": "{{ item.partitions[0].num }}"
+    #   loop:
+    #     "{{ discos_info.results }}"
+    #
+    # - name: Exibe informação dos discos devices
+    #   ansible.builtin.debug:
+    #     msg: "{{ item.item }}{{ item.partitions[0].num }}"
+    #   loop:
+    #     "{{ discos_info.results }}"
+    #
+    # - name: Exibe partição dos discos
+    #   ansible.builtin.debug:
+    #     msg: >
+    #       "The partição /dev/vdb is {{ part_vdb }}"
+    #       "The partição /dev/vdc is {{ part_vdc }}"
+
+    - name: inicializa a lista vazia
+      ansible.builtin.set_fact:
+        filesystem: []
+
+    - name: constroi a lista do filesystem
+      ansible.builtin.set_fact:
+        filesystem: "{{ filesystem + [ item.item ~ item.partitions[0].num ] }}"
+      loop:
+        "{{ discos_info.results }}"
+
+    - name: Exibe informação filesystem
+      ansible.builtin.debug:
+        var: filesystem
+#
+    - name: Formata a partição
+      community.general.filesystem:
+        fstype: xfs
+        dev: "{{ item }}"
+      loop:
+        "{{ filesystem }}"
+
+    - name: Obtem UUID do discos
+      ansible.builtin.command: blkid -s UUID -o value "{{ item }}"
+      register: discos_uuid
+      loop:
+        "{{ filesystem }}"
+      changed_when: false
+
+    - name: Exibe uuid dos discos
+      ansible.builtin.debug:
+        msg: "{{ discos_uuid.results }}"
+
+    - name: registra cada uuid dos discos
+      ansible.builtin.set_fact:
+        "blkid_{{ item.item | regex_replace('^/dev/', '') }}": "{{ item.stdout }}"
+      loop:
+        "{{ discos_uuid.results }}"
+
+    - name: Exibe uuid por discos
+      ansible.builtin.debug:
+        msg: >
+          "The UUID/type of /dev/vdb is {{ blkid_vdb1 }}"
+          "The UUID/type of /dev/vdc is {{ blkid_vdc1 }}"
+
+    # - name: Monta vdb para /data e vdc para /data1
+    #   ansible.posix.mount:
+    #     src:
+
+    # - name: mount vdb to /data1 and vdc to /data2
+    #   mount:
+    #     fstype: ext4
+    #     src: "{{ item.dev }}"
+    #     path: "{{ item.path }}"
+    #     state: mounted
+    #   loop:
+    #     - { dev: '/dev/vdb', path: '/data1' }
+    #     - { dev: '/dev/vdc', path: '/data2' }

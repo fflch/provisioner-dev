@@ -558,7 +558,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.100 miniofflch
   config.vm.define "d13-miniofflch" do |host|
     host.vm.hostname = "d13-miniofflch"
-    host.vm.box = "cloud-image/debian-13"
+    host.vm.box = "debian/trixie64"
     host.vm.network :private_network,
       :ip => "192.168.8.100",
       :libvirt__network_name => "fflch",
@@ -584,7 +584,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.101 miniofflchreplica
   config.vm.define "d13-miniofflchreplica" do |host|
     host.vm.hostname = "d13-miniofflchreplica"
-    host.vm.box = "cloud-image/debian-13"
+    host.vm.box = "debian/trixie64"
     host.vm.network :private_network,
       :ip => "192.168.8.101",
       :libvirt__network_name => "fflch",
