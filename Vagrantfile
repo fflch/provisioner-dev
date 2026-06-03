@@ -488,7 +488,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.95 swarm-manager1
   config.vm.define "d13-swarm-manager1" do |host|
     host.vm.hostname = "d13-swarm-manager1"
-    host.vm.box = "cloud-image/debian-13"
+    host.vm.box = "debian/trixie64"
     host.vm.network :private_network,
       :ip => "192.168.8.95",
       :libvirt__network_name => "fflch",
@@ -502,7 +502,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.96 swarm-manager2
   config.vm.define "d13-swarm-manager2" do |host|
     host.vm.hostname = "d13-swarm-manager2"
-    host.vm.box = "cloud-image/debian-13"
+    host.vm.box = "debian/trixie64"
     host.vm.network :private_network,
       :ip => "192.168.8.96",
       :libvirt__network_name => "fflch",
@@ -516,7 +516,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.97 swarm-manager3
   config.vm.define "d13-swarm-manager3" do |host|
     host.vm.hostname = "d13-swarm-manager3"
-    host.vm.box = "cloud-image/debian-13"
+    host.vm.box = "debian/trixie64"
     host.vm.network :private_network,
       :ip => "192.168.8.97",
       :libvirt__network_name => "fflch",
@@ -530,7 +530,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.98 swarm-worker1
   config.vm.define "d13-swarm-worker1" do |host|
     host.vm.hostname = "d13-swarm-worker1"
-    host.vm.box = "cloud-image/debian-13"
+    host.vm.box = "debian/trixie64"
     host.vm.network :private_network,
       :ip => "192.168.8.98",
       :libvirt__network_name => "fflch",
@@ -544,7 +544,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 192.168.8.99 swarm-worker2
   config.vm.define "d13-swarm-worker2" do |host|
     host.vm.hostname = "d13-swarm-worker2"
-    host.vm.box = "cloud-image/debian-13"
+    host.vm.box = "debian/trixie64"
     host.vm.network :private_network,
       :ip => "192.168.8.99",
       :libvirt__network_name => "fflch",

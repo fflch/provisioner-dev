@@ -1,0 +1,16 @@
+swarm_nodes:
+  - hostname: d13-swarm-manager2
+    ip: 192.168.8.96
+    role: manager
+
+  - hostname: d13-swarm-manager3
+    ip: 192.168.8.97
+    role: manager
+
+  - hostname: d13-swarm-worker1
+    ip: 192.168.8.98
+    role: worker
+
+  - hostname: d13-swarm-worker2
+    ip: 192.168.8.99
+    role: worker

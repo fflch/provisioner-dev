@@ -1,8 +1,10 @@
 ---
-- name: d13-swarm-manager1
+- name: Instala o Swarm Manager Principal
   become: yes
   hosts: d13-swarm-manager1
 
+  vars:
+    swarm_advertise_addr: "{{ ansible_host }}"
 
   #### tasks
   tasks:
@@ -15,3 +17,53 @@
 
     - include_role:
         name: geerlingguy.docker
+
+    - name: Instalar dependências
+      apt:
+        name:
+          - curl
+          - ca-certificates
+          - gnupg
+        state: present
+        update_cache: true
+
+    - name: Verificar se Docker está instalado
+      command: docker --version
+      register: docker_check
+      ignore_errors: true
+      changed_when: false
+
+    - name: Habilitar Docker
+      systemd:
+        name: docker
+        enabled: true
+        state: started
+
+    - name: Verificar se o nó já participa de um Swarm
+      command: docker info --format '{{ "{{" }} .Swarm.LocalNodeState {{ "}}" }}'
+      register: swarm_status
+      changed_when: false
+
+    - name: Inicializar Swarm
+      command: >
+        docker swarm init
+        --advertise-addr {{ swarm_advertise_addr }}
+      when: swarm_status.stdout != "active"
+
+    - name: Obter token de Manager
+      command: docker swarm join-token -q manager
+      register: manager_token
+      changed_when: false
+
+    - name: Obter token de Worker
+      command: docker swarm join-token -q worker
+      register: worker_token
+      changed_when: false
+
+    - name: Exibir token Manager
+      debug:
+        msg: "{{ manager_token.stdout }}"
+
+    - name: Exibir token Worker
+      debug:
+        msg: "{{ worker_token.stdout }}"

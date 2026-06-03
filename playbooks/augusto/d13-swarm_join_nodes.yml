@@ -1,0 +1,86 @@
+---
+- name: Obter tokens do Manager Principal
+  hosts: d13-swarm-manager1
+  become: true
+  gather_facts: false
+
+  tasks:
+
+    - name: Obter token de manager
+      command: docker swarm join-token -q manager
+      register: manager_token
+      changed_when: false
+
+    - name: Obter token de worker
+      command: docker swarm join-token -q worker
+      register: worker_token
+      changed_when: false
+
+    - name: Armazenar tokens
+      set_fact:
+        swarm_manager_token: "{{ manager_token.stdout }}"
+        swarm_worker_token: "{{ worker_token.stdout }}"
+
+- name: Adicionar nós ao cluster
+  hosts: 
+    - d13-swarm-manager2
+    - d13-swarm-manager3
+    - d13-swarm-worker1
+    - d13-swarm-worker2
+  become: true
+
+  vars_files:
+    - nodes.yml
+
+  vars:
+    primary_manager_ip: "{{ hostvars['d13-swarm-manager1']['ansible_host'] }}"
+
+  tasks:
+
+    - name: Instalar Docker caso necessário
+      apt:
+        name:
+          - docker.io
+        state: present
+        update_cache: true
+
+    - name: Iniciar Docker
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Verificar estado do Swarm
+      command: docker info --format '{{ "{{" }} .Swarm.LocalNodeState {{ "}}" }}'
+      register: swarm_state
+      failed_when: false
+      changed_when: false
+
+    - name: Descobrir função do nó
+      set_fact:
+        node_role: >-
+          {{
+            (
+              swarm_nodes
+              | selectattr('hostname', 'equalto', inventory_hostname)
+              | first
+            ).role
+          }}
+
+    - name: Adicionar Manager ao cluster
+      command: >
+        docker swarm join
+        --token {{ hostvars['d13-swarm-manager1']['swarm_manager_token'] }}
+        {{ primary_manager_ip }}:2377
+      when:
+        - swarm_state.stdout != "active"
+        - node_role == "manager"
+
+    - name: Adicionar Worker ao cluster
+      command: >
+        docker swarm join
+        --token {{ hostvars['d13-swarm-manager1']['swarm_worker_token'] }}
+        {{ primary_manager_ip }}:2377
+      when:
+        - swarm_state.stdout != "active"
+        - node_role == "worker"
