@@ -6,22 +6,22 @@
   vars:
     tasks_managed_disks:
       - device: /dev/vdb
-        partition_number: 1
-        partition_label: gpt
-        filesystem_type: xfs
+        # partition_number: 1
+        # partition_label: gpt
+        # filesystem_type: xfs
         mount_path: /data
-        mount_opts: defaults,noatime
-        mount_dump: 0
-        mount_passno: 2
+        # mount_opts: defaults,noatime,nodiratime
+        # mount_dump: 0
+        # mount_passno: 2
 
       - device: /dev/vdc
-        partition_number: 1
-        partition_label: gpt
-        filesystem_type: xfs
+        # partition_number: 1
+        # partition_label: gpt
+        # filesystem_type: xfs
         mount_path: /data1
-        mount_opts: defaults,noatime
-        mount_dump: 0
-        mount_passno: 2
+        # mount_opts: defaults,noatime,nodiratime
+        # mount_dump: 0
+        # mount_passno: 2
 
   tasks:
     - name: instala pacotes
@@ -36,8 +36,8 @@
     - name: Cria partição
       community.general.parted:
         device: "{{ item.device }}"
-        number: "{{ item.partition_number }}"
-        label: "{{ item.partition_label }}"
+        number: "{{ item.partition_number | default(1) }}"
+        label: "{{ item.partition_label | default('gpt') }}"
         state: present
       loop: "{{ tasks_managed_disks }}"
       when:
@@ -56,15 +56,16 @@
 
     - name: Formata a partição
       community.general.filesystem:
-        fstype: "{{ item.filesystem_type }}"
-        dev: "{{ item.device ~ item.partition_number }}"
+        fstype: "{{ item.filesystem_type | default('xfs') }}"
+        dev: "{{ item.device ~ (item.partition_number | default(1)) }}"
+        opts: "-i size=512 -n ftype=1"
       loop:
         "{{ tasks_managed_disks }}"
       when:
         - tasks_managed_disks is defined
 
     - name: Obtem UUID do discos
-      ansible.builtin.command: blkid -s UUID -o value "{{ item.device ~ item.partition_number }}"
+      ansible.builtin.command: blkid -s UUID -o value "{{ item.device ~ (item.partition_number | default(1)) }}"
       register: discos_uuid
       loop:
         "{{ tasks_managed_disks }}"
@@ -78,9 +79,9 @@
         path: "{{ item[0].mount_path }}"
         src: "UUID={{ item[1].stdout }}"
         fstype: "{{ item[0].filesystem_type | default('xfs') }}"
-        opts: "{{ item[0].mount_opts | default('defaults') }}"
-        dump: "{{ item[0].mount_dump | default(omit) }}"
-        passno: "{{ item[0].mount_passno | default(omit) }}"
+        opts: "{{ item[0].mount_opts | default('defaults,noatime,nodiratime') }}"
+        # dump: "{{ item[0].mount_dump | default(omit) }}"
+        # passno: "{{ item[0].mount_passno | default(omit) }}"
         state: mounted
       loop: "{{ tasks_managed_disks | zip(discos_uuid.results) | list }}"
       when:

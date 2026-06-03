@@ -1,6 +1,11 @@
 # Basta usar a imagem minio/minio:RELEASE.2025-04-22T22-12-26Z
 # https://github.com/kevincoakley/ansible-role-disk
 # https://github.com/tinslice/ansible-role-disks
+<!-- - name: Criar filesystem XFS -->
+<!--   community.general.filesystem: -->
+<!--     fstype: xfs -->
+<!--     dev: /dev/sdb -->
+<!--     opts: "-i size=512 -n ftype=1 -L RUSTFS0" -->
 
 https://www.min.io/product/erasure-code-calculator
 
