@@ -1,0 +1,39 @@
+laravel:
+  # replicado
+  - name: REPLICADO_HOST
+    value: "replicado"
+  - name: REPLICADO_PORT
+    value: "5005"
+  - name: REPLICADO_DATABASE
+    value: "fflchdev"
+  - name: REPLICADO_USERNAME
+    value: "dbmaint"
+  - name: REPLICADO_PASSWORD
+    value: "{{ lookup('passwordstore', 'sti/servidores/replicadodev/fflchdev') }}"
+  - name: REPLICADO_CODUNDCLG
+    value: 8
+  - name: REPLICADO_SYBASE
+    value: 1
+
+  # senha única
+  - name: SENHAUNICA_KEY
+    value: "fflch_sti"
+  - name: SENHAUNICA_SECRET
+    value: "{{ lookup('passwordstore', 'sti/tokens/senhaunica_oauth1/secret') }}"
+  - name: SENHAUNICA_DEV
+    value: "no"
+
+  - name: USP_THEME_SKIN
+    value: "fflch"
+
+  # mysql
+  - name: DB_CONNECTION
+    value: 'mysql'
+
+  # WSFOTO
+  - name: WSFOTO_USER
+    value: FFLCH
+  - name: WSFOTO_PASS
+    value: "{{ lookup('passwordstore', 'sti/tokens/wsfoto_soap/secret') }}"
+  - name: WSFOTO_DISABLE
+    value: 0

@@ -1,3 +1,12 @@
+# Basta usar a imagem minio/minio:RELEASE.2025-04-22T22-12-26Z
+# https://github.com/kevincoakley/ansible-role-disk
+# https://github.com/tinslice/ansible-role-disks
+<!-- - name: Criar filesystem XFS -->
+<!--   community.general.filesystem: -->
+<!--     fstype: xfs -->
+<!--     dev: /dev/sdb -->
+<!--     opts: "-i size=512 -n ftype=1 -L RUSTFS0" -->
+
 https://www.min.io/product/erasure-code-calculator
 
 vagrant up d13-miniofflch d13-miniofflchreplica
@@ -79,7 +88,7 @@ LimitNOFILE=65536
 WantedBy=multi-user.target
 
 
-### serviços 
+### serviços
 systemctl daemon-reload
 systemctl enable --now minio
 
@@ -87,7 +96,7 @@ systemctl enable --now minio
 http://192.168.8.100:9001/login
 
 
-No miniofflch: 
+No miniofflch:
 
 mc alias set miniofflch http://192.168.8.100:9000  admin SenhaMuitoForte
 mc alias set miniofflchreplica http://192.168.8.101:9000  admin SenhaMuitoForte
