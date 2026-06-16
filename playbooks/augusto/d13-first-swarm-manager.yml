@@ -6,10 +6,9 @@
   vars:
     swarm_advertise_addr: "{{ ansible_host }}"
 
-  #### tasks
   tasks:
 
-    - name: Aplica role fflch.tasks 
+    - name: Aplica a Role fflch.tasks
       include_role:
         name: fflch.tasks
       vars:
@@ -18,52 +17,45 @@
     - include_role:
         name: geerlingguy.docker
 
-    - name: Instalar dependências
-      apt:
-        name:
-          - curl
-          - ca-certificates
-          - gnupg
-        state: present
-        update_cache: true
-
-    - name: Verificar se Docker está instalado
-      command: docker --version
-      register: docker_check
-      ignore_errors: true
-      changed_when: false
-
-    - name: Habilitar Docker
-      systemd:
-        name: docker
-        enabled: true
-        state: started
-
-    - name: Verificar se o nó já participa de um Swarm
+    - name: Verifica se o Host já participa de um Cluster Swarm
       command: docker info --format '{{ "{{" }} .Swarm.LocalNodeState {{ "}}" }}'
       register: swarm_status
       changed_when: false
 
-    - name: Inicializar Swarm
+    - name: Inicializa o Swarm
       command: >
         docker swarm init
         --advertise-addr {{ swarm_advertise_addr }}
       when: swarm_status.stdout != "active"
 
-    - name: Obter token de Manager
+    - name: Obtem o Token de Manager
       command: docker swarm join-token -q manager
       register: manager_token
       changed_when: false
 
-    - name: Obter token de Worker
+    - name: Obtem o Token de Worker
       command: docker swarm join-token -q worker
       register: worker_token
       changed_when: false
 
-    - name: Exibir token Manager
+    - name: Salva o Token de Manager no Chaveiro
+      shell: |
+        echo "{{ manager_token.stdout }}" | \
+        pass insert -f -m sti/tokens/swarm/manager
+      become: false
+      delegate_to: localhost
+
+    - name: Salva o Token de Worker no Chaveiro
+      shell: |
+        echo "{{ worker_token.stdout }}" | \
+        pass insert -f -m sti/tokens/swarm/worker
+      become: false
+      delegate_to: localhost 
+
+    - name: Exibe o Token de Manager
       debug:
         msg: "{{ manager_token.stdout }}"
 
-    - name: Exibir token Worker
+    - name: Exibe o Token de Worker
       debug:
         msg: "{{ worker_token.stdout }}"
