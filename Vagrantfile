@@ -556,8 +556,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # 192.168.8.100 miniofflch
-  config.vm.define "d13-miniofflch" do |host|
-    host.vm.hostname = "d13-miniofflch"
+  config.vm.define "d13-rustfsfflch" do |host|
+    host.vm.hostname = "d13-rustfsfflch"
     host.vm.box = "debian/trixie64"
     host.vm.network :private_network,
       :ip => "192.168.8.100",
@@ -578,12 +578,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         size: '1G',
         type: 'qcow2',
         bus: 'virtio'
+
+      # Disco extra 3 (4GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+
+      # Disco extra 4 (4GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
     end
   end
 
-  # 192.168.8.101 miniofflchreplica
-  config.vm.define "d13-miniofflchreplica" do |host|
-    host.vm.hostname = "d13-miniofflchreplica"
+  # 192.168.8.101 rustfsfflchreplica
+  config.vm.define "d13-rustfsfflch2" do |host|
+    host.vm.hostname = "d13-rustfsfflch2"
     host.vm.box = "debian/trixie64"
     host.vm.network :private_network,
       :ip => "192.168.8.101",
@@ -600,6 +612,92 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         bus: 'virtio'
 
       # Disco extra 2 (4GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+
+      # Disco extra 3 (4GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+
+      # Disco extra 4 (4GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+    end
+  end
+
+  config.vm.define "d13-rustfsfflch3" do |host|
+    host.vm.hostname = "d13-rustfsfflch3"
+    host.vm.box = "debian/trixie64"
+    host.vm.network :private_network,
+      :ip => "192.168.8.102",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 1024
+      v.cpus = 1
+
+      # Disco extra 1 (2GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+
+      # Disco extra 2 (4GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+
+      # Disco extra 3 (4GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+
+      # Disco extra 4 (4GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+    end
+  end
+
+  config.vm.define "d13-rustfsfflch4" do |host|
+    host.vm.hostname = "d13-rustfsfflch4"
+    host.vm.box = "debian/trixie64"
+    host.vm.network :private_network,
+      :ip => "192.168.8.103",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 1024
+      v.cpus = 1
+
+      # Disco extra 1 (2GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+
+      # Disco extra 2 (4GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+
+      # Disco extra 3 (4GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+
+      # Disco extra 4 (4GB)
       v.storage :file,
         size: '1G',
         type: 'qcow2',

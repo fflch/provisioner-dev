@@ -1,0 +1,42 @@
+---
+- name: rustfs
+  become: yes
+  hosts: d13-rustfsfflch3
+
+  vars:
+    # tasks_rustfs_base_dir: /data
+    # tasks_rustfs_user_group: rustfs-user
+    # tasks_rustfs_access_key: "rustfsadmin"
+    # tasks_rustfs_secret_key: "rustfsadmin"
+    tasks_rustfs_nodes:
+      - node: node1
+        ip: 192.168.8.100
+
+      - node: node2
+        ip: 192.168.8.101
+
+      - node: node3
+        ip: 192.168.8.102
+
+      - node: node4
+        ip: 192.168.8.103
+    tasks_rustfs_managed_disks:
+      - device: /dev/vdb
+        folder: rustfs0
+
+      - device: /dev/vdc
+        folder: rustfs1
+
+      - device: /dev/vdd
+        folder: rustfs2
+
+      - device: /dev/vde
+        folder: rustfs3
+
+  tasks:
+
+    - name: Aplica role fflch.tasks
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_rustfs: true

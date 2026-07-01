@@ -1,3 +1,4 @@
+# https://www.bitnesia.com/en/install-rustfs-s3-compatible
 # Basta usar a imagem minio/minio:RELEASE.2025-04-22T22-12-26Z
 # https://github.com/kevincoakley/ansible-role-disk
 # https://github.com/tinslice/ansible-role-disks
