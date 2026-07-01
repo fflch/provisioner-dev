@@ -1,0 +1,40 @@
+---
+- name: Adiciona Workers ao Cluster Swarm
+  hosts: 
+    - d13-swarm-worker1
+    - d13-swarm-worker2
+  become: true
+
+  vars:
+    swarm_manager_ip: 192.168.8.95
+
+  tasks:
+    - name: Aplica a Role fflch.tasks
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_common: true
+
+    - include_role:
+        name: geerlingguy.docker
+
+    - name: Lê Token de Worker do Chaveiro
+      command: pass show sti/tokens/swarm/worker
+      delegate_to: localhost
+      become: false
+      register: worker_token
+      changed_when: false
+
+    - name: Verifica Estado Atual do Swarm
+      command: docker info --format '{{ "{{" }} .Swarm.LocalNodeState {{ "}}" }}'
+      register: swarm_state
+      failed_when: false
+      changed_when: false
+
+    - name: Adiciona Host ao Cluster Swarm como Worker
+      command: >
+        docker swarm join
+        --token {{ worker_token.stdout }}
+        {{ swarm_manager_ip }}:2377
+      when: swarm_state.stdout != "active"
+    
