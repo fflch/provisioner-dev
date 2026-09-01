@@ -1,0 +1,63 @@
+---
+- name: garage
+  become: yes
+  hosts: d13-garage
+
+  vars:
+    tasks_garage_version: v2.3.0
+    tasks_garage_metadata_dir: /var/lib/garage/meta
+    tasks_garage_basedata_dir: /data
+    tasks_garage_db_engine: sqlite
+    tasks_garage_rpc_secret: "{{ lookup('ansible.builtin.pipe', 'openssl rand -hex 32') }}"
+    tasks_garage_admin_token: "{{ lookup('ansible.builtin.pipe', 'openssl rand -base64 32') }}"
+    tasks_garage_metrics_token: "{{ lookup('ansible.builtin.pipe', 'openssl rand -base64 32') }}"
+    tasks_garage_ipv4_address: "192.168.8.104"
+
+    tasks_garage_managed_disks:
+      - device: /dev/vdb
+        folder: garage0
+        capacity: 1G
+
+      # - device: /dev/vdc
+      #   folder: garage1
+      #   capacity: 2G
+
+  tasks:
+
+    - name: Aplica role fflch.tasks
+      include_role:
+        name: fflch.tasks
+      vars:
+        tasks_garage: true
+
+    - name: Download garage webui
+      ansible.builtin.get_url:
+        url: "https://github.com/khairul169/garage-webui/releases/download/1.1.0/garage-webui-v1.1.0-linux-amd64"
+        dest: /usr/local/bin/garage-webui
+        mode: '0755'
+        owner: root
+        group: root
+
+    - name: Executar o garage-webui definindo a variável de ambiente
+      ansible.builtin.command:
+        cmd: garage-webui
+      environment:
+        CONFIG_PATH: "/etc/garage.toml"
+      # async e poll se necessário caso o comando fique rodando indefinidamente em primeiro plano:
+      async: 86400
+      poll: 0
+
+# upload de arquivo
+# curl --progress-bar -X PUT \
+#   --user "SUA_ACCESS_KEY:SUA_SECRET_KEY" \
+#   --aws-sigv4 "aws:amz:garage:s3" \
+#   --upload-file /caminho/para/seu/arquivo.ext \
+#   http://localhost:3900/nome-do-bucket/arquivo.ext
+
+# baixando um arquivo
+# curl -X GET \
+#   --user "SUA_ACCESS_KEY:SUA_SECRET_KEY" \
+#   --aws-sigv4 "aws:amz:garage:s3" \
+#   http://localhost:3900/nome-do-bucket/arquivo.ext \
+#   -o /caminho/onde/salvar/o/arquivo.ext
+

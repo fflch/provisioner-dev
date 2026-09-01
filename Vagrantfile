@@ -705,4 +705,29 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define "d13-garage" do |host|
+    host.vm.hostname = "d13-garage"
+    host.vm.box = "debian/trixie64"
+    host.vm.network :private_network,
+      :ip => "192.168.8.104",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 1024
+      v.cpus = 1
+
+      # Disco extra 1 (2GB)
+      v.storage :file,
+        size: '1G',
+        type: 'qcow2',
+        bus: 'virtio'
+
+      # Disco extra 2 (4GB)
+      v.storage :file,
+        size: '2G',
+        type: 'qcow2',
+        bus: 'virtio'
+    end
+  end
+
 end
