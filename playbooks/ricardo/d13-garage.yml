@@ -11,7 +11,6 @@
     tasks_garage_rpc_secret: "{{ lookup('ansible.builtin.pipe', 'openssl rand -hex 32') }}"
     tasks_garage_admin_token: "{{ lookup('ansible.builtin.pipe', 'openssl rand -base64 32') }}"
     tasks_garage_metrics_token: "{{ lookup('ansible.builtin.pipe', 'openssl rand -base64 32') }}"
-    tasks_garage_ipv4_address: "192.168.8.104"
 
     tasks_garage_managed_disks:
       - device: /dev/vdb
