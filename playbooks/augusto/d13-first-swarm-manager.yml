@@ -28,34 +28,22 @@
         --advertise-addr {{ swarm_advertise_addr }}
       when: swarm_status.stdout != "active"
 
-    - name: Obtem o Token de Manager
-      command: docker swarm join-token -q manager
-      register: manager_token
+    - name: Obtem o token de Manager no Manager Principal
+      ansible.builtin.command:
+        cmd: docker swarm join-token -q manager
+      delegate_to: d13-swarm-manager1
+      become: true
+      register: swarm_manager_token
       changed_when: false
+      run_once: true
+      no_log: true  
 
-    - name: Obtem o Token de Worker
-      command: docker swarm join-token -q worker
-      register: worker_token
+    - name: Obtem o token de Worker no Manager Principal
+      ansible.builtin.command:
+        cmd: docker swarm join-token -q worker
+      delegate_to: d13-swarm-manager1
+      become: true
+      register: swarm_worker_token
       changed_when: false
-
-    - name: Salva o Token de Manager no Chaveiro
-      shell: |
-        echo "{{ manager_token.stdout }}" | \
-        pass insert -f -m sti/tokens/swarm/manager
-      become: false
-      delegate_to: localhost
-
-    - name: Salva o Token de Worker no Chaveiro
-      shell: |
-        echo "{{ worker_token.stdout }}" | \
-        pass insert -f -m sti/tokens/swarm/worker
-      become: false
-      delegate_to: localhost 
-
-    - name: Exibe o Token de Manager
-      debug:
-        msg: "{{ manager_token.stdout }}"
-
-    - name: Exibe o Token de Worker
-      debug:
-        msg: "{{ worker_token.stdout }}"
+      run_once: true
+      no_log: true  

@@ -18,12 +18,15 @@
     - include_role:
         name: geerlingguy.docker
 
-    - name: Lê Token de Worker do Chaveiro
-      command: pass show sti/tokens/swarm/worker
-      delegate_to: localhost
-      become: false
-      register: worker_token
+    - name: Obtem o token de Worker no Manager Principal
+      ansible.builtin.command:
+        cmd: docker swarm join-token -q worker
+      delegate_to: d13-swarm-manager1
+      become: true
+      register: swarm_worker_token
       changed_when: false
+      run_once: true
+      no_log: true
 
     - name: Verifica Estado Atual do Swarm
       command: docker info --format '{{ "{{" }} .Swarm.LocalNodeState {{ "}}" }}'
@@ -31,10 +34,12 @@
       failed_when: false
       changed_when: false
 
-    - name: Adiciona Host ao Cluster Swarm como Worker
-      command: >
-        docker swarm join
-        --token {{ worker_token.stdout }}
-        {{ swarm_manager_ip }}:2377
-      when: swarm_state.stdout != "active"
-    
+    - name: Adiciona o Worker ao Swarm
+      ansible.builtin.command:
+        cmd: >
+          docker swarm join
+          --token {{ swarm_worker_token.stdout }}
+          {{ hostvars['d13-swarm-manager1']['ansible_host'] }}:2377
+      when:
+        - swarm_state.stdout != 'active'
+      no_log: true

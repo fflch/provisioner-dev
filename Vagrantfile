@@ -730,4 +730,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  # 192.168.8.105 with-secure
+  config.vm.define "d13-with-secure" do |host|
+    host.vm.hostname = "d13-with-secure"
+    host.vm.box = "debian/trixie64"
+    host.vm.network :private_network,
+      :ip => "192.168.8.105",
+      :libvirt__network_name => "fflch",
+      :libvirt__forward_mode => "nat"
+    host.vm.provider :libvirt do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+  end
+
 end

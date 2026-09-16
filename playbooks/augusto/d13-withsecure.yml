@@ -1,0 +1,22 @@
+---
+- name: deploy d13-withsecure
+  become: yes
+  hosts: d13-with-secure
+
+  vars:
+    fsecure_http_port: "80"
+    fsecure_https_port: "443"
+    fsecure_admin_interface_port: "8080"
+    fsecure_restrict_admin_interface: "no"
+    fsecure_enable_web_reporting: "yes"
+    fsecure_web_port: "8081"
+    fsecure_password: "withsecure"
+
+  tasks:
+    - name: Aplica role fflch.tasks
+      include_role:
+        name: fflch.tasks
+
+    - name: Aplica role fflch.fsecure
+      include_role:
+        name: fflch.fsecure

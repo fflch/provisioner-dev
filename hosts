@@ -46,6 +46,8 @@ d13-rustfsfflch4 ansible_host="192.168.8.103"
 
 d13-garage ansible_host="192.168.8.104"
 
+d13-with-secure ansible_host="192.168.8.105"
+
 [vagrant:vars]
 ansible_user="vagrant"
 ansible_ssh_private_key_file="~/.vagrant.d/insecure_private_key"
